@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.core.validators import RegexValidator
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, password=None):
@@ -33,11 +34,35 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.email
 
+class Team(models.Model):
+    for_number_regex = RegexValidator(regex=r'^[0-9]{4}', message=("四桁の数字を入力してください。"))
+
+    name = models.CharField(max_length=20, unique=True, blank=False, null=False)
+    is_limit_join = models.BooleanField(default=False)
+    password = models.CharField(validators=[for_number_regex], max_length=4)
+
+    def __str__(self):
+        return self.name
+
+class TeamBoard(models.Model):
+    introduction = models.CharField(max_length=100)
+    team = models.OneToOneField(
+        Team, related_name="team_board",
+        on_delete=models.CASCADE
+    )
+    join_count = models.IntegerField(default=1)
+    coach = models.CharField(max_length=20)
+
 class Profile(models.Model):
     nickname = models.CharField(max_length=20)
     user = models.OneToOneField(
         CustomUser, related_name="profile",
         on_delete=models.CASCADE
+    )
+    team_board = models.ForeignKey(
+        TeamBoard, related_name="member",
+        blank=True, null=True,
+        on_delete=models.SET_NULL
     )
     is_guest = models.BooleanField(default=False)
     is_coach = models.BooleanField(default=False)
