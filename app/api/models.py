@@ -101,3 +101,23 @@ class Schedule(models.Model):
 
     def __str__(self):
         return self.training.title
+
+class FinishedSchedule(models.Model):
+    schedule = models.ForeignKey(
+        Schedule, related_name="finished_schedules",
+        on_delete=models.CASCADE
+    )
+    training = models.ForeignKey(
+        Training, related_name="finished_schedules",
+        on_delete=models.CASCADE
+    )
+    load = models.IntegerField(default=0)
+    count = models.IntegerField(default=0)
+    distance = models.IntegerField(default=0)
+    minitus = models.IntegerField(default=0)
+    profile = models.ForeignKey(
+        Profile, related_name="finished_schedules",
+        on_delete=models.CASCADE
+    )
+    comment = models.CharField(max_length=20 ,default="")
+    created_at = models.DateTimeField(auto_now_add=True)
