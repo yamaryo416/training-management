@@ -36,3 +36,8 @@ def validate_team_password(value):
     if not match:
         raise GraphQLError("Password is Four Number")
     return value
+
+def validate_post_text(value):
+    validate_blank(value)
+    validate_too_long(value, 100)
+    return value
