@@ -121,3 +121,15 @@ class FinishedSchedule(models.Model):
     )
     comment = models.CharField(max_length=20 ,default="")
     created_at = models.DateTimeField(auto_now_add=True)
+
+class Post(models.Model):
+    text = models.CharField(max_length=100)
+    team_board = models.ForeignKey(
+        TeamBoard, related_name="posts",
+        on_delete=models.CASCADE
+    )
+    profile = models.ForeignKey(
+        Profile, related_name="posts",
+        on_delete=models.CASCADE
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
