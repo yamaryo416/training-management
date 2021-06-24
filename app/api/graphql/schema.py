@@ -5,14 +5,16 @@ from graphene_django.filter import DjangoFilterConnectionField
 from graphql_jwt.decorators import login_required, user_passes_test
 from graphql_relay import from_global_id
 
-from api.models import Profile, Team, TeamBoard
-from api.graphql.node import ProfileNode, TeamNode, TeamBoardNode
+from api.models import Profile, Team, TeamBoard, Training
+from api.graphql.node import ProfileNode, TeamNode, TeamBoardNode, TrainingNode
 from api.graphql.mutation.user_mutation import CreateGeneralUserMutation, CreateGuestUserMutation, DeleteUserMutation
 from api.graphql.mutation.profile_mutation import \
     UpdateProfileNicknameMutation, UpdateProfileTeamBoardMutation, DeleteMyProfileTeamBoardMutation, \
     DeleteOneProfileTeamBoardMutation
 from api.graphql.mutation.team_mutation import CreateTeamMutation, UpdateTeamMutation
 from api.graphql.mutation.team_board_mutation import UpdateTeamBoardIntroductionMutation, UpdateTeamBoardCoachMutation
+from api.graphql.mutation.training_mutation import \
+    CreateTrainingMutation, UpdateTrainingMutation, DeleteTrainingMutation
 
 class Mutation(graphene.AbstractType):
     token_auth = graphql_jwt.ObtainJSONWebToken.Field()
@@ -27,6 +29,9 @@ class Mutation(graphene.AbstractType):
     update_team = UpdateTeamMutation.Field()
     update_team_board_introduction = UpdateTeamBoardIntroductionMutation.Field()
     update_team_board_coach = UpdateTeamBoardCoachMutation.Field()
+    create_training = CreateTrainingMutation.Field()
+    update_training = UpdateTrainingMutation.Field()
+    delete_training = DeleteTrainingMutation.Field()
 
 class Query(graphene.ObjectType):
     my_profile = graphene.Field(ProfileNode)
@@ -37,6 +42,7 @@ class Query(graphene.ObjectType):
                                       team_id=graphene.NonNull(graphene.ID))
     my_team_member = DjangoFilterConnectionField(ProfileNode)
     all_team_board = DjangoFilterConnectionField(TeamBoardNode)
+    my_team_trainings = DjangoFilterConnectionField(TrainingNode)
 
     @login_required
     def resolve_my_profile(self, info, **kwargs):
@@ -63,3 +69,7 @@ class Query(graphene.ObjectType):
     @login_required
     def resolve_all_team_board(self, info, **kwargs):
         return TeamBoard.objects.filter(team__is_limit_join=False).order_by('-join_count')
+
+    @login_required
+    def resolve_my_team_trainings(self, info, **kwargs):
+        return Training.objects.filter(team_board=info.context.user.profile.team_board).order_by('-created_at')

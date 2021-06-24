@@ -1,7 +1,7 @@
 from graphene_django import DjangoObjectType
 from graphene import relay
 
-from api.models import CustomUser, Profile, Team, TeamBoard
+from api.models import CustomUser, Profile, Team, TeamBoard, Training
 
 class UserNode(DjangoObjectType):
     class Meta:
@@ -34,5 +34,13 @@ class TeamBoardNode(DjangoObjectType):
         model = TeamBoard
         filter_fields = {
             'team__id': ['exact'],
+        }
+        interfaces = (relay.Node,)
+
+class TrainingNode(DjangoObjectType):
+    class Meta:
+        model = Training
+        filter_fields = {
+            'title': ['exact', 'icontains'],
         }
         interfaces = (relay.Node,)
