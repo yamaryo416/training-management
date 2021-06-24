@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.core.validators import RegexValidator
+from django.utils import timezone
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, password=None):
@@ -83,3 +84,20 @@ class Training(models.Model):
     )
     finished_patern = models.CharField(max_length=5, default='')
     created_at = models.DateTimeField(auto_now_add=True)
+
+class Schedule(models.Model):
+    training = models.ForeignKey(
+        Training, related_name="schedules",
+        on_delete=models.CASCADE
+    )
+    team_board = models.ForeignKey(
+        TeamBoard, related_name="schedules",
+        blank=True, null=True,
+        on_delete=models.SET_NULL
+    )
+    date = models.DateField(default=timezone.now)
+    finished_count = models.IntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.training.title

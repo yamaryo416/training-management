@@ -1,4 +1,9 @@
 from django.contrib import admin
-from .models import CustomUser
+from .models import CustomUser, Profile, Team, TeamBoard, Training, Schedule
 
 admin.site.register(CustomUser)
+admin.site.register(Profile)
+admin.site.register(Team)
+admin.site.register(TeamBoard)
+admin.site.register(Training)
+admin.site.register(Schedule)
