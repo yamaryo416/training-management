@@ -71,3 +71,15 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.nickname
+
+class Training(models.Model):
+    title = models.CharField(max_length=20)
+    description = models.CharField(max_length=60 ,default="")
+    icon_number = models.IntegerField(default=0)
+    team_board = models.ForeignKey(
+        TeamBoard, related_name="trainings",
+        blank=True, null=True,
+        on_delete=models.SET_NULL
+    )
+    finished_patern = models.CharField(max_length=5, default='')
+    created_at = models.DateTimeField(auto_now_add=True)
