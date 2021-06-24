@@ -187,3 +187,83 @@ UPDATE_TEAM_BOARD_COACH_MUTATION= '''
         }
     }
 '''
+
+# training
+
+GET_MY_TEAM_TRAININGS_QUERY = '''
+    query myTeamTrainings {
+        myTeamTrainings {
+            edges {
+                node {
+                    id
+                    title
+               }
+           }
+       }
+   }
+'''
+
+GET_ONE_TEAM_TRAINING_QUERY = '''
+    query myTeamTrainings($title: String!) {
+        myTeamTrainings(title: $title) {
+            edges {
+                node {
+                    id
+                    title
+               }
+           }
+       }
+   }
+'''
+
+CREATE_TRAINING_MUTATION = '''
+    mutation createTraining(
+        $title: String!,
+        $description: String!,
+        $iconNumber: Int!,
+        $finishedPatern: String!
+    ) {
+        createTraining(input: {
+            title: $title,
+            description: $description,
+            iconNumber: $iconNumber,
+            finishedPatern: $finishedPatern
+        }) {
+            training {
+                id
+            }
+        }        
+    }
+'''
+
+UPDATE_TRAINING_MUTATION = '''
+    mutation updateTraining(
+        $trainingId: ID!,
+        $title: String!,
+        $description: String!,
+        $iconNumber: Int!,
+        $finishedPatern: String!
+    ) {
+        updateTraining(input: {
+            trainingId: $trainingId,
+            title: $title,
+            description: $description,
+            iconNumber: $iconNumber,
+            finishedPatern: $finishedPatern
+        }) {
+            training {
+                id
+            }
+        }        
+    }
+'''
+
+DELETE_TRAINING_MUTATION = '''
+    mutation deleteTraining($trainingId: ID!) {
+        deleteTraining(input: { trainingId: $trainingId }) {
+            training {
+                id
+            }
+        }
+    }
+'''

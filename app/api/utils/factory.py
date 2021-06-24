@@ -3,7 +3,7 @@ import datetime
 from factory.django import DjangoModelFactory
 from factory import Sequence, Trait, SubFactory, RelatedFactory
 
-from api.models import CustomUser, Profile, Team, TeamBoard
+from api.models import CustomUser, Profile, Team, TeamBoard, Training
 
 class ProfileFactory(DjangoModelFactory):
     class Meta:
@@ -38,3 +38,13 @@ class TeamFactory(DjangoModelFactory):
     team_board = RelatedFactory(TeamBoardFactory, factory_related_name="team")
     is_limit_join = False
     password = "0000"
+
+class TrainingFactory(DjangoModelFactory):
+    class Meta:
+        model = Training
+
+    title = Sequence(lambda n: 'training{0}'.format(n))
+    description = ""
+    icon_number = 0
+    finished_patern = '0'
+    created_at = Sequence(lambda n: datetime.datetime(2020, 1, 1, 0, 0, 0, 0000) + datetime.timedelta(days=n))
