@@ -1,7 +1,7 @@
 from graphene_django import DjangoObjectType
 from graphene import relay
 
-from api.models import CustomUser, Profile, Team, TeamBoard, Training, Schedule
+from api.models import CustomUser, Profile, Team, TeamBoard, Training, Schedule, FinishedSchedule
 
 class UserNode(DjangoObjectType):
     class Meta:
@@ -53,3 +53,12 @@ class ScheduleNode(DjangoObjectType):
             'training__title': ['exact'],
         }
         interfaces = (relay.Node,)
+
+class FinishedScheduleNode(DjangoObjectType):
+    class Meta:
+        model = FinishedSchedule
+        filter_fields = {
+            'schedule__id': ['exact'],
+            'profile__id': ['exact'],
+        }
+        interfaces = (relay.Node, )

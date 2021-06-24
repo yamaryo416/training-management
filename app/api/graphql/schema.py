@@ -5,8 +5,8 @@ from graphene_django.filter import DjangoFilterConnectionField
 from graphql_jwt.decorators import login_required, user_passes_test
 from graphql_relay import from_global_id
 
-from api.models import Profile, Team, TeamBoard, Training, Schedule
-from api.graphql.node import ProfileNode, TeamNode, TeamBoardNode, TrainingNode, ScheduleNode
+from api.models import Profile, Team, TeamBoard, Training, Schedule, FinishedSchedule
+from api.graphql.node import ProfileNode, TeamNode, TeamBoardNode, TrainingNode, ScheduleNode, FinishedScheduleNode
 from api.graphql.mutation.user_mutation import CreateGeneralUserMutation, CreateGuestUserMutation, DeleteUserMutation
 from api.graphql.mutation.profile_mutation import \
     UpdateProfileNicknameMutation, UpdateProfileTeamBoardMutation, DeleteMyProfileTeamBoardMutation, \
@@ -17,6 +17,8 @@ from api.graphql.mutation.training_mutation import \
     CreateTrainingMutation, UpdateTrainingMutation, DeleteTrainingMutation
 from api.graphql.mutation.schedule_mutation import \
     CreateScheduleMutation, CreateManySchedulesMutation, DeleteScheduleMutation, DeleteManySchedulesMutation
+from api.graphql.mutation.finished_schedule_mutation import \
+    CreateFinishedScheduleMutation, DeleteFinishedScheduleMutation
 
 class Mutation(graphene.AbstractType):
     token_auth = graphql_jwt.ObtainJSONWebToken.Field()
@@ -38,6 +40,8 @@ class Mutation(graphene.AbstractType):
     create_many_schedules = CreateManySchedulesMutation.Field()
     delete_schedule = DeleteScheduleMutation.Field()
     delete_many_schedules = DeleteManySchedulesMutation.Field()
+    create_finished_schedule = CreateFinishedScheduleMutation.Field()
+    delete_finished_schedule = DeleteFinishedScheduleMutation.Field()
 
 class Query(graphene.ObjectType):
     my_profile = graphene.Field(ProfileNode)
@@ -50,6 +54,8 @@ class Query(graphene.ObjectType):
     all_team_board = DjangoFilterConnectionField(TeamBoardNode)
     my_team_trainings = DjangoFilterConnectionField(TrainingNode)
     my_team_schedules = DjangoFilterConnectionField(ScheduleNode)
+    my_finished_schedules = DjangoFilterConnectionField(FinishedScheduleNode)
+    my_team_finished_schedules = DjangoFilterConnectionField(FinishedScheduleNode)
 
     @login_required
     def resolve_my_profile(self, info, **kwargs):
@@ -84,3 +90,11 @@ class Query(graphene.ObjectType):
     @login_required
     def resolve_my_team_schedules(self, info, **kwargs):
         return Schedule.objects.filter(team_board=info.context.user.profile.team_board).order_by('-created_at')
+
+    @login_required
+    def resolve_my_finished_schedules(self, info, **kwargs):
+        return FinishedSchedule.objects.filter(profile=info.context.user.profile).order_by('-created_at')
+
+    @login_required
+    def resolve_my_team_finished_schedules(self, info, **kwargs):
+        return FinishedSchedule.objects.filter(schedule__team_board=info.context.user.profile.team_board).order_by('-created_at')

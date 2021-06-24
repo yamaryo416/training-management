@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.core.validators import RegexValidator
-from django.utils import timezone
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, password=None):
@@ -65,6 +64,7 @@ class Profile(models.Model):
         blank=True, null=True,
         on_delete=models.SET_NULL
     )
+    finished_schedule_count = models.IntegerField(default=0)
     is_guest = models.BooleanField(default=False)
     is_coach = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -95,7 +95,7 @@ class Schedule(models.Model):
         blank=True, null=True,
         on_delete=models.SET_NULL
     )
-    date = models.DateField(default=timezone.now)
+    date = models.DateField()
     finished_count = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
 
