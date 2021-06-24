@@ -363,3 +363,56 @@ CREATE_MANY_SCHEDULES_MUTATION= '''
         }
     }
 '''
+
+# finished_schedule
+
+GET_MY_TEAM_FINISHED_SCHEDULES_QUERY = '''
+    query myTeamFinishedSchedules {
+        myTeamFinishedSchedules {
+            edges {
+                node {
+                    id
+                }
+            }
+        }
+    }
+'''
+
+GET_MY_TEAM_ONE_FINISHED_SCHEDULE_QUERY = '''
+    query myTeamFinishedSchedules {
+        myTeamFinishedSchedules {
+            edges {
+                node {
+                    id
+                }
+            }
+        }
+    }
+'''
+
+CREATE_FINISHED_SCHEDULE_MUTATION = '''
+    mutation createFinishedSchedule($scheduleId: ID!, $count: Int!, $load: Int!, $distance: Int!, $minitus: Int!, $comment: String!) {
+        createFinishedSchedule(input: {
+            scheduleId: $scheduleId,
+            count: $count,
+            load: $load,
+            distance: $distance,
+            minitus: $minitus,
+            comment: $comment
+        }) {
+            finishedSchedule {
+                id
+            }
+        }
+    }
+'''
+
+DELETE_FINISHED_SCHEDULE_MUTATION = '''
+    mutation deleteFinishedSchedule($scheduleId: ID!) {
+        deleteFinishedSchedule(input: { scheduleId: $scheduleId }) {
+            finishedSchedule {
+                id
+            }
+        }
+    }
+'''
