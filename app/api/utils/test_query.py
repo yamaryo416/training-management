@@ -416,3 +416,50 @@ DELETE_FINISHED_SCHEDULE_MUTATION = '''
         }
     }
 '''
+
+# post
+
+GET_MY_TEAM_POSTS_QUERY = '''
+    query myTeamPosts {
+        myTeamPosts {
+            edges {
+                node {
+                    id
+                    text
+                }
+            }
+        }
+    }
+'''
+
+GET_MY_TEAM_ONE_POST_QUERY = '''
+    query myTeamPosts($text: String!) {
+        myTeamPosts(text: $text) {
+            edges {
+                node {
+                    id
+                }
+            }
+        }
+    }
+'''
+
+CREATE_POST_MUTATION = '''
+    mutation createPost($text: String!) {
+        createPost(input: { text: $text }) {
+            post {
+                id
+            }
+        }
+    }
+'''
+
+DELETE_POST_MUTATION = '''
+    mutation deletePost($postId: ID!) {
+        deletePost(input: { postId: $postId }) {
+            post {
+                id
+            }
+        }
+    }
+'''

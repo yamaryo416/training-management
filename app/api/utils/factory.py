@@ -3,7 +3,7 @@ import datetime
 from factory.django import DjangoModelFactory
 from factory import Sequence, Trait, SubFactory, RelatedFactory
 
-from api.models import CustomUser, Profile, Team, TeamBoard, Training, Schedule, FinishedSchedule
+from api.models import CustomUser, Profile, Team, TeamBoard, Training, Schedule, FinishedSchedule, Post
 
 class ProfileFactory(DjangoModelFactory):
     class Meta:
@@ -65,4 +65,10 @@ class FinishedScheduleFactory(DjangoModelFactory):
     distance = 0
     minitus = 0
     comment = ''
+    created_at = Sequence(lambda n: datetime.datetime(2020, 1, 1, 0, 0, 0, 0000) + datetime.timedelta(days=n))
+
+class PostFactory(DjangoModelFactory):
+    class Meta:
+        model = Post
+
     created_at = Sequence(lambda n: datetime.datetime(2020, 1, 1, 0, 0, 0, 0000) + datetime.timedelta(days=n))
