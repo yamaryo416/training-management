@@ -267,3 +267,99 @@ DELETE_TRAINING_MUTATION = '''
         }
     }
 '''
+
+# schedule
+
+GET_MY_TEAM_SCHEDULES = '''
+   query myTeamSchedules {
+        myTeamSchedules {
+            edges {
+                node {
+                    id
+               }
+           }
+       }
+   }
+'''
+
+GET_MY_TEAM_ONE_DAY_SCHEDULES_QUERY = '''
+   query myTeamSchedules($date: Date!) {
+       myTeamSchedules(date: $date) {
+           edges {
+               node {
+                   id
+               }
+           }
+       }
+   }
+'''
+
+GET_MY_TEAM_ONE_SCHEDULE_QUERY = '''
+   query myTeamSchedules($date: Date!, $training_Title: String!) {
+       myTeamSchedules(date: $date, training_Title: $training_Title) {
+           edges {
+               node {
+                   id
+               }
+           }
+       }
+   }
+'''
+
+CREATE_SCHEDULE_MUTATION = '''
+    mutation createSchedule($trainingId: ID!, $date: Date!) {
+        createSchedule(input: { trainingId: $trainingId, date: $date }) {
+            schedule {
+                id
+            }
+        }
+    }
+'''
+
+DELETE_SCHEDULE_MUTATION = '''
+    mutation deleteSchedule($scheduleId: ID!) {
+        deleteSchedule(input: { scheduleId: $scheduleId} ) {
+            schedule {
+                id
+            }
+        }
+    }
+'''
+
+DELETE_MANY_SCHEDULES_MUTATION = '''
+    mutation deleteManySchedules(
+        $startDate: Date!,
+        $endDate: Date!,
+        $trainingId: ID
+    ) {
+       deleteManySchedules(input: {
+            startDate: $startDate,
+            endDate: $endDate,
+            trainingId: $trainingId
+        }) {
+            schedule {
+               id
+           }
+       }
+    }
+'''
+
+CREATE_MANY_SCHEDULES_MUTATION= '''
+    mutation createManySchedules(
+        $trainingId: ID!,
+        $startDate: Date!,
+        $endDate: Date!,
+        $dayOfWeek: String!
+    ) {
+        createManySchedules(input: {
+            trainingId: $trainingId,
+            startDate: $startDate,
+            endDate: $endDate,
+            dayOfWeek: $dayOfWeek
+        }) {
+            schedule {
+                id
+            }
+        }
+    }
+'''
