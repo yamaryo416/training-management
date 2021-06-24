@@ -5,8 +5,8 @@ from graphene_django.filter import DjangoFilterConnectionField
 from graphql_jwt.decorators import login_required, user_passes_test
 from graphql_relay import from_global_id
 
-from api.models import Profile, Team, TeamBoard, Training
-from api.graphql.node import ProfileNode, TeamNode, TeamBoardNode, TrainingNode
+from api.models import Profile, Team, TeamBoard, Training, Schedule
+from api.graphql.node import ProfileNode, TeamNode, TeamBoardNode, TrainingNode, ScheduleNode
 from api.graphql.mutation.user_mutation import CreateGeneralUserMutation, CreateGuestUserMutation, DeleteUserMutation
 from api.graphql.mutation.profile_mutation import \
     UpdateProfileNicknameMutation, UpdateProfileTeamBoardMutation, DeleteMyProfileTeamBoardMutation, \
@@ -15,6 +15,8 @@ from api.graphql.mutation.team_mutation import CreateTeamMutation, UpdateTeamMut
 from api.graphql.mutation.team_board_mutation import UpdateTeamBoardIntroductionMutation, UpdateTeamBoardCoachMutation
 from api.graphql.mutation.training_mutation import \
     CreateTrainingMutation, UpdateTrainingMutation, DeleteTrainingMutation
+from api.graphql.mutation.schedule_mutation import \
+    CreateScheduleMutation, CreateManySchedulesMutation, DeleteScheduleMutation, DeleteManySchedulesMutation
 
 class Mutation(graphene.AbstractType):
     token_auth = graphql_jwt.ObtainJSONWebToken.Field()
@@ -32,6 +34,10 @@ class Mutation(graphene.AbstractType):
     create_training = CreateTrainingMutation.Field()
     update_training = UpdateTrainingMutation.Field()
     delete_training = DeleteTrainingMutation.Field()
+    create_schedule = CreateScheduleMutation.Field()
+    create_many_schedules = CreateManySchedulesMutation.Field()
+    delete_schedule = DeleteScheduleMutation.Field()
+    delete_many_schedules = DeleteManySchedulesMutation.Field()
 
 class Query(graphene.ObjectType):
     my_profile = graphene.Field(ProfileNode)
@@ -43,6 +49,7 @@ class Query(graphene.ObjectType):
     my_team_member = DjangoFilterConnectionField(ProfileNode)
     all_team_board = DjangoFilterConnectionField(TeamBoardNode)
     my_team_trainings = DjangoFilterConnectionField(TrainingNode)
+    my_team_schedules = DjangoFilterConnectionField(ScheduleNode)
 
     @login_required
     def resolve_my_profile(self, info, **kwargs):
@@ -73,3 +80,7 @@ class Query(graphene.ObjectType):
     @login_required
     def resolve_my_team_trainings(self, info, **kwargs):
         return Training.objects.filter(team_board=info.context.user.profile.team_board).order_by('-created_at')
+
+    @login_required
+    def resolve_my_team_schedules(self, info, **kwargs):
+        return Schedule.objects.filter(team_board=info.context.user.profile.team_board).order_by('-created_at')
