@@ -2,17 +2,18 @@ import json
 
 from graphene_django.utils.testing import GraphQLTestCase
 
-from api.models import CustomUser, Profile
-from api.utils.factory import UserFactory
+from api.models import CustomUser, Profile, TeamBoard
+from api.utils.factory import UserFactory, TeamFactory
 from api.utils.test_helper import create_token_headers
 from api.utils.test_query import CREATE_GENERAL_USER_MUTATION, CREATE_GUEST_USER_MUTATION, DELETE_USER_MUTATION
 
 class UserMutationTestCase(GraphQLTestCase):
     @classmethod
     def setUpTestData(self):
-        self.coach_user = UserFactory(email="coach@example.com", profile__is_coach=True, profile__nickname="coach user")
-        self.general_user = UserFactory(profile__is_coach=False, profile__nickname="general user")
-        self.guest_user = UserFactory(profile__is_guest=True, profile__nickname="guest user")
+        self.team = TeamFactory(team_board__coach="coach user", team_board__join_count=3)
+        self.coach_user = UserFactory(email="coach@example.com", profile__is_coach=True, profile__nickname="coach user", profile__team_board=self.team.team_board)
+        self.general_user = UserFactory(profile__team_board=self.team.team_board, profile__is_coach=False, profile__nickname="general user")
+        self.guest_user = UserFactory(profile__team_board=self.team.team_board, profile__is_guest=True, profile__nickname="guest user")
 
     def test_success_create_user(self):
         response = self.query(
@@ -100,7 +101,7 @@ class UserMutationTestCase(GraphQLTestCase):
         self.assertEqual(Profile.objects.all().count(), 4)
         self.assertTrue(Profile.objects.filter(nickname="ゲスト").exists())
 
-    def test_failed_create_guest_user_because_password_is_too_short(self):
+    def test_failed_create_guest_user_because_password(self):
         response = self.query(
             CREATE_GUEST_USER_MUTATION,
             op_name="createGuestUser",
@@ -123,6 +124,7 @@ class UserMutationTestCase(GraphQLTestCase):
         self.assertResponseNoErrors(response)
         self.assertEqual(CustomUser.objects.all().count(), 2)
         self.assertEqual(Profile.objects.all().count(), 2)
+        self.assertEqual(TeamBoard.objects.get(team=self.team).join_count, 2)
 
     def test_success_delete_guest_user_and_no_change_team_join_count(self):
         response = self.query(
@@ -135,6 +137,7 @@ class UserMutationTestCase(GraphQLTestCase):
         self.assertResponseNoErrors(response)
         self.assertEqual(CustomUser.objects.all().count(), 2)
         self.assertEqual(Profile.objects.all().count(), 2)
+        self.assertEqual(TeamBoard.objects.get(team=self.team).join_count, 3)
 
     def test_failed_delete_user_because_is_coach(self):
         response = self.query(
@@ -147,3 +150,4 @@ class UserMutationTestCase(GraphQLTestCase):
         self.assertEqual(content["errors"][0]["message"], "You do not have permission to perform this action")
         self.assertEqual(CustomUser.objects.all().count(), 3)
         self.assertEqual(Profile.objects.all().count(), 3)
+        self.assertEqual(TeamBoard.objects.get(team=self.team).join_count, 3)
