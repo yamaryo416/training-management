@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "test": "jest --env=jsdom --verbose"
   },
   "dependencies": {
     "@apollo/react-hooks": "^4.0.0",
@@ -35,5 +36,15 @@
     "jest": "^27.0.5",
     "jest-css-modules": "^2.1.0",
     "typescript": "4.3.4"
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "<rootDir>/.next/",
+      "<rootDir>/node_modules/"
+    ]
+  },
+  "prettier": {
+    "singleQuote": true,
+    "semi": false
   }
 }
