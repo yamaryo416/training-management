@@ -32,3 +32,17 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.email
+
+class Profile(models.Model):
+    nickname = models.CharField(max_length=20)
+    user = models.OneToOneField(
+        CustomUser, related_name="profile",
+        on_delete=models.CASCADE
+    )
+    is_guest = models.BooleanField(default=False)
+    is_coach = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    join_at = models.DateTimeField(blank=True, null=True)
+
+    def __str__(self):
+        return self.nickname
