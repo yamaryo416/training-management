@@ -3,7 +3,6 @@ import random, string
 
 from graphene import relay
 from graphql_jwt.decorators import login_required, user_passes_test
-
 from api.models import CustomUser, Profile
 from api.utils.validator import validate_name, validate_email, validate_user_password
 from api.graphql.node import UserNode
@@ -68,6 +67,10 @@ class DeleteUserMutation(relay.ClientIDMutation):
     @user_passes_test(lambda use: not use.profile.is_coach)
     def mutate_and_get_payload(root, info, **input):
         user = info.context.user
+        if (user.profile.team_board is not None) & (not user.profile.is_guest):
+            team_board = user.profile.team_board
+            team_board.join_count -= 1
+            team_board.save()
         user.delete()
 
         return DeleteUserMutation(user=None)
