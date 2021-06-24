@@ -35,6 +35,7 @@ class Query(graphene.ObjectType):
                                         password=graphene.NonNull(graphene.String))
     one_team_from_id = graphene.Field(TeamNode,
                                       team_id=graphene.NonNull(graphene.ID))
+    my_team_member = DjangoFilterConnectionField(ProfileNode)
     all_team_board = DjangoFilterConnectionField(TeamBoardNode)
 
     @login_required
@@ -52,6 +53,12 @@ class Query(graphene.ObjectType):
     def resolve_one_team_from_id(self, info, **kwargs):
         team_id = from_global_id(kwargs.get('team_id'))[1]
         return Team.objects.get(id=team_id)
+    
+    @login_required
+    @user_passes_test(lambda use: use.profile.is_coach)
+    def resolve_my_team_member(self, info, **kwargs):
+        return Profile.objects.filter(team_board=info.context.user.profile.team_board, is_guest=False).order_by(
+            '-join_at')
 
     @login_required
     def resolve_all_team_board(self, info, **kwargs):
