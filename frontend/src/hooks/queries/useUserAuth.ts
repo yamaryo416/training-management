@@ -93,3 +93,4 @@ export const useUserAuth = () => {
 
 
     return { signup, login, joinGuestUser, logout }
+}
