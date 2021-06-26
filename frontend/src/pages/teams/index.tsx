@@ -1,6 +1,6 @@
 import { memo, VFC, useEffect } from "react";
 import { useRouter } from "next/router";
-import { Flex } from "@chakra-ui/layout";
+import { Flex, Box } from "@chakra-ui/layout";
 
 import { useMessage } from "../../hooks/useMessage";
 import { useGetMyProfile } from "../../hooks/queries/useGetMyProfile";
@@ -10,11 +10,14 @@ import { TeamAuthModal } from "../../components/organisms/modal/TeamAuthModal";
 import { HeadTitle } from '../../components/atoms/title/HeadTitle'
 import { HeaderForAuthUser } from "../../components/templates/HeaderForAuthUser";
 import { MainMenubar } from "../../components/templates/MainMenubar";
+import { useGetAllTeamBoard } from "../../hooks/queries/useGetAllTeamBoard";
+import { TeamCard } from "../../components/organisms/layout/TeamCard";
 
 const TeamList: VFC = memo(() => {
     const router = useRouter()
     const { showMessage } = useMessage()
     const { loadingMyProfile, errorMyProfile, dataMyProfile } = useGetMyProfile()
+    const { loadingAllTeamBoard, dataAllTeamBoard, errorAllTeamBoard } = useGetAllTeamBoard()
 
     useEffect(() => {
         if (errorMyProfile) {
@@ -49,6 +52,22 @@ const TeamList: VFC = memo(() => {
                     isMyTeamPage={false}
                     isGuest={dataMyProfile?.myProfile.isGuest!}
                 />
+                  <Box mt="150px" color="white">
+                    <Flex flexWrap="wrap">
+                        {loadingAllTeamBoard && <CustomSpinner />}
+                        {errorAllTeamBoard && <FailedText />}
+                        {dataAllTeamBoard?.allTeamBoard.edges?.map(({ node }) => (
+                            <TeamCard
+                                key={node.id}
+                                teamId={node.team.id}
+                                teamName={node.team.name}
+                                coachName={node.coach}
+                                introduction={node.introduction}
+                                joinCount={node.joinCount}
+                            />
+                        ))}
+                    </Flex>
+                </Box>
             </Flex>
         </>
     )
