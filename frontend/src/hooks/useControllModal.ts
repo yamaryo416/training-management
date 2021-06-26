@@ -9,11 +9,13 @@ import { scheduleCreateModalState } from "../store/scheduleCreateModalState"
 import { confirmScheduleDeleteModalState } from "../store/confirmScheduleDeleteModalState"
 import { scheduleDeleteModalState } from "../store/scheduleDeleteModalState"
 import { myProfileEditModalState } from "../store/myProfileEditModalState"
+import { confirmTeamLeaveModalState } from "../store/confirmTeamLeaveModalState"
 
 export const useControllModal = () => {
     const setUserAuthModal = useSetRecoilState(userAuthModalState)
     const setTeamAuthModal = useSetRecoilState(teamAuthModalState)
     const setMyProfileEditModal = useSetRecoilState(myProfileEditModalState)
+    const setConfirmTeamLeaveModal = useSetRecoilState(confirmTeamLeaveModalState)
     const [trainingCreateOrUpdateModal, setTrainingCreateOrUpdateModal] = useRecoilState(trainingCreateOrUpdateModalState)
     const [confirmTrainingDeleteModal, setConfirmTrainingDeleteModal] = useRecoilState(confirmTrainingDeleteModalState)
     const setScheduleCreateModal = useSetRecoilState(scheduleCreateModalState)
@@ -25,6 +27,14 @@ export const useControllModal = () => {
 
     const onOpenTeamAuthModal = useCallback((isJoin: boolean) => setTeamAuthModal({ isOpen: true, isJoin }), [])
     const onCloseTeamAuthModal = useCallback(() => setTeamAuthModal({ isOpen: false, isJoin: false }), [])
+
+    const onOpenConfirmTeamLeaveModal = useCallback(
+        (id: string, nickname: string, isMyself: boolean) =>  {
+            setConfirmTeamLeaveModal({ id, nickname, isMyself, isOpen: true })
+    }, [])
+    const onCloseConfirmTeamLeaveModal = useCallback(() =>  {
+            setConfirmTeamLeaveModal({ id: "", nickname: "", isMyself: true, isOpen: false })
+    }, [])
 
     const onOpenMyProfileEditModal = useCallback(() => setMyProfileEditModal(true), [])
     const onCloseMyProfileEditModal = useCallback(() => setMyProfileEditModal(false), [])
@@ -112,6 +122,8 @@ export const useControllModal = () => {
         onCloseUserAuthModal,
         onOpenTeamAuthModal,
         onCloseTeamAuthModal,
+        onOpenConfirmTeamLeaveModal,
+        onCloseConfirmTeamLeaveModal,
         onOpenMyProfileEditModal,
         onCloseMyProfileEditModal,
         onOpenTrainingCreateModal,

@@ -91,6 +91,16 @@ export const UPDATE_MY_PROFILE_NICKNAME = gql`
     }
 `;
 
+export const DELETE_MY_PROFILE_TEAM_BOARD  = gql`
+    mutation DeleteMyProfileTeamBoard($confirm: Boolean!) {
+        deleteMyProfileTeamBoard(input: { confirm: $confirm }) {
+            profile {
+                id
+            }
+        }
+    }
+`;
+
 // team
 
 export const GET_ONE_TEAM_FROM_NAME = gql`
