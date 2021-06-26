@@ -6,6 +6,7 @@ import { teamAuthModalState } from "../store/teamAuthModalState"
 import { trainingCreateOrUpdateModalState } from "../store/trainingCreateOrUpdateModalState"
 import { confirmTrainingDeleteModalState } from "../store/confirmTrainingDeleteModalState"
 import { scheduleCreateModalState } from "../store/scheduleCreateModalState"
+import { confirmScheduleDeleteModalState } from "../store/confirmScheduleDeleteModalState"
 
 export const useControllModal = () => {
     const setUserAuthModal = useSetRecoilState(userAuthModalState)
@@ -13,6 +14,7 @@ export const useControllModal = () => {
     const [trainingCreateOrUpdateModal, setTrainingCreateOrUpdateModal] = useRecoilState(trainingCreateOrUpdateModalState)
     const [confirmTrainingDeleteModal, setConfirmTrainingDeleteModal] = useRecoilState(confirmTrainingDeleteModalState)
     const setScheduleCreateModal = useSetRecoilState(scheduleCreateModalState)
+    const setConfirmScheduleDeleteModal = useSetRecoilState(confirmScheduleDeleteModalState)
 
     const onOpenUserAuthModal = useCallback((isLogin: boolean) => setUserAuthModal({ isLogin, isOpen: true }), [])
     const onCloseUserAuthModal = useCallback(() => setUserAuthModal({ isLogin: true, isOpen: false }), [])
@@ -71,6 +73,30 @@ export const useControllModal = () => {
     const onOpenScheduleCreateModal = useCallback(() => setScheduleCreateModal(true), [])
     const onCloseScheduleCreateModal = useCallback(() => setScheduleCreateModal(false), [])
 
+    const onOpenConfirmScheduleDeleteModal = useCallback(
+        (id: string, title: string, date: string, startDate: string, endDate: string, isManySchedule: boolean) => 
+            setConfirmScheduleDeleteModal({
+                id,
+                title,
+                date,
+                startDate,
+                endDate,
+                isManySchedule,
+                isOpen: true,
+            })
+    , [])
+    const onCloseConfirmScheduleDeleteModal = useCallback(() => 
+        setConfirmScheduleDeleteModal({
+            id: "",
+            title: "",
+            date: "",
+            startDate: "",
+            endDate: "",
+            isManySchedule: false,
+            isOpen: false,
+        })
+    , [])
+
     return {
         onOpenUserAuthModal,
         onCloseUserAuthModal,
@@ -82,6 +108,8 @@ export const useControllModal = () => {
         onOpenConfirmTrainingDeleteModal,
         onCloseConfirmTrainingDeleteModal,
         onOpenScheduleCreateModal,
-        onCloseScheduleCreateModal
+        onCloseScheduleCreateModal,
+        onOpenConfirmScheduleDeleteModal,
+        onCloseConfirmScheduleDeleteModal
     }
 }
