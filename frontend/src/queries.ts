@@ -70,3 +70,82 @@ export const GET_MY_PROFILE = gql`
         }
     }
 `;
+
+export const UPDATE_MY_PROFILE_TEAM_BOARD  = gql`
+    mutation UpdateMyProfileTeamBoard($teamBoardId: ID!) {
+        updateProfileTeamBoard(input: { teamBoardId: $teamBoardId }) {
+            profile {
+                id
+            }
+        }
+    }
+`;
+
+// team
+
+export const GET_ONE_TEAM_FROM_NAME = gql`
+    query OneTeamFromName($name: String!, $password: String!) {
+        oneTeamFromName(name: $name, password: $password) {
+            name
+            teamBoard {
+                id
+            }
+        }
+    }
+`;
+
+export const GET_ONE_TEAM_FROM_ID = gql`
+    query OneTeamFromId($teamId: ID!) {
+        oneTeamFromId(teamId: $teamId) {
+            id
+            name
+            teamBoard {
+                id
+                introduction
+                joinCount
+                coach
+                schedules {
+                    edges {
+                        node {
+                            id
+                            training {
+                                title
+                                iconNumber
+                            }
+                            date
+                        }
+                    }
+                }
+                trainings {
+                    edges {
+                        node {
+                            id
+                            title
+                            iconNumber
+                        }
+                    }
+                }
+            }
+        }
+    }
+`;
+
+export const CREATE_TEAM = gql`
+    mutation CreateTeam($name: String!,$isLimitJoin: Boolean!, $password: String!) {
+        createTeam(input: {name: $name, isLimitJoin: $isLimitJoin, password: $password}) {
+            team {
+                id
+            }
+        }
+    }
+`;
+
+export const UPDATE_TEAM = gql`
+    mutation UpdateTeam($name: String!, $isLimitJoin: Boolean!, $password: String!) {
+        updateTeam(input: { name: $name, isLimitJoin: $isLimitJoin, password: $password }) {
+            team {
+                id
+            }
+        }
+    }
+`;
