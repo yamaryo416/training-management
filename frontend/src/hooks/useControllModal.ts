@@ -8,10 +8,12 @@ import { confirmTrainingDeleteModalState } from "../store/confirmTrainingDeleteM
 import { scheduleCreateModalState } from "../store/scheduleCreateModalState"
 import { confirmScheduleDeleteModalState } from "../store/confirmScheduleDeleteModalState"
 import { scheduleDeleteModalState } from "../store/scheduleDeleteModalState"
+import { myProfileEditModalState } from "../store/myProfileEditModalState"
 
 export const useControllModal = () => {
     const setUserAuthModal = useSetRecoilState(userAuthModalState)
     const setTeamAuthModal = useSetRecoilState(teamAuthModalState)
+    const setMyProfileEditModal = useSetRecoilState(myProfileEditModalState)
     const [trainingCreateOrUpdateModal, setTrainingCreateOrUpdateModal] = useRecoilState(trainingCreateOrUpdateModalState)
     const [confirmTrainingDeleteModal, setConfirmTrainingDeleteModal] = useRecoilState(confirmTrainingDeleteModalState)
     const setScheduleCreateModal = useSetRecoilState(scheduleCreateModalState)
@@ -23,6 +25,9 @@ export const useControllModal = () => {
 
     const onOpenTeamAuthModal = useCallback((isJoin: boolean) => setTeamAuthModal({ isOpen: true, isJoin }), [])
     const onCloseTeamAuthModal = useCallback(() => setTeamAuthModal({ isOpen: false, isJoin: false }), [])
+
+    const onOpenMyProfileEditModal = useCallback(() => setMyProfileEditModal(true), [])
+    const onCloseMyProfileEditModal = useCallback(() => setMyProfileEditModal(false), [])
 
     const onOpenTrainingCreateModal = useCallback(
         () => setTrainingCreateOrUpdateModal({...trainingCreateOrUpdateModal, isOpen: true, isCreate: true }), 
@@ -107,6 +112,8 @@ export const useControllModal = () => {
         onCloseUserAuthModal,
         onOpenTeamAuthModal,
         onCloseTeamAuthModal,
+        onOpenMyProfileEditModal,
+        onCloseMyProfileEditModal,
         onOpenTrainingCreateModal,
         onOpenTrainingUpdateModal,
         onCloseTrainingCreateOrUpdateModal,

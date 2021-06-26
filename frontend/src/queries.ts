@@ -81,6 +81,16 @@ export const UPDATE_MY_PROFILE_TEAM_BOARD  = gql`
     }
 `;
 
+export const UPDATE_MY_PROFILE_NICKNAME = gql`
+    mutation UpdateMyProfileNickname($nickname: String!) {
+        updateProfileNickname(input: { nickname: $nickname}) {
+            profile {
+                id
+            }
+        }
+    }
+`;
+
 // team
 
 export const GET_ONE_TEAM_FROM_NAME = gql`
