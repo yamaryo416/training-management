@@ -5,6 +5,7 @@ import { useMessage } from "../../hooks/useMessage";
 import { useGetMyProfile } from "../../hooks/queries/useGetMyProfile";
 import { CustomSpinner } from "../../components/atoms/spinner/CustomSpinner";
 import { FailedText } from "../../components/atoms/text/FailedText";
+import { TeamAuthModal } from "../../components/organisms/modal/TeamAuthModal";
 
 const TeamList: VFC = memo(() => {
     const router = useRouter()
@@ -28,6 +29,7 @@ const TeamList: VFC = memo(() => {
     return (
         <>
             {dataMyProfile.myProfile.nickname}
+            <TeamAuthModal />
         </>
     )
 })
