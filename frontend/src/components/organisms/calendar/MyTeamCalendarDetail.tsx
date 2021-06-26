@@ -22,6 +22,7 @@ export const MyTeamCalendarDetail: VFC = memo(() => {
     const { zeroNumber } = useNumber()
     const {
         onOpenConfirmScheduleDeleteModal,
+        onOpenFinishedScheduleCreateModal
     } = useControllModal()
  
     const oneDay = useRecoilValue(scheduleOneDayState)
@@ -63,7 +64,14 @@ export const MyTeamCalendarDetail: VFC = memo(() => {
                                                     data-testid={node.id + '-schedule-finished-create-button'}
                                                     bg='blue.500'
                                                     h='30px'
-                                                    onClick={() => null}
+                                                    onClick={() => {
+                                                        onOpenFinishedScheduleCreateModal(
+                                                            node.id,
+                                                            node.training.title,
+                                                            node.date,
+                                                            node.training.finishedPatern
+                                                        )
+                                                    }}
                                                 >
                                                     実施する
                                                 </Button>
