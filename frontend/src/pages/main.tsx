@@ -7,6 +7,7 @@ import { useMessage } from '../hooks/useMessage'
 import { CustomSpinner } from '../components/atoms/spinner/CustomSpinner'
 import { FailedText } from "../components/atoms/text/FailedText";
 import { HeadTitle } from '../components/atoms/title/HeadTitle'
+import { MyTeamCalendarSection } from '../components/templates/MyTeamCalendarSection'
 import { HeaderForAuthUser } from '../components/templates/HeaderForAuthUser'
 import { MainMenubar } from '../components/templates/MainMenubar'
 import { ModalSection } from '../components/templates/ModalSection'
@@ -50,6 +51,9 @@ const Main: VFC = memo(() => {
                 />
                 <Box mt='150px'>
                     <Flex flexWrap="wrap">
+                        <Box>
+                            <MyTeamCalendarSection/>
+                        </Box>
                         <Box>
                             <MyTeamTrainingSection/>
                         </Box>
