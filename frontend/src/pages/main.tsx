@@ -12,6 +12,7 @@ import { HeaderForAuthUser } from '../components/templates/HeaderForAuthUser'
 import { MainMenubar } from '../components/templates/MainMenubar'
 import { ModalSection } from '../components/templates/ModalSection'
 import { MyTeamTrainingSection } from '../components/templates/MyTeamTrainingSection'
+import { TeamBoardSection } from '../components/templates/TeamBoardSection'
 
 const Main: VFC = memo(() => {
     const router = useRouter()
@@ -57,10 +58,17 @@ const Main: VFC = memo(() => {
                         <Box>
                             <MyTeamTrainingSection/>
                         </Box>
+                        <Box>
+                            <TeamBoardSection
+                                teamName={dataMyProfile?.myProfile.teamBoard.team.name}
+                                introduction={dataMyProfile?.myProfile.teamBoard?.introduction}
+                                coachName={dataMyProfile?.myProfile.teamBoard?.coach}
+                                joinCount={dataMyProfile?.myProfile.teamBoard.joinCount}
+                                isMyTeam={true}
+                            />
+                        </Box>
                     </Flex>
                 </Box>
-
-            {dataMyProfile.myProfile.nickname}
             </Flex>
             <ModalSection
                 isJoinTeam={dataMyProfile?.myProfile.teamBoard !== null}

@@ -12,6 +12,7 @@ import { myProfileEditModalState } from "../store/myProfileEditModalState"
 import { confirmTeamLeaveModalState } from "../store/confirmTeamLeaveModalState"
 import { confirmUserDeleteModalState } from "../store/confirmUserDeleteModalState"
 import { teamEditModalState } from "../store/teamEditModalState"
+import { confirmPostDeleteModalState } from "../store/confirmPostDeleteModalState"
 
 export const useControllModal = () => {
     const setUserAuthModal = useSetRecoilState(userAuthModalState)
@@ -25,6 +26,7 @@ export const useControllModal = () => {
     const setScheduleCreateModal = useSetRecoilState(scheduleCreateModalState)
     const setScheduleDeleteModal = useSetRecoilState(scheduleDeleteModalState)
     const setConfirmScheduleDeleteModal = useSetRecoilState(confirmScheduleDeleteModalState)
+    const setConfirmPostDeleteModal = useSetRecoilState(confirmPostDeleteModalState)
 
     const onOpenUserAuthModal = useCallback((isLogin: boolean) => setUserAuthModal({ isLogin, isOpen: true }), [])
     const onCloseUserAuthModal = useCallback(() => setUserAuthModal({ isLogin: true, isOpen: false }), [])
@@ -127,6 +129,20 @@ export const useControllModal = () => {
         })
     , [])
 
+    const onOpenConfirmPostDeleteModal = useCallback(
+        (id: string, text: string) => {
+            setConfirmPostDeleteModal({
+                id, text, isOpen: true
+            })
+    }, [])
+    const onCloseConfirmPostDeleteModal = useCallback(() => {
+        setConfirmPostDeleteModal({
+            id: "",
+            text: "",
+            isOpen: false
+        })
+    }, [])
+
     return {
         onOpenUserAuthModal,
         onCloseUserAuthModal,
@@ -150,6 +166,8 @@ export const useControllModal = () => {
         onOpenScheduleDeleteModal,
         onCloseScheduleDeleteModal,
         onOpenConfirmScheduleDeleteModal,
-        onCloseConfirmScheduleDeleteModal
+        onCloseConfirmScheduleDeleteModal,
+        onOpenConfirmPostDeleteModal,
+        onCloseConfirmPostDeleteModal
     }
 }

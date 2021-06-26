@@ -381,3 +381,48 @@ export const DELETE_MANY_SCHEDULES = gql`
         }
     }
 `
+
+// post
+
+export const GET_MORE_MY_TEAM_POSTS = gql`
+    query MyTeamPosts($first: Int, $after: String) {
+        myTeamPosts(first: $first, after: $after ) {
+            edges {
+                node {
+                    id
+                    text
+                    profile {
+                        id
+                        nickname
+                    }
+                    createdAt
+                }
+            }
+            pageInfo {
+                endCursor
+                hasNextPage
+            }
+        }
+    }
+`;
+
+export const CREATE_POST = gql`
+    mutation CreatePost($text: String!) {
+        createPost(input: {text: $text}) {
+            post {
+                id
+            }
+        }
+    }
+`;
+
+
+export const DELETE_POST = gql`
+    mutation DeletePost($postId: ID!) {
+        deletePost(input: {postId: $postId}) {
+            post {
+                id
+            }
+        }
+    }
+`;
