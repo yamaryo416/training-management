@@ -12,6 +12,7 @@ import { HeaderForAuthUser } from "../../components/templates/HeaderForAuthUser"
 import { MainMenubar } from "../../components/templates/MainMenubar";
 import { useGetAllTeamBoard } from "../../hooks/queries/useGetAllTeamBoard";
 import { TeamCard } from "../../components/organisms/layout/TeamCard";
+import { ModalSection } from "../../components/templates/ModalSection";
 
 const TeamList: VFC = memo(() => {
     const router = useRouter()
@@ -69,6 +70,11 @@ const TeamList: VFC = memo(() => {
                     </Flex>
                 </Box>
             </Flex>
+            <ModalSection
+                isJoinTeam={dataMyProfile?.myProfile.teamBoard !== null}
+                isCoach={dataMyProfile?.myProfile.isCoach!}
+                page="teamListPage"
+            />
         </>
     )
 })

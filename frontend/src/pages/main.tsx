@@ -9,6 +9,7 @@ import { FailedText } from "../components/atoms/text/FailedText";
 import { HeadTitle } from '../components/atoms/title/HeadTitle'
 import { HeaderForAuthUser } from '../components/templates/HeaderForAuthUser'
 import { MainMenubar } from '../components/templates/MainMenubar'
+import { ModalSection } from '../components/templates/ModalSection'
 
 const Main: VFC = memo(() => {
     const router = useRouter()
@@ -48,6 +49,11 @@ const Main: VFC = memo(() => {
                 />
             {dataMyProfile.myProfile.nickname}
             </Flex>
+            <ModalSection
+                isJoinTeam={dataMyProfile?.myProfile.teamBoard !== null}
+                isCoach={dataMyProfile?.myProfile.isCoach!}
+                page="myPage"
+            />
         </>
     )
 })
