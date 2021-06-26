@@ -249,3 +249,105 @@ export const DELETE_TRAINING = gql`
         }
     }
 `
+
+// schedule
+
+export const GET_MY_TEAM_SCHEDULES = gql`
+    query MyTeamSchedules{
+        myTeamSchedules {
+            edges {
+                node {
+                    id
+                    training {
+                        id
+                        title
+                        description
+                        iconNumber
+                        finishedPatern
+                    }
+                    date
+                }
+            }
+        }
+    }
+`;
+
+export const GET_ONE_DAY_SCHEDULES = gql`
+    query OneDaySchedules($date : Date!) {
+        myTeamSchedules(date: $date) {
+            edges {
+                node {
+                    id
+                    training {
+                        title
+                        description
+                        iconNumber
+                        finishedPatern
+                    }
+                    date
+                    finishedCount
+                    finishedSchedules {
+                        edges {
+                            node {
+                                profile {
+                                    id
+                                    nickname
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+`;
+
+export const CREATE_SINGLE_SCHEDULE = gql`
+    mutation CreateSingleSchedule($trainingId: ID!, $date: Date!) {
+        createSchedule(input: { trainingId: $trainingId, date: $date}) {
+            schedule {
+                id
+            }
+        }
+    }
+`
+
+export const CREATE_MANY_SCHEDULES = gql`
+    mutation CreateManySchedules(
+        $trainingId: ID!,
+        $startDate: Date!,
+        $endDate: Date!,
+        $dayOfWeek: String!
+         ) {
+        createManySchedules(input: { 
+            trainingId: $trainingId,
+            startDate: $startDate,
+            endDate: $endDate,
+            dayOfWeek: $dayOfWeek
+            }) {
+            schedule {
+                id
+            }
+        }
+    }
+`;
+
+export const DELETE_SCHEDULE = gql`
+    mutation DeleteSchedule($scheduleId: ID!) {
+        deleteSchedule(input: { scheduleId: $scheduleId }) {
+            schedule{
+                id
+            }
+        }
+    }
+`;
+
+export const DELETE_MANY_SCHEDULES = gql`
+    mutation DeleteManySchedules($startDate: Date!, $endDate: Date!, $trainingId: ID) {
+        deleteManySchedules(input: { startDate: $startDate, endDate: $endDate, trainingId: $trainingId }) {
+            schedule {
+                id
+            }
+        }
+    }
+`
