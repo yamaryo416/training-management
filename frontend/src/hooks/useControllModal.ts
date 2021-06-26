@@ -10,11 +10,13 @@ import { confirmScheduleDeleteModalState } from "../store/confirmScheduleDeleteM
 import { scheduleDeleteModalState } from "../store/scheduleDeleteModalState"
 import { myProfileEditModalState } from "../store/myProfileEditModalState"
 import { confirmTeamLeaveModalState } from "../store/confirmTeamLeaveModalState"
+import { confirmUserDeleteModalState } from "../store/confirmUserDeleteModalState"
 
 export const useControllModal = () => {
     const setUserAuthModal = useSetRecoilState(userAuthModalState)
     const setTeamAuthModal = useSetRecoilState(teamAuthModalState)
     const setMyProfileEditModal = useSetRecoilState(myProfileEditModalState)
+    const setConfirmUserDeleteModal = useSetRecoilState(confirmUserDeleteModalState)
     const setConfirmTeamLeaveModal = useSetRecoilState(confirmTeamLeaveModalState)
     const [trainingCreateOrUpdateModal, setTrainingCreateOrUpdateModal] = useRecoilState(trainingCreateOrUpdateModalState)
     const [confirmTrainingDeleteModal, setConfirmTrainingDeleteModal] = useRecoilState(confirmTrainingDeleteModalState)
@@ -38,6 +40,9 @@ export const useControllModal = () => {
 
     const onOpenMyProfileEditModal = useCallback(() => setMyProfileEditModal(true), [])
     const onCloseMyProfileEditModal = useCallback(() => setMyProfileEditModal(false), [])
+
+    const onOpenConfirmUserDeleteModal = useCallback(() => setConfirmUserDeleteModal(true), [])
+    const onCloseConfirmUserDeleteModal = useCallback(() => setConfirmUserDeleteModal(false), []) 
 
     const onOpenTrainingCreateModal = useCallback(
         () => setTrainingCreateOrUpdateModal({...trainingCreateOrUpdateModal, isOpen: true, isCreate: true }), 
@@ -126,6 +131,8 @@ export const useControllModal = () => {
         onCloseConfirmTeamLeaveModal,
         onOpenMyProfileEditModal,
         onCloseMyProfileEditModal,
+        onOpenConfirmUserDeleteModal,
+        onCloseConfirmUserDeleteModal,
         onOpenTrainingCreateModal,
         onOpenTrainingUpdateModal,
         onCloseTrainingCreateOrUpdateModal,

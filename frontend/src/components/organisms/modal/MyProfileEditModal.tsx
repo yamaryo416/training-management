@@ -17,7 +17,7 @@ import { ErrorText } from "../../atoms/text/ErrorText";
 
 export const MyProfileEditModal: VFC = memo(() => {
     const { updateMyProfileNickname } = useUpdateMyProfileNickname()
-    const { onCloseMyProfileEditModal, onOpenConfirmTeamLeaveModal } = useControllModal()
+    const { onCloseMyProfileEditModal, onOpenConfirmTeamLeaveModal, onOpenConfirmUserDeleteModal } = useControllModal()
     const { dataMyProfile } = useGetMyProfile()
     const { showMessage } = useMessage()
     
@@ -99,7 +99,7 @@ export const MyProfileEditModal: VFC = memo(() => {
                         onCloseMyProfileEditModal()
                         dataMyProfile?.myProfile.isCoach ? 
                         showMessage({ title: "コーチの権限を他のユーザーに委譲してください。", status: "error" }) :
-                        null
+                        onOpenConfirmUserDeleteModal()
                 }}>
                     アカウントを削除する
                 </DeleteButton>
