@@ -13,6 +13,7 @@ import { confirmTeamLeaveModalState } from "../store/confirmTeamLeaveModalState"
 import { confirmUserDeleteModalState } from "../store/confirmUserDeleteModalState"
 import { teamEditModalState } from "../store/teamEditModalState"
 import { confirmPostDeleteModalState } from "../store/confirmPostDeleteModalState"
+import { trainingDetailModalState } from "../store/trainingDetailModalState"
 
 export const useControllModal = () => {
     const setUserAuthModal = useSetRecoilState(userAuthModalState)
@@ -23,6 +24,7 @@ export const useControllModal = () => {
     const setTeamEditModal = useSetRecoilState(teamEditModalState)
     const [trainingCreateOrUpdateModal, setTrainingCreateOrUpdateModal] = useRecoilState(trainingCreateOrUpdateModalState)
     const [confirmTrainingDeleteModal, setConfirmTrainingDeleteModal] = useRecoilState(confirmTrainingDeleteModalState)
+    const setTrainingDetailModal = useSetRecoilState(trainingDetailModalState)
     const setScheduleCreateModal = useSetRecoilState(scheduleCreateModalState)
     const setScheduleDeleteModal = useSetRecoilState(scheduleDeleteModalState)
     const setConfirmScheduleDeleteModal = useSetRecoilState(confirmScheduleDeleteModalState)
@@ -98,7 +100,33 @@ export const useControllModal = () => {
                 isOpen: false
             })
     }, [])
-
+    
+    const onOpneTrainingDetailModal = useCallback(
+        (
+            title: string,
+            description: string,
+            finishedPatern: string,
+            iconNumber: number | undefined
+        ) => {
+             setTrainingDetailModal({
+                 title,
+                 description,
+                 finishedPatern,
+                 iconNumber,
+                 isOpen: true
+            })
+    }, [])
+    const onCloseTrainingDetailModal = useCallback(
+        () => {
+            setTrainingDetailModal({
+                title: '',
+                description: undefined,
+                finishedPatern: '',
+                iconNumber: undefined,
+                isOpen: false
+            })
+    }, [])
+    
     const onOpenScheduleCreateModal = useCallback(() => setScheduleCreateModal(true), [])
     const onCloseScheduleCreateModal = useCallback(() => setScheduleCreateModal(false), [])
 
@@ -161,6 +189,8 @@ export const useControllModal = () => {
         onCloseTrainingCreateOrUpdateModal,
         onOpenConfirmTrainingDeleteModal,
         onCloseConfirmTrainingDeleteModal,
+        onOpneTrainingDetailModal,
+        onCloseTrainingDetailModal,
         onOpenScheduleCreateModal,
         onCloseScheduleCreateModal,
         onOpenScheduleDeleteModal,

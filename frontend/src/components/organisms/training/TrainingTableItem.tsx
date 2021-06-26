@@ -18,7 +18,7 @@ export const TrainingTableItem: VFC<Props> = memo((props) => {
     const { node, isMyTeam } = props;
 
     const { dataMyProfile, loadingMyProfile } = useGetMyProfile()
-    const { onOpenTrainingUpdateModal, onOpenConfirmTrainingDeleteModal } = useControllModal()
+    const { onOpenTrainingUpdateModal, onOpenConfirmTrainingDeleteModal, onOpneTrainingDetailModal } = useControllModal()
     const { zeroNumber } = useNumber()
 
     if (loadingMyProfile) return <CustomSpinner />
@@ -35,8 +35,16 @@ export const TrainingTableItem: VFC<Props> = memo((props) => {
                     overflow="hidden"
                     textOverflow="ellipsis"  
                     data-testid={node.id + '-training-title'}              
-                    onClick={() => null
-                }>
+                    onClick={() => {
+                        if (isMyTeam) {
+                            onOpneTrainingDetailModal(
+                                node.title,
+                                node.description,
+                                node.finishedPatern,
+                                zeroNumber(node.iconNumber)
+                            )
+                        } 
+                }}>
                     {node.title}
                 </Text>
                 {isMyTeam && !dataMyProfile?.myProfile.isGuest! && (
