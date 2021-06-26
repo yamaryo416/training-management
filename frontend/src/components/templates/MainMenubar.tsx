@@ -39,7 +39,8 @@ export const MainMenubar:VFC<Props> = (props) => {
 
    const {
        onOpenTeamAuthModal,
-       onOpenTrainingCreateModal
+       onOpenTrainingCreateModal,
+       onOpenScheduleCreateModal
    } = useControllModal()
 
    const onOpenIsMenubar = useCallback(() => setIsMenubarOpen(true), [])
@@ -95,7 +96,7 @@ export const MainMenubar:VFC<Props> = (props) => {
                                                 <MenuButton title="トレーニング作成" onClick={onOpenTrainingCreateModal}>
                                                     <NoteAddIcon style={{ fontSize: 40 }} data-testid='main-create-training-icon' />
                                                 </MenuButton>
-                                                <MenuButton title="スケジュール作成" onClick={() => null}>
+                                                <MenuButton title="スケジュール作成" onClick={onOpenScheduleCreateModal}>
                                                     <InsertInvitationIcon style={{ fontSize: 40}} data-testid='main-create-schedule-icon' />
                                                 </MenuButton>
                                                 <MenuButton title="スケジュール削除" onClick={() => null}>
