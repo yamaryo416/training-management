@@ -44,6 +44,7 @@ export const HeaderForAuthUser: VFC<Props> = memo((props) => {
         onOpenScheduleCreateModal,
         onOpenScheduleDeleteModal,
         onOpenMyProfileEditModal,
+        onOpenTeamEditModal
     } = useControllModal()
 
     const onFocusPageList = useCallback(() => setMenuFocus("pageList"), [])
@@ -126,7 +127,7 @@ export const HeaderForAuthUser: VFC<Props> = memo((props) => {
                                     <>
                                         <MenuListItem
                                             text="チーム編集"
-                                            onClick={() => null}
+                                            onClick={onOpenTeamEditModal}
                                         >
                                             <EditIcon />
                                         </MenuListItem>

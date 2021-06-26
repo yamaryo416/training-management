@@ -191,6 +191,16 @@ export const GET_ALL_TEAM_BOARD = gql`
     }
 `;
 
+export const UPDATE_TEAM_BOARD_INTRODUCTION = gql`
+    mutation UpdateTeamBoardIntroduction($introduction: String!) {
+        updateTeamBoardIntroduction(input: { introduction: $introduction }) {
+            teamBoard {
+                id
+            }
+        }
+    }
+`
+
 // training
 
 export const GET_MY_TEAM_TRAININGS = gql`

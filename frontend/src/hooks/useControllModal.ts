@@ -11,6 +11,7 @@ import { scheduleDeleteModalState } from "../store/scheduleDeleteModalState"
 import { myProfileEditModalState } from "../store/myProfileEditModalState"
 import { confirmTeamLeaveModalState } from "../store/confirmTeamLeaveModalState"
 import { confirmUserDeleteModalState } from "../store/confirmUserDeleteModalState"
+import { teamEditModalState } from "../store/teamEditModalState"
 
 export const useControllModal = () => {
     const setUserAuthModal = useSetRecoilState(userAuthModalState)
@@ -18,6 +19,7 @@ export const useControllModal = () => {
     const setMyProfileEditModal = useSetRecoilState(myProfileEditModalState)
     const setConfirmUserDeleteModal = useSetRecoilState(confirmUserDeleteModalState)
     const setConfirmTeamLeaveModal = useSetRecoilState(confirmTeamLeaveModalState)
+    const setTeamEditModal = useSetRecoilState(teamEditModalState)
     const [trainingCreateOrUpdateModal, setTrainingCreateOrUpdateModal] = useRecoilState(trainingCreateOrUpdateModalState)
     const [confirmTrainingDeleteModal, setConfirmTrainingDeleteModal] = useRecoilState(confirmTrainingDeleteModalState)
     const setScheduleCreateModal = useSetRecoilState(scheduleCreateModalState)
@@ -37,6 +39,9 @@ export const useControllModal = () => {
     const onCloseConfirmTeamLeaveModal = useCallback(() =>  {
             setConfirmTeamLeaveModal({ id: "", nickname: "", isMyself: true, isOpen: false })
     }, [])
+
+    const onOpenTeamEditModal = useCallback(() => setTeamEditModal(true), [])
+    const onCloseTeamEditModal = useCallback(() => setTeamEditModal(false), [])
 
     const onOpenMyProfileEditModal = useCallback(() => setMyProfileEditModal(true), [])
     const onCloseMyProfileEditModal = useCallback(() => setMyProfileEditModal(false), [])
@@ -129,6 +134,8 @@ export const useControllModal = () => {
         onCloseTeamAuthModal,
         onOpenConfirmTeamLeaveModal,
         onCloseConfirmTeamLeaveModal,
+        onOpenTeamEditModal,
+        onCloseTeamEditModal,
         onOpenMyProfileEditModal,
         onCloseMyProfileEditModal,
         onOpenConfirmUserDeleteModal,

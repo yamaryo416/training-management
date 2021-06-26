@@ -9,6 +9,7 @@ import { ScheduleDeleteModal } from "../organisms/modal/ScheduleDeleteModal";
 import { MyProfileEditModal } from "../organisms/modal/MyProfileEditModal";
 import { ConfirmTeamLeaveModal } from "../organisms/modal/ConfirmTeamLeaveModal";
 import { ConfirmUserDeleteModal } from "../organisms/modal/ConfirmUserDeleteModal";
+import { TeamEditModal } from "../organisms/modal/TeamEditModal";
 
 type Props = {
     isJoinTeam: boolean;
@@ -30,6 +31,7 @@ export const ModalSection: VFC<Props> = memo((props) => {
             )}
             {(page === "myPage" || page === "myTeamMemberPage") && isCoach && (
                 <>
+                    <TeamEditModal />
                     <TrainingCreateOrUpdateModal />
                     <ConfirmTrainingDeleteModal />
                     <ScheduleCreateModal />
