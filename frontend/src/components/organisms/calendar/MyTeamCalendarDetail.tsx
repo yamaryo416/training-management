@@ -14,11 +14,15 @@ import { TODAY } from "../../../../constants";
 import { useNumber } from "../../../hooks/useNumber";
 import { CalendarDetailMenubar } from "./CalendarDetailMenubar";
 import { CalendarDetailContents } from "./CalendarDetailContents";
+import { useControllModal } from "../../../hooks/useControllModal";
 
 export const MyTeamCalendarDetail: VFC = memo(() => {
     const { dataMyProfile } = useGetMyProfile()
     const { loadingOnedaySchedules, dataOneDaySchedules, errorOneDaySchedules } = useGetOneDaySchedules()
     const { zeroNumber } = useNumber()
+    const {
+        onOpenConfirmScheduleDeleteModal,
+    } = useControllModal()
  
     const oneDay = useRecoilValue(scheduleOneDayState)
 
@@ -70,8 +74,15 @@ export const MyTeamCalendarDetail: VFC = memo(() => {
                                         <Box pl={7}>
                                             <DeleteIcon
                                                 data-testid={node.id + '-schedule-delete-icon'}
-                                                onClick={() => null}
-                                            />
+                                                onClick={() => {
+                                                    onOpenConfirmScheduleDeleteModal(
+                                                        node.id,
+                                                        node.training.title,
+                                                        oneDay,
+                                                        "",
+                                                        "",
+                                                        false
+                                            )}}/>
                                         </Box> 
                                     )}
                                 </Flex>

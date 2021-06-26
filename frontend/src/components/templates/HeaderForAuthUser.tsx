@@ -41,7 +41,8 @@ export const HeaderForAuthUser: VFC<Props> = memo((props) => {
     const {
         onOpenTeamAuthModal,
         onOpenTrainingCreateModal,
-        onOpenScheduleCreateModal
+        onOpenScheduleCreateModal,
+        onOpenScheduleDeleteModal
     } = useControllModal()
 
     const onFocusPageList = useCallback(() => setMenuFocus("pageList"), [])
@@ -142,7 +143,7 @@ export const HeaderForAuthUser: VFC<Props> = memo((props) => {
                                         </MenuListItem>
                                         <MenuListItem
                                             text="スケジュール削除"
-                                            onClick={() => null}
+                                            onClick={onOpenScheduleDeleteModal}
                                         >
                                             <DeleteForeverIcon />
                                         </MenuListItem>
