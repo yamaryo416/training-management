@@ -4,11 +4,13 @@ import { useRecoilState, useSetRecoilState } from "recoil"
 import { userAuthModalState } from "../store/userAuthModalState"
 import { teamAuthModalState } from "../store/teamAuthModalState"
 import { trainingCreateOrUpdateModalState } from "../store/trainingCreateOrUpdateModalState"
+import { confirmTrainingDeleteModalState } from "../store/confirmTrainingDeleteModalState"
 
 export const useControllModal = () => {
     const setUserAuthModal = useSetRecoilState(userAuthModalState)
     const setTeamAuthModal = useSetRecoilState(teamAuthModalState)
     const [trainingCreateOrUpdateModal, setTrainingCreateOrUpdateModal] = useRecoilState(trainingCreateOrUpdateModalState)
+    const [confirmTrainingDeleteModal, setConfirmTrainingDeleteModal] = useRecoilState(confirmTrainingDeleteModalState)
 
     const onOpenUserAuthModal = useCallback((isLogin: boolean) => setUserAuthModal({ isLogin, isOpen: true }), [])
     const onCloseUserAuthModal = useCallback(() => setUserAuthModal({ isLogin: true, isOpen: false }), [])
@@ -41,6 +43,29 @@ export const useControllModal = () => {
             }) 
     , [])
 
+    const onOpenConfirmTrainingDeleteModal = useCallback(
+        (
+            id: string,
+            title: string,
+            description: string
+        ) => {
+            setConfirmTrainingDeleteModal({
+                id,
+                title,
+                description,
+                isOpen: true
+            })
+    }, [])
+    const onCloseConfirmTrainingDeleteModal = useCallback(
+        () => {
+            setConfirmTrainingDeleteModal({
+                id: '',
+                title: '',
+                description: '',
+                isOpen: false
+            })
+    }, [])
+
     return {
         onOpenUserAuthModal,
         onCloseUserAuthModal,
@@ -48,6 +73,8 @@ export const useControllModal = () => {
         onCloseTeamAuthModal,
         onOpenTrainingCreateModal,
         onOpenTrainingUpdateModal,
-        onCloseTrainingCreateOrUpdateModal
+        onCloseTrainingCreateOrUpdateModal,
+        onOpenConfirmTrainingDeleteModal,
+        onCloseConfirmTrainingDeleteModal
     }
 }
