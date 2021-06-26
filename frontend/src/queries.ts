@@ -149,3 +149,24 @@ export const UPDATE_TEAM = gql`
         }
     }
 `;
+
+// teamBoard
+
+export const GET_ALL_TEAM_BOARD = gql`
+    query AllTeamBoard{
+        allTeamBoard {
+            edges {
+                node {
+                    id
+                    introduction
+                    joinCount
+                    coach
+                    team {
+                        id
+                        name
+                    }
+                }
+            }
+        }
+    }
+`;
