@@ -426,3 +426,123 @@ export const DELETE_POST = gql`
         }
     }
 `;
+
+// finishedSchedule
+
+export const GET_MY_FINISHED_SCHEDULES = gql`
+    query MyFinishedSchedules {
+        myFinishedSchedules {
+            edges {
+                node {
+                    id
+                    profile {
+                        id
+                        nickname
+                    }
+                    training {
+                        id
+                        title
+                        finishedPatern
+                    }
+                    schedule {
+                        id
+                        date
+                    }
+                    count
+                    load
+                    distance
+                    minitus
+                    comment
+                }
+            }
+        }
+    }
+`
+
+export const GET_MY_TEAM_FINISHED_SCHEDULES = gql`
+    query MyTeamFinishedSchedules{
+        myTeamFinishedSchedules {
+            edges {
+                node {
+                    id
+                    profile {
+                        id
+                        nickname
+                    }
+                    training {
+                        id
+                        title
+                        finishedPatern
+                    }
+                    schedule {
+                        id
+                        date
+                    }
+                    count
+                    load
+                    distance
+                    minitus
+                    comment
+                }
+            }
+        }
+    }
+`
+
+export const GET_ONE_MEMBER_FINISHED_SCHEDULES = gql`
+    query OneMemberFinishedSchedules($profileId: ID!) {
+        myTeamFinishedSchedules(profile_Id: $profileId) {
+            edges {
+                node {
+                    id
+                    profile {
+                        id
+                        nickname
+                    }
+                    training {
+                        id
+                        title
+                        finishedPatern
+                    }
+                    schedule {
+                        id
+                        date
+                    }
+                    count
+                    load
+                    distance
+                    minitus
+                    comment
+                }
+            }
+        }
+    }
+`
+
+export const CREATE_FINISHED_SCHEDULE = gql`
+    mutation CreateFinishedSchedule($scheduleId : ID!, $count: Int!, $load: Int!, $distance: Int!, $minitus: Int!, $comment: String!) {
+        createFinishedSchedule(
+            input: { 
+                scheduleId: $scheduleId 
+                count: $count,
+                load: $load,
+                distance: $distance,
+                minitus: $minitus,
+                comment: $comment
+            }) {
+            finishedSchedule {
+                id
+            }
+        }
+    }
+`
+
+export const DELETE_FINISHED_SCHEDULE = gql`
+    mutation DeleteFinishedSchedule($scheduleId : ID!) {
+        deleteFinishedSchedule(input: { scheduleId: $scheduleId }) {
+            finishedSchedule {
+                id
+            }
+        }
+    }
+`
