@@ -13,6 +13,7 @@ import { TeamEditModal } from "../organisms/modal/TeamEditModal";
 import { ConfirmPostDeleteModal } from "../organisms/modal/ConfirmPostDeleteModal";
 import { TrainingDetailModal } from "../organisms/modal/TrainingDetailModal";
 import { FinishedScheduleCreateModal } from "../organisms/modal/FinishedScheduleCreateModal";
+import { ConfirmFinishedScheduleDeleteModal } from "../organisms/modal/ConfirmFinishedScheduleDeleteModal";
 
 type Props = {
     isJoinTeam: boolean;
@@ -37,6 +38,7 @@ export const ModalSection: VFC<Props> = memo((props) => {
                     <ConfirmPostDeleteModal />
                     <TrainingDetailModal/>
                     <FinishedScheduleCreateModal />
+                    <ConfirmFinishedScheduleDeleteModal />
                 </>
             )}
             {(page === "myPage" || page === "myTeamMemberPage") && isCoach && (
