@@ -1,6 +1,6 @@
 import { memo, VFC, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { Flex } from '@chakra-ui/layout'
+import { Flex, Box } from '@chakra-ui/layout'
 
 import { useGetMyProfile } from '../hooks/queries/useGetMyProfile'
 import { useMessage } from '../hooks/useMessage'
@@ -10,6 +10,7 @@ import { HeadTitle } from '../components/atoms/title/HeadTitle'
 import { HeaderForAuthUser } from '../components/templates/HeaderForAuthUser'
 import { MainMenubar } from '../components/templates/MainMenubar'
 import { ModalSection } from '../components/templates/ModalSection'
+import { MyTeamTrainingSection } from '../components/templates/MyTeamTrainingSection'
 
 const Main: VFC = memo(() => {
     const router = useRouter()
@@ -47,6 +48,14 @@ const Main: VFC = memo(() => {
                     isMyTeamPage={true}
                     isGuest={dataMyProfile?.myProfile.isGuest!}
                 />
+                <Box mt='150px'>
+                    <Flex flexWrap="wrap">
+                        <Box>
+                            <MyTeamTrainingSection/>
+                        </Box>
+                    </Flex>
+                </Box>
+
             {dataMyProfile.myProfile.nickname}
             </Flex>
             <ModalSection
