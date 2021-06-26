@@ -2,6 +2,7 @@ import { memo, VFC } from "react";
 
 import { TeamAuthModal } from "../organisms/modal/TeamAuthModal";
 import { TrainingCreateOrUpdateModal } from "../organisms/modal/TrainingCreateOrUpdateModal";
+import { ConfirmTrainingDeleteModal } from "../organisms/modal/ConfirmTrainingDeleteModal";
 
 type Props = {
     isJoinTeam: boolean;
@@ -22,6 +23,7 @@ export const ModalSection: VFC<Props> = memo((props) => {
             {(page === "myPage" || page === "myTeamMemberPage") && isCoach && (
                 <>
                     <TrainingCreateOrUpdateModal />
+                    <ConfirmTrainingDeleteModal />
                 </>
             )}
         </>

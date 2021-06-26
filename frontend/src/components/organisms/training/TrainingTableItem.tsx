@@ -18,7 +18,7 @@ export const TrainingTableItem: VFC<Props> = memo((props) => {
     const { node, isMyTeam } = props;
 
     const { dataMyProfile, loadingMyProfile } = useGetMyProfile()
-    const { onOpenTrainingUpdateModal } = useControllModal()
+    const { onOpenTrainingUpdateModal, onOpenConfirmTrainingDeleteModal } = useControllModal()
     const { zeroNumber } = useNumber()
 
     if (loadingMyProfile) return <CustomSpinner />
@@ -63,7 +63,13 @@ export const TrainingTableItem: VFC<Props> = memo((props) => {
                                 <Box pl={5}>
                                     <DeleteIcon
                                         data-testid={node.id + '-training-delete-icon'}
-                                        onClick={() => null}
+                                        onClick={() => {
+                                            onOpenConfirmTrainingDeleteModal(
+                                                node.id,
+                                                node.title,
+                                                node.description,
+                                            )
+                                        }}
                                     / >
                                 </Box>
                             </>
