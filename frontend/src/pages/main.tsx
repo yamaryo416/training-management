@@ -1,5 +1,6 @@
 import { memo, VFC, useEffect } from 'react'
 import { useRouter } from 'next/router'
+import { Flex } from '@chakra-ui/layout'
 
 import { useGetMyProfile } from '../hooks/queries/useGetMyProfile'
 import { useMessage } from '../hooks/useMessage'
@@ -7,6 +8,7 @@ import { CustomSpinner } from '../components/atoms/spinner/CustomSpinner'
 import { FailedText } from "../components/atoms/text/FailedText";
 import { HeadTitle } from '../components/atoms/title/HeadTitle'
 import { HeaderForAuthUser } from '../components/templates/HeaderForAuthUser'
+import { MainMenubar } from '../components/templates/MainMenubar'
 
 const Main: VFC = memo(() => {
     const router = useRouter()
@@ -37,7 +39,15 @@ const Main: VFC = memo(() => {
                 isCoach={dataMyProfile?.myProfile.isCoach!}
                 isGuest={dataMyProfile?.myProfile.isGuest!}
             />
+            <Flex>
+                <MainMenubar
+                    isJoinTeam={dataMyProfile?.myProfile.teamBoard !== null}
+                    isCoach={dataMyProfile?.myProfile.isCoach!}
+                    isMyTeamPage={true}
+                    isGuest={dataMyProfile?.myProfile.isGuest!}
+                />
             {dataMyProfile.myProfile.nickname}
+            </Flex>
         </>
     )
 })

@@ -1,5 +1,6 @@
-import { useRouter } from "next/router";
 import { memo, VFC, useEffect } from "react";
+import { useRouter } from "next/router";
+import { Flex } from "@chakra-ui/layout";
 
 import { useMessage } from "../../hooks/useMessage";
 import { useGetMyProfile } from "../../hooks/queries/useGetMyProfile";
@@ -8,6 +9,7 @@ import { FailedText } from "../../components/atoms/text/FailedText";
 import { TeamAuthModal } from "../../components/organisms/modal/TeamAuthModal";
 import { HeadTitle } from '../../components/atoms/title/HeadTitle'
 import { HeaderForAuthUser } from "../../components/templates/HeaderForAuthUser";
+import { MainMenubar } from "../../components/templates/MainMenubar";
 
 const TeamList: VFC = memo(() => {
     const router = useRouter()
@@ -40,6 +42,14 @@ const TeamList: VFC = memo(() => {
             />
             {dataMyProfile.myProfile.nickname}
             <TeamAuthModal />
+            <Flex>
+                <MainMenubar
+                    isJoinTeam={dataMyProfile?.myProfile.teamBoard !== null}
+                    isCoach={dataMyProfile?.myProfile.isCoach!}
+                    isMyTeamPage={false}
+                    isGuest={dataMyProfile?.myProfile.isGuest!}
+                />
+            </Flex>
         </>
     )
 })
