@@ -170,3 +170,82 @@ export const GET_ALL_TEAM_BOARD = gql`
         }
     }
 `;
+
+// training
+
+export const GET_MY_TEAM_TRAININGS = gql`
+    query MyTeamTrainings{
+        myTeamTrainings {
+            edges {
+                node {
+                    id
+                    title
+                    description
+                    iconNumber
+                    finishedPatern
+                    finishedSchedules {
+                        edges {
+                            node {
+                                profile {
+                                    id
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+`;
+
+export const CREATE_TRAINING = gql`
+    mutation CreateTraining(
+        $title: String!, 
+        $description: String!,
+        $iconNumber: Int!,
+        $finishedPatern: String!
+    ){
+        createTraining(input: { 
+            title: $title,
+            description: $description,
+            iconNumber: $iconNumber,
+            finishedPatern: $finishedPatern
+        }) {
+            training {
+                id
+            }
+        }
+    }
+`;
+
+export const UPDATE_TRAINING = gql`
+    mutation UpdateTraining(
+        $trainingId: ID!
+        $title: String!, 
+        $description: String!,
+        $iconNumber: Int,
+        $finishedPatern: String!
+    ){ 
+        updateTraining(input: {
+            trainingId: $trainingId,
+            title: $title,
+            description: $description,
+            iconNumber: $iconNumber,
+            finishedPatern: $finishedPatern
+        }) {
+            training {
+                id
+            }
+        }
+    }
+`;
+
+export const DELETE_TRAINING = gql`
+    mutation DeleteTraining($trainingId: ID!) {
+        deleteTraining(input: {trainingId: $trainingId }) {
+            training {
+                id
+            }
+        }
+    }
+`
