@@ -15,6 +15,7 @@ import { teamEditModalState } from "../store/teamEditModalState"
 import { confirmPostDeleteModalState } from "../store/confirmPostDeleteModalState"
 import { trainingDetailModalState } from "../store/trainingDetailModalState"
 import { finishedScheduleCreateModalState } from "../store/finishedScheduleCreateModalState"
+import { confirmFinishedScheduleDeleteModalState } from "../store/confirmFinishedScheduleDeleteModalState"
 
 export const useControllModal = () => {
     const setUserAuthModal = useSetRecoilState(userAuthModalState)
@@ -31,6 +32,7 @@ export const useControllModal = () => {
     const setConfirmScheduleDeleteModal = useSetRecoilState(confirmScheduleDeleteModalState)
     const setConfirmPostDeleteModal = useSetRecoilState(confirmPostDeleteModalState)
     const setFinishedScheduleCreateModal = useSetRecoilState(finishedScheduleCreateModalState)
+    const setConfirmFinishedScheduleDeleteModal = useSetRecoilState(confirmFinishedScheduleDeleteModalState)
 
     const onOpenUserAuthModal = useCallback((isLogin: boolean) => setUserAuthModal({ isLogin, isOpen: true }), [])
     const onCloseUserAuthModal = useCallback(() => setUserAuthModal({ isLogin: true, isOpen: false }), [])
@@ -194,6 +196,25 @@ export const useControllModal = () => {
             })
     , [])
 
+    const onOpenConfirmFinishedScheduleDeleteModal = useCallback(
+        (id: string, title: string, date: string) =>
+            setConfirmFinishedScheduleDeleteModal({
+                id,
+                title,
+                date,
+                isOpen: true
+            })
+    , [])
+    const onCloseConfirmFinishedScheduleDeleteModal = useCallback(
+        () =>
+            setConfirmFinishedScheduleDeleteModal({
+                id: '',
+                title: '',
+                date: '',
+                isOpen: false
+            })
+    , [])
+
     return {
         onOpenUserAuthModal,
         onCloseUserAuthModal,
@@ -223,6 +244,8 @@ export const useControllModal = () => {
         onOpenConfirmPostDeleteModal,
         onCloseConfirmPostDeleteModal,
         onOpenFinishedScheduleCreateModal,
-        onCloseFinishedScheduleCreateModal
+        onCloseFinishedScheduleCreateModal,
+        onOpenConfirmFinishedScheduleDeleteModal,
+        onCloseConfirmFinishedScheduleDeleteModal
     }
 }
