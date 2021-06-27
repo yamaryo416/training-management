@@ -1,6 +1,8 @@
 import { Box, Flex, Text } from '@chakra-ui/layout'
 import { memo, ReactNode, VFC } from 'react'
+
 import { PageTitle } from '../../atoms/title/PageTitle';
+import { TutorialText } from '../../atoms/text/TutorialText'
 
 type Props = {
     title: string;
@@ -26,6 +28,7 @@ export const HeaderLayout: VFC<Props> = memo((props) => {
                 {children}
             </Flex>
             <PageTitle>{title}</PageTitle>
+            {isLogin && <TutorialText />}
         </Box>
     )
 })
