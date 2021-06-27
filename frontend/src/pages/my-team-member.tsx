@@ -1,6 +1,6 @@
 import { memo, VFC, useEffect } from "react";
 import { useRouter } from "next/router";
-import { Box, Flex } from "@chakra-ui/layout";
+import { Box, Flex, Heading } from "@chakra-ui/layout";
 
 import { useGetMyProfile } from "../hooks/queries/useGetMyProfile";
 import { useMessage } from "../hooks/useMessage";
@@ -9,6 +9,7 @@ import { FailedText } from "../components/atoms/text/FailedText";
 import { HeadTitle } from '../components/atoms/title/HeadTitle'
 import { HeaderForAuthUser } from "../components/templates/HeaderForAuthUser";
 import { MainMenubar } from "../components/templates/MainMenubar";
+import { MyTeamMemberListSection } from "../components/templates/MyTeamMemberListSection";
 
 const MyTeamMember: VFC = memo(() => {
     const router = useRouter()
@@ -22,10 +23,6 @@ const MyTeamMember: VFC = memo(() => {
         if (!localStorage.getItem('token')) {
             router.push('/')
             showMessage({ title: 'ログインしてください。', status: 'error'})
-        }
-        if (!dataMyProfile.myProfile.isCoach) {
-            router.push('/main')
-            showMessage({ title: '権限がありません。', status: 'error'})
         }
     }, [dataMyProfile])
 
@@ -44,7 +41,20 @@ const MyTeamMember: VFC = memo(() => {
                 isGuest={false}
             />
             <Flex>
-                <MainMenubar isJoinTeam={true} isCoach={true} isMyTeamPage={true} isGuest={false} />
+                <Box mt= "150px">
+                    <Flex flexWrap="wrap">
+                        <MainMenubar isJoinTeam={true} isCoach={true} isMyTeamPage={true} isGuest={false} />
+                        {dataMyProfile.myProfile.isCoach ? (
+                            <>
+                                <Box>
+                                    <MyTeamMemberListSection />
+                                </Box>
+                            </>
+                        ):(
+                            <Heading textAlign='center' fontSize='18px'>閲覧権限がありません。</Heading>
+                        )}
+                    </Flex>
+                </Box>
             </Flex>
         </>
     )
