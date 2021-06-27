@@ -53,7 +53,7 @@ export const MyTeamMemberListItem: VFC<Props> = memo((props) => {
                 <Box pl={5} display={{ base: "block", md: "none" }}>
                     <InfoIcon
                         data-testid={`${member.node.id}-member-detail-as-base`}
-                        onClick={() => null}
+                        onClick={() => onOpenOneMemberSelected(member.node.id, member.node.nickname, member.node.isCoach, true )}
                     />
                 </Box>
             </Flex>
