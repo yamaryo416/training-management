@@ -20,6 +20,7 @@ import { finishedScheduleMemberListModalState } from "../store/finishedScheduleM
 import { trainingImplementationState } from "../store/trainingImplementationState"
 import { confirmTeamJoinModalState } from "../store/confirmTeamJoinModalState"
 import { oneMemberSelectedModalState } from "../store/oneMemberSelectedModalState"
+import { confirmHandOffCoachModalState } from "../store/confirmHandOffCoachModalState"
 
 export const useControllModal = () => {
     const setUserAuthModal = useSetRecoilState(userAuthModalState)
@@ -41,6 +42,7 @@ export const useControllModal = () => {
     const setTrainingImplementationModal = useSetRecoilState(trainingImplementationState)
     const setConfirmTeamJoinModal = useSetRecoilState(confirmTeamJoinModalState)
     const setOneMemberSelectedModal = useSetRecoilState(oneMemberSelectedModalState)
+    const setConfirmHandOffCoachModal = useSetRecoilState(confirmHandOffCoachModalState)
 
     const onOpenUserAuthModal = useCallback((isLogin: boolean) => setUserAuthModal({ isLogin, isOpen: true }), [])
     const onCloseUserAuthModal = useCallback(() => setUserAuthModal({ isLogin: true, isOpen: false }), [])
@@ -277,6 +279,13 @@ export const useControllModal = () => {
         })
     , [])
 
+    const onOpenConfirmHandOffCoachModal = useCallback(
+        (id: string, nickname: string) => setConfirmHandOffCoachModal({ id, nickname, isOpen: true })
+        , [])
+    const onCloseConfirmHandOffCoachModal = useCallback(
+        () => setConfirmHandOffCoachModal({ id: "", nickname: "", isOpen: false })
+        , [])
+
     return {
         onOpenUserAuthModal,
         onCloseUserAuthModal,
@@ -316,6 +325,8 @@ export const useControllModal = () => {
         onOpenConfirmTeamJoinModal,
         onCloseConfirmTeamJoinModal,
         onOpenOneMemberSelected,
-        onCloseOneMemberSelected
+        onCloseOneMemberSelected,
+        onOpenConfirmHandOffCoachModal,
+        onCloseConfirmHandOffCoachModal
     }
 }
