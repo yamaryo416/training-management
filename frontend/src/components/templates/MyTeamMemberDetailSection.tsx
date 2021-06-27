@@ -21,7 +21,7 @@ import { useControllModal } from "../../hooks/useControllModal";
 export const MyTeamMemberDetailSection: VFC = memo(() => {
     const { dataMyProfile } = useGetMyProfile()
     const { loadingMyTeamTrainings, dataMyTeamTrainings, errorMyTeamTrainings } = useGetMyTeamTrainings()
-    const { onOpenConfirmTeamLeaveModal } = useControllModal()
+    const { onOpenConfirmTeamLeaveModal, onOpenConfirmHandOffCoachModal } = useControllModal()
     const {
         loadingOneMemberFinishedSchedules,
         dataOneMemberFinishedSchedules,
@@ -60,7 +60,9 @@ export const MyTeamMemberDetailSection: VFC = memo(() => {
                                     name='confirm-hand-off-coach'
                                     type="button"
                                     disabled={false}
-                                    onClick={() => null}
+                                    onClick={() => 
+                                        onOpenConfirmHandOffCoachModal(oneMemberSelectedModal.id, oneMemberSelectedModal.nickname)
+                                    }
                                 >
                                     コーチ権限を委譲する
                                 </PrimaryButton>

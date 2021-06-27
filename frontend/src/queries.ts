@@ -221,6 +221,16 @@ export const UPDATE_TEAM_BOARD_INTRODUCTION = gql`
     }
 `
 
+export const UPDATE_TEAM_BOARD_COACH = gql`
+    mutation UpdateTeamBoardCoach($profileId: ID!) {
+        updateTeamBoardCoach(input: { profileId: $profileId }) {
+            teamBoard {
+                id
+            }
+        }
+    }
+`
+
 // training
 
 export const GET_MY_TEAM_TRAININGS = gql`
