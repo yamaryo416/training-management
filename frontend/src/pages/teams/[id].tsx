@@ -14,6 +14,7 @@ import { HeaderForAuthUser } from "../../components/templates/HeaderForAuthUser"
 import { MainMenubar } from "../../components/templates/MainMenubar";
 import { TeamDetailMenubar } from "../../components/organisms/team/TeamDetailMenubar";
 import { ConfirmTeamJoinModal } from "../../components/organisms/modal/ConfirmTeamJoinModal";
+import { OneTeamCalendarSection } from "../../components/templates/OneTeamCalendarSection";
 
 const TeamDetail: VFC = memo(() => {
     const router = useRouter()
@@ -63,6 +64,11 @@ const TeamDetail: VFC = memo(() => {
                 />
                 <Box mt='150px'>
                     <TeamDetailMenubar/>
+                    <Flex flexWrap="wrap">
+                        <Box>
+                            <OneTeamCalendarSection schedules={dataOneTeamFromId?.oneTeamFromId.teamBoard.schedules} />
+                        </Box>
+                    </Flex>
                 </Box>
             </Flex>
             <ConfirmTeamJoinModal teamName={dataOneTeamFromId?.oneTeamFromId.name} teamId={dataOneTeamFromId?.oneTeamFromId.teamBoard.id}/> 
