@@ -13,6 +13,7 @@ import { FailedText } from "../../components/atoms/text/FailedText";
 import { HeaderForAuthUser } from "../../components/templates/HeaderForAuthUser";
 import { MainMenubar } from "../../components/templates/MainMenubar";
 import { TeamDetailMenubar } from "../../components/organisms/team/TeamDetailMenubar";
+import { ConfirmTeamJoinModal } from "../../components/organisms/modal/ConfirmTeamJoinModal";
 
 const TeamDetail: VFC = memo(() => {
     const router = useRouter()
@@ -64,6 +65,7 @@ const TeamDetail: VFC = memo(() => {
                     <TeamDetailMenubar/>
                 </Box>
             </Flex>
+            <ConfirmTeamJoinModal teamName={dataOneTeamFromId?.oneTeamFromId.name} teamId={dataOneTeamFromId?.oneTeamFromId.teamBoard.id}/> 
         </>
     )
 })

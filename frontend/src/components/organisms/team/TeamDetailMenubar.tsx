@@ -5,10 +5,12 @@ import { useRouter } from "next/router"
 
 import { useGetMyProfile } from "../../../hooks/queries/useGetMyProfile";
 import { CustomSpinner } from "../../atoms/spinner/CustomSpinner"
+import { useControllModal } from "../../../hooks/useControllModal";
 
 export const TeamDetailMenubar: VFC = memo(() => {
     const router = useRouter()
 
+    const { onOpenConfirmTeamJoinModal } = useControllModal()
     const { dataMyProfile, loadingMyProfile } =useGetMyProfile()
 
     if (loadingMyProfile) return <CustomSpinner />
@@ -21,7 +23,7 @@ export const TeamDetailMenubar: VFC = memo(() => {
                 </Box>
                 <Box>
                     {!dataMyProfile?.myProfile.teamBoard && (
-                        <Button fontSize={{ base: "13px",  md: "16px" }} bg="rgb(255, 255, 0)" color="black" onClick={() => null}>チームに加入する</Button>
+                        <Button fontSize={{ base: "13px",  md: "16px" }} bg="rgb(255, 255, 0)" color="black" onClick={onOpenConfirmTeamJoinModal}>チームに加入する</Button>
                     )}
                 </Box>
             </Flex>
