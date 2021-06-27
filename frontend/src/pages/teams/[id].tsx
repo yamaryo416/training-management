@@ -1,6 +1,7 @@
 import { memo, VFC, useEffect } from "react";
 import { useRouter } from 'next/router';
 import { useQuery } from "@apollo/client";
+import { Box, Flex } from "@chakra-ui/layout";
 
 import { OneTeamFromIdType } from "../../../types/queriesType";
 import { GET_ONE_TEAM_FROM_ID } from "../../queries";
@@ -9,6 +10,8 @@ import { HeadTitle } from '../../components/atoms/title/HeadTitle'
 import { useGetMyProfile } from "../../hooks/queries/useGetMyProfile";
 import { useMessage } from "../../hooks/useMessage";
 import { FailedText } from "../../components/atoms/text/FailedText";
+import { HeaderForAuthUser } from "../../components/templates/HeaderForAuthUser";
+import { MainMenubar } from "../../components/templates/MainMenubar";
 
 const TeamDetail: VFC = memo(() => {
     const router = useRouter()
@@ -41,6 +44,22 @@ const TeamDetail: VFC = memo(() => {
     return (
         <>
             <HeadTitle title={dataOneTeamFromId?.oneTeamFromId.name} />
+            <HeaderForAuthUser
+                title={`${dataOneTeamFromId?.oneTeamFromId.name} ページ`}
+                nickname={dataMyProfile?.myProfile.nickname!}
+                myTeamBoard={dataMyProfile?.myProfile.teamBoard}
+                isMyTeamPage={false}
+                isCoach={dataMyProfile?.myProfile.isCoach!}
+                isGuest={dataMyProfile?.myProfile.isGuest!}
+            />
+            <Flex>
+                <MainMenubar
+                    isJoinTeam={dataMyProfile?.myProfile.teamBoard !== null}
+                    isCoach={dataMyProfile?.myProfile.isCoach!}
+                    isMyTeamPage={false}
+                    isGuest={dataMyProfile?.myProfile.isGuest!}
+                />
+            </Flex>
         </>
     )
 })
