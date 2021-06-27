@@ -16,10 +16,12 @@ import { DeleteButton } from "../atoms/button/DeleteButton";
 import { oneMemberSelectedModalState } from "../../store/oneMemberSelectedModalState";
 import { TrainingImplementationModal } from "../organisms/modal/TrainingImplementationModal";
 import { useGetOneMemberFinishedSchedules } from "../../hooks/queries/useGetOneMemberFinishedSchedules";
+import { useControllModal } from "../../hooks/useControllModal";
 
 export const MyTeamMemberDetailSection: VFC = memo(() => {
     const { dataMyProfile } = useGetMyProfile()
     const { loadingMyTeamTrainings, dataMyTeamTrainings, errorMyTeamTrainings } = useGetMyTeamTrainings()
+    const { onOpenConfirmTeamLeaveModal } = useControllModal()
     const {
         loadingOneMemberFinishedSchedules,
         dataOneMemberFinishedSchedules,
@@ -68,7 +70,9 @@ export const MyTeamMemberDetailSection: VFC = memo(() => {
                                     name='confirm-team-leave'
                                     type='button'
                                     disabled={false}
-                                    onClick={() => null}
+                                    onClick={() => 
+                                        onOpenConfirmTeamLeaveModal(oneMemberSelectedModal.id, oneMemberSelectedModal.nickname, false)
+                                    }
                                 >
                                     チームから脱退させる
                                 </DeleteButton>
