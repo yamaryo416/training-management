@@ -2,17 +2,26 @@ import '@testing-library/jest-dom/extend-expect'
 
 import { render, screen, cleanup } from '@testing-library/react'
 
-import { HeadTitle } from '../HeadTitle'
 import { PageTitle } from '../PageTitle'
+import { SectionTitle } from '../SectionTitle'
 
 
 afterEach(cleanup)
 
-describe('HeadTitle', () => {
+describe('PageTitle', () => {
     it('Should render correct text', () => {
         render(
-            <HeadTitle title='test' />
+            <PageTitle>Test</PageTitle>
         )
-        expect(screen.getByTitle('トレサポ | test')).toBeInTheDocument()
+        expect(screen.queryByText('Test')).toBeInTheDocument()
+    })
+})
+
+describe('SectionTitle', () => {
+    it('Should render correct text', () => {
+        render(
+            <SectionTitle>Test</SectionTitle>
+        )
+        expect(screen.queryByText('Test')).toBeInTheDocument()
     })
 })
