@@ -14,7 +14,7 @@ const Home: VFC = memo(() => {
     if (localStorage.getItem('token')) {
         router.push('/main')
     }
-}, [])
+  }, [])
 
   return (
     <>
