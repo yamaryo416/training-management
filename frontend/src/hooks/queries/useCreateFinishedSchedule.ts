@@ -6,12 +6,15 @@ import { CREATE_FINISHED_SCHEDULE, GET_MY_FINISHED_SCHEDULES, GET_MY_TEAM_FINISH
 import { scheduleOneDayState } from "../../store/scheduleOneDayState"
 import { useControllModal } from "../useControllModal"
 import { useMessage } from "../useMessage"
+import { tutorialState } from "../../store/tutorialState"
 
 export const useCreateFinishedSchedule = () => {
     const oneDay = useRecoilValue(scheduleOneDayState)
 
     const { onCloseFinishedScheduleCreateModal } = useControllModal()
     const { showMessage } = useMessage()
+
+    const [tutorial, setTutorial] = useRecoilState(tutorialState)
     
     const [createFinishedScheduleMutation] = useMutation(CREATE_FINISHED_SCHEDULE, {
         refetchQueries: [
@@ -36,6 +39,9 @@ export const useCreateFinishedSchedule = () => {
                 })
                 onCloseFinishedScheduleCreateModal()
                 showMessage({ title: 'スケジュールを実施しました。', status: 'success' })
+                if (tutorial === 3) {
+                    setTutorial(0)
+                }
             } catch (err) {
                 if (err.message.includes('Count')) {
                     showMessage({ title: '回数を入力してください。', status: 'error' })

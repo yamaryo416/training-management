@@ -7,11 +7,14 @@ import { OneTeamFromIdType, OneTeamFromNameType } from "../../../types/queriesTy
 import { useControllModal } from "../useControllModal"
 import { useMessage } from "../useMessage"
 import { useRecoilState } from "recoil"
+import { tutorialState } from "../../store/tutorialState"
 
 export const useTeamAuth = () => {
     const router = useRouter()
 
     const { onCloseTeamAuthModal } = useControllModal()
+
+    const [tutorial, setTutorial] = useRecoilState(tutorialState)
 
     const { showMessage } = useMessage()
 
@@ -42,6 +45,7 @@ export const useTeamAuth = () => {
             showMessage({ title: "チームを作成しました!", status: "success" })
             onCloseTeamAuthModal()
             router.push("/main")
+            setTutorial(3)
         } catch (err) {
             showMessage({ title: "チーム名は既に使われています。", status: "error"})
         }
@@ -60,11 +64,15 @@ export const useTeamAuth = () => {
             })
             showMessage({ title: "チームに加入しました!", status: "success" })
             router.push("/main")
+            if (tutorial === 1) {
+                setTutorial(5)
+            } else if (tutorial === 2) {
+                setTutorial(6)
+            }
         } catch (err) {
             alert(err)
         }
     }
-
 
     return ({ 
         loadingOneTeamFromName,

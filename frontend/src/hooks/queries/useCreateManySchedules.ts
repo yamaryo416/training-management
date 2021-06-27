@@ -3,12 +3,15 @@ import moment from "moment"
 import { useRecoilState } from "recoil"
 
 import { CREATE_MANY_SCHEDULES, GET_MY_TEAM_SCHEDULES } from "../../queries"
+import { tutorialState } from "../../store/tutorialState"
 import { useControllModal } from "../useControllModal"
 import { useMessage } from "../useMessage"
 
 export const useCreateManySchedules = () => {
     const { showMessage } = useMessage()
     const { onCloseScheduleCreateModal } = useControllModal()
+
+    const [tutorial, setTutorial] = useRecoilState(tutorialState)
 
     const [createManySchedulesMutation] = useMutation(CREATE_MANY_SCHEDULES, {
         refetchQueries: [{ query: GET_MY_TEAM_SCHEDULES }]
@@ -25,6 +28,9 @@ export const useCreateManySchedules = () => {
             })
             showMessage({ title: "スケジュールを作成しました。", status: "success" })
             onCloseScheduleCreateModal()
+            if (tutorial === 4) {
+                setTutorial(0)
+            }
         }
     }
 

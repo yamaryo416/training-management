@@ -7,6 +7,7 @@ import { CREATE_GUEST_USER, CREATE_GENERAL_USER, GET_TOKEN } from "../../queries
 import { useControllModal } from "../useControllModal"
 import { useMessage } from "../useMessage"
 import { useSetRecoilState } from "recoil"
+import { tutorialState } from "../../store/tutorialState"
 
 type UserVars = {
     nickname: string;
@@ -22,6 +23,8 @@ export const useUserAuth = () => {
     const [createGeneralUserMutation] = useMutation(CREATE_GENERAL_USER)
     const [createGuestUserMutation] = useMutation(CREATE_GUEST_USER)
     const { onCloseUserAuthModal, onOpenTeamAuthModal } = useControllModal()
+
+    const setTutorial = useSetRecoilState(tutorialState)
 
     const passwordValidation = useCallback((password: string, password_confirmation: string) => {
         if (password !== password_confirmation) {
@@ -44,6 +47,7 @@ export const useUserAuth = () => {
             onCloseUserAuthModal()
             onOpenTeamAuthModal(true)
             router.push("/teams")
+            setTutorial(1)
         } catch(err) {
             if (err.message.includes("duplicate")) {
                 showMessage({ title: "Eメールは既に使われています。", status: "error" })
@@ -83,6 +87,7 @@ export const useUserAuth = () => {
         localStorage.setItem("token", result.data.tokenAuth.token)
         showMessage({ title: "ゲストとしてログインしました。", status: "success" })
         router.push("/teams")
+        setTutorial(2)
     }, [])
 
     const logout =  useCallback(() => {
@@ -90,7 +95,6 @@ export const useUserAuth = () => {
         router.push("/")
         showMessage({ title: "ログアウトしました。", status: "success" })
     }, [])
-
 
     return { signup, login, joinGuestUser, logout }
 }
