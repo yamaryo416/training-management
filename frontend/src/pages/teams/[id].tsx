@@ -15,6 +15,7 @@ import { MainMenubar } from "../../components/templates/MainMenubar";
 import { TeamDetailMenubar } from "../../components/organisms/team/TeamDetailMenubar";
 import { ConfirmTeamJoinModal } from "../../components/organisms/modal/ConfirmTeamJoinModal";
 import { OneTeamCalendarSection } from "../../components/templates/OneTeamCalendarSection";
+import { OneTeamTrainingSection } from "../../components/templates/OneTeamTrainingSection";
 
 const TeamDetail: VFC = memo(() => {
     const router = useRouter()
@@ -67,6 +68,9 @@ const TeamDetail: VFC = memo(() => {
                     <Flex flexWrap="wrap">
                         <Box>
                             <OneTeamCalendarSection schedules={dataOneTeamFromId?.oneTeamFromId.teamBoard.schedules} />
+                        </Box>
+                        <Box>
+                            <OneTeamTrainingSection trainings={dataOneTeamFromId?.oneTeamFromId.teamBoard.trainings} />
                         </Box>
                     </Flex>
                 </Box>
