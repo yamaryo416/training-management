@@ -18,6 +18,7 @@ import { finishedScheduleCreateModalState } from "../store/finishedScheduleCreat
 import { confirmFinishedScheduleDeleteModalState } from "../store/confirmFinishedScheduleDeleteModalState"
 import { finishedScheduleMemberListModalState } from "../store/finishedScheduleMemberListModalState"
 import { trainingImplementationState } from "../store/trainingImplementationState"
+import { confirmTeamJoinModalState } from "../store/confirmTeamJoinModalState"
 
 export const useControllModal = () => {
     const setUserAuthModal = useSetRecoilState(userAuthModalState)
@@ -37,6 +38,7 @@ export const useControllModal = () => {
     const setConfirmFinishedScheduleDeleteModal = useSetRecoilState(confirmFinishedScheduleDeleteModalState)
     const setFinishedScheduleMemberListModal = useSetRecoilState(finishedScheduleMemberListModalState)
     const setTrainingImplementationModal = useSetRecoilState(trainingImplementationState)
+    const setConfirmTeamJoinModal = useSetRecoilState(confirmTeamJoinModalState)
 
     const onOpenUserAuthModal = useCallback((isLogin: boolean) => setUserAuthModal({ isLogin, isOpen: true }), [])
     const onCloseUserAuthModal = useCallback(() => setUserAuthModal({ isLogin: true, isOpen: false }), [])
@@ -252,6 +254,9 @@ export const useControllModal = () => {
             })
     }, [])
 
+    const onOpenConfirmTeamJoinModal = useCallback(() => setConfirmTeamJoinModal(true), [])
+    const onCloseConfirmTeamJoinModal = useCallback(() => setConfirmTeamJoinModal(false), [])
+
     return {
         onOpenUserAuthModal,
         onCloseUserAuthModal,
@@ -287,6 +292,8 @@ export const useControllModal = () => {
         onOpenFinishedScheduleMemberListModal,
         onCloseFinishedScheduleMemberListModal,
         onOpenTrainingImplementationModal,
-        onCloseTrainingImplementationModal
+        onCloseTrainingImplementationModal,
+        onOpenConfirmTeamJoinModal,
+        onCloseConfirmTeamJoinModal
     }
 }
