@@ -10,11 +10,14 @@ import { TrainingTableHeader } from "../organisms/training/TrainingTableHeader";
 import { SectionCloseLink } from "../atoms/link/SectionCloseLink";
 import { FetchMoreLink } from "../atoms/link/FetchMoreLink";
 import { FailedText } from "../atoms/text/FailedText";
+import { TrainingImplementationModal } from "../organisms/modal/TrainingImplementationModal";
+import { useGetMyFinishedSchedules } from "../../hooks/queries/useGetMyFinishedSchedules";
 
 export const MyTeamTrainingSection: VFC = memo(() => {
     const [isDisplayAllTrainings, setIsDisplayAllTrainings] = useState(false)
 
     const { loadingMyTeamTrainings, dataMyTeamTrainings, errorMyTeamTrainings } = useGetMyTeamTrainings()
+    const { loadingMyFinishedSchedules, dataMyFinishedSchedules } = useGetMyFinishedSchedules()
 
     return (
         <SectionCard width="400px">
@@ -52,6 +55,7 @@ export const MyTeamTrainingSection: VFC = memo(() => {
                             />
                         </Box>
                     )}
+                    <TrainingImplementationModal finishedSchedules={dataMyFinishedSchedules.myFinishedSchedules} />
                  </>
              )}
         </SectionCard>

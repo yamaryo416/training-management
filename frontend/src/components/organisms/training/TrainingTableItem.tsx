@@ -18,7 +18,12 @@ export const TrainingTableItem: VFC<Props> = memo((props) => {
     const { node, isMyTeam } = props;
 
     const { dataMyProfile, loadingMyProfile } = useGetMyProfile()
-    const { onOpenTrainingUpdateModal, onOpenConfirmTrainingDeleteModal, onOpneTrainingDetailModal } = useControllModal()
+    const { 
+        onOpenTrainingUpdateModal,
+        onOpenConfirmTrainingDeleteModal,
+        onOpneTrainingDetailModal,
+        onOpenTrainingImplementationModal
+    } = useControllModal()
     const { zeroNumber } = useNumber()
 
     if (loadingMyProfile) return <CustomSpinner />
@@ -85,6 +90,11 @@ export const TrainingTableItem: VFC<Props> = memo((props) => {
                     </>
                 )}
             </Flex>
+              {isMyTeam && !dataMyProfile.myProfile.isGuest && 
+                <Link color='orange' pl={{ base: '30px', md: '60px' }} data-testid={`${node.id}-training-implementation-list`}  onClick={() => onOpenTrainingImplementationModal(node.id, node.title, node.finishedPatern)}>
+                    実施状況
+                </Link>
+            }
         </Box>
     )
 })
