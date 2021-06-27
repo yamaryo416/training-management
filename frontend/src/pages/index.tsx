@@ -5,6 +5,7 @@ import { HeadTitle } from '../components/atoms/title/HeadTitle'
 import { HeaderForGeneralUser } from '../components/templates/HeaderForGeneralUser'
 import { UserAuthModal } from '../components/organisms/modal/UserAuthModal'
 import { TopContentsSection } from '../components/templates/TopContentsSection'
+import { Footer } from '../components/organisms/layout/Footer'
 
 const Home: VFC = memo(() => {
   const router = useRouter()
@@ -21,6 +22,7 @@ const Home: VFC = memo(() => {
        <HeaderForGeneralUser />
        <UserAuthModal />
        <TopContentsSection />
+       <Footer />
     </>
   )
 })

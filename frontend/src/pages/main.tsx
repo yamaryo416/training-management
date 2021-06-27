@@ -17,6 +17,7 @@ import { FinishedScheduleLogsSection } from '../components/templates/FinishedSch
 import { finishedScheduleMemberListModalState } from '../store/finishedScheduleMemberListModalState'
 import { useRecoilValue } from 'recoil'
 import { FinishedScheduleMemberSection } from '../components/templates/FinishedScheduleMemberSection'
+import { Footer } from '../components/organisms/layout/Footer'
 
 const Main: VFC = memo(() => {
     const router = useRouter()
@@ -86,6 +87,7 @@ const Main: VFC = memo(() => {
                     </Flex>
                 </Box>
             </Flex>
+            <Footer />
             <ModalSection
                 isJoinTeam={dataMyProfile?.myProfile.teamBoard !== null}
                 isCoach={dataMyProfile?.myProfile.isCoach!}

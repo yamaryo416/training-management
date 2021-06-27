@@ -18,6 +18,7 @@ import { OneTeamCalendarSection } from "../../components/templates/OneTeamCalend
 import { OneTeamTrainingSection } from "../../components/templates/OneTeamTrainingSection";
 import { TeamBoardSection } from "../../components/templates/TeamBoardSection";
 import { ModalSection } from "../../components/templates/ModalSection";
+import { Footer } from '../../components/organisms/layout/Footer'
 
 const TeamDetail: VFC = memo(() => {
     const router = useRouter()
@@ -86,6 +87,7 @@ const TeamDetail: VFC = memo(() => {
                     </Flex>
                 </Box>
             </Flex>
+            <Footer />
             <ModalSection
                 isJoinTeam={dataMyProfile?.myProfile.teamBoard !== null}
                 isCoach={dataMyProfile?.myProfile.isCoach!}
