@@ -5,6 +5,7 @@ import InfoIcon from '@material-ui/icons/Info';
 
 import { ProfileNodeType } from "../../../../types/queriesType";
 import moment from "moment";
+import { useControllModal } from "../../../hooks/useControllModal";
 
 type Props = {
     member: ProfileNodeType;
@@ -12,6 +13,8 @@ type Props = {
 
 export const MyTeamMemberListItem: VFC<Props> = memo((props) => {
     const { member } = props;
+
+    const { onOpenOneMemberSelected } = useControllModal()
 
     return (
         <Box key={member.node.id}>
@@ -44,7 +47,7 @@ export const MyTeamMemberListItem: VFC<Props> = memo((props) => {
                 <Box pl={5} display={{ base: "none", md: "block" }}>
                     <InfoIcon
                         data-testid={`${member.node.id}-member-detail-as-md`}
-                        onClick={() => null}
+                        onClick={() => onOpenOneMemberSelected(member.node.id, member.node.nickname, member.node.isCoach, false )}
                     />
                 </Box>
                 <Box pl={5} display={{ base: "block", md: "none" }}>

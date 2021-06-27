@@ -10,6 +10,7 @@ import { HeadTitle } from '../components/atoms/title/HeadTitle'
 import { HeaderForAuthUser } from "../components/templates/HeaderForAuthUser";
 import { MainMenubar } from "../components/templates/MainMenubar";
 import { MyTeamMemberListSection } from "../components/templates/MyTeamMemberListSection";
+import { MyTeamMemberDetailSection } from "../components/templates/MyTeamMemberDetailSection";
 
 const MyTeamMember: VFC = memo(() => {
     const router = useRouter()
@@ -48,6 +49,9 @@ const MyTeamMember: VFC = memo(() => {
                             <>
                                 <Box>
                                     <MyTeamMemberListSection />
+                                </Box>
+                                <Box display={{ base: "none", md: "block" }}>
+                                    <MyTeamMemberDetailSection />
                                 </Box>
                             </>
                         ):(
