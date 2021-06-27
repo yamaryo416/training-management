@@ -13,6 +13,7 @@ import { MainMenubar } from '../components/templates/MainMenubar'
 import { ModalSection } from '../components/templates/ModalSection'
 import { MyTeamTrainingSection } from '../components/templates/MyTeamTrainingSection'
 import { TeamBoardSection } from '../components/templates/TeamBoardSection'
+import { FinishedScheduleLogsSection } from '../components/templates/FinishedScheduleLogsSection'
 
 const Main: VFC = memo(() => {
     const router = useRouter()
@@ -58,6 +59,11 @@ const Main: VFC = memo(() => {
                         <Box>
                             <MyTeamTrainingSection/>
                         </Box>
+                        {!dataMyProfile.myProfile.isGuest && (
+                            <Box>
+                                <FinishedScheduleLogsSection />
+                            </Box>
+                        )}
                         <Box>
                             <TeamBoardSection
                                 teamName={dataMyProfile?.myProfile.teamBoard.team.name}
