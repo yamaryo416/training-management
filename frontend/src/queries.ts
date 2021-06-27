@@ -101,6 +101,26 @@ export const DELETE_MY_PROFILE_TEAM_BOARD  = gql`
     }
 `;
 
+export const GET_MY_TEAM_MEMBER =gql`
+    query MyTeamMember($nickname: String, $first: Int, $after: String) {
+        myTeamMember(nickname_Icontains: $nickname, first: $first, after: $after) {
+            edges {
+                node {
+                    id
+                    nickname
+                    isCoach
+                    finishedScheduleCount
+                    joinAt
+                }
+            }
+            pageInfo {
+                endCursor
+                hasNextPage
+            }
+        }
+    }
+`;
+
 // team
 
 export const GET_ONE_TEAM_FROM_NAME = gql`

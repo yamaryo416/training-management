@@ -14,11 +14,16 @@ import { ModalSection } from '../components/templates/ModalSection'
 import { MyTeamTrainingSection } from '../components/templates/MyTeamTrainingSection'
 import { TeamBoardSection } from '../components/templates/TeamBoardSection'
 import { FinishedScheduleLogsSection } from '../components/templates/FinishedScheduleLogsSection'
+import { finishedScheduleMemberListModalState } from '../store/finishedScheduleMemberListModalState'
+import { useRecoilValue } from 'recoil'
+import { FinishedScheduleMemberSection } from '../components/templates/FinishedScheduleMemberSection'
 
 const Main: VFC = memo(() => {
     const router = useRouter()
     const { showMessage } = useMessage()
     const { loadingMyProfile, errorMyProfile, dataMyProfile } = useGetMyProfile()
+
+    const finishedScheduleMemberListModal = useRecoilValue(finishedScheduleMemberListModalState)
 
     useEffect(() => {
         if (errorMyProfile) {
@@ -56,6 +61,11 @@ const Main: VFC = memo(() => {
                         <Box>
                             <MyTeamCalendarSection/>
                         </Box>
+                        {dataMyProfile?.myProfile.isCoach && finishedScheduleMemberListModal.isOpen && (
+                            <Box display={{ base: "none", md: "block" }}>
+                                <FinishedScheduleMemberSection />
+                            </Box>
+                        )}
                         <Box>
                             <MyTeamTrainingSection/>
                         </Box>

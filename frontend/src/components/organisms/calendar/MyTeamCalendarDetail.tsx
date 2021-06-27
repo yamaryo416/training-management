@@ -24,6 +24,7 @@ export const MyTeamCalendarDetail: VFC = memo(() => {
         onOpenConfirmScheduleDeleteModal,
         onOpenFinishedScheduleCreateModal,
         onOpenConfirmFinishedScheduleDeleteModal,
+        onOpenFinishedScheduleMemberListModal
     } = useControllModal()
  
     const oneDay = useRecoilValue(scheduleOneDayState)
@@ -111,8 +112,13 @@ export const MyTeamCalendarDetail: VFC = memo(() => {
                                             color="orange"
                                             pl={10}
                                             data-testid={node.id + '-finished-member-link'}
-                                            onClick={() => null}
-                                        >
+                                            onClick={() =>
+                                                onOpenFinishedScheduleMemberListModal(
+                                                    node.id,
+                                                    node.training.title,
+                                                    node.date,
+                                                    "section"
+                                            )}>
                                             実施者一覧
                                         </Link>
                                         <Link 
