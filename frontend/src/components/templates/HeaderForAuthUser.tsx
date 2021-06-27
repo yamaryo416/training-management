@@ -178,7 +178,7 @@ export const HeaderForAuthUser: VFC<Props> = memo((props) => {
                                 {isCoach && (
                                     <MenuListItem
                                         text="マイチームメンバー"
-                                        onClick={() => null}
+                                        onClick={() => router.push("/my-team-member")}
                                         >
                                         <DnsIcon />
                                     </MenuListItem>

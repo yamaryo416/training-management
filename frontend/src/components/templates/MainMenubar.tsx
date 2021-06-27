@@ -132,7 +132,7 @@ export const MainMenubar:VFC<Props> = (props) => {
                                             </MenuButton>
                                         )}
                                         {isCoach && (
-                                            <MenuButton title="マイチームメンバー" onClick={() => null}>
+                                            <MenuButton title="マイチームメンバー" onClick={() => router.push("/my-team-member")} >
                                                 <DnsIcon style={{ fontSize: 40 }} data-testid='main-move-my-team-member-icon' />
                                             </MenuButton>
                                         )}
