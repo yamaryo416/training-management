@@ -12,6 +12,7 @@ import { useMessage } from "../../hooks/useMessage";
 import { FailedText } from "../../components/atoms/text/FailedText";
 import { HeaderForAuthUser } from "../../components/templates/HeaderForAuthUser";
 import { MainMenubar } from "../../components/templates/MainMenubar";
+import { TeamDetailMenubar } from "../../components/organisms/team/TeamDetailMenubar";
 
 const TeamDetail: VFC = memo(() => {
     const router = useRouter()
@@ -59,6 +60,9 @@ const TeamDetail: VFC = memo(() => {
                     isMyTeamPage={false}
                     isGuest={dataMyProfile?.myProfile.isGuest!}
                 />
+                <Box mt='150px'>
+                    <TeamDetailMenubar/>
+                </Box>
             </Flex>
         </>
     )
