@@ -19,6 +19,7 @@ import { confirmFinishedScheduleDeleteModalState } from "../store/confirmFinishe
 import { finishedScheduleMemberListModalState } from "../store/finishedScheduleMemberListModalState"
 import { trainingImplementationState } from "../store/trainingImplementationState"
 import { confirmTeamJoinModalState } from "../store/confirmTeamJoinModalState"
+import { oneMemberSelectedModalState } from "../store/oneMemberSelectedModalState"
 
 export const useControllModal = () => {
     const setUserAuthModal = useSetRecoilState(userAuthModalState)
@@ -39,6 +40,7 @@ export const useControllModal = () => {
     const setFinishedScheduleMemberListModal = useSetRecoilState(finishedScheduleMemberListModalState)
     const setTrainingImplementationModal = useSetRecoilState(trainingImplementationState)
     const setConfirmTeamJoinModal = useSetRecoilState(confirmTeamJoinModalState)
+    const setOneMemberSelectedModal = useSetRecoilState(oneMemberSelectedModalState)
 
     const onOpenUserAuthModal = useCallback((isLogin: boolean) => setUserAuthModal({ isLogin, isOpen: true }), [])
     const onCloseUserAuthModal = useCallback(() => setUserAuthModal({ isLogin: true, isOpen: false }), [])
@@ -257,6 +259,24 @@ export const useControllModal = () => {
     const onOpenConfirmTeamJoinModal = useCallback(() => setConfirmTeamJoinModal(true), [])
     const onCloseConfirmTeamJoinModal = useCallback(() => setConfirmTeamJoinModal(false), [])
 
+    const onOpenOneMemberSelected = useCallback(
+        (id: string, nickname: string, isCoach: boolean, isOpen: boolean) => {
+        setOneMemberSelectedModal({
+            id,
+            nickname,
+            isCoach,
+            isOpen
+        })
+    }, [])
+    const onCloseOneMemberSelected = useCallback(() => 
+        setOneMemberSelectedModal({
+            id: "",
+            nickname: "",
+            isCoach: false,
+            isOpen: false
+        })
+    , [])
+
     return {
         onOpenUserAuthModal,
         onCloseUserAuthModal,
@@ -294,6 +314,8 @@ export const useControllModal = () => {
         onOpenTrainingImplementationModal,
         onCloseTrainingImplementationModal,
         onOpenConfirmTeamJoinModal,
-        onCloseConfirmTeamJoinModal
+        onCloseConfirmTeamJoinModal,
+        onOpenOneMemberSelected,
+        onCloseOneMemberSelected
     }
 }
