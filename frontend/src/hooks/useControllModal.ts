@@ -17,6 +17,7 @@ import { trainingDetailModalState } from "../store/trainingDetailModalState"
 import { finishedScheduleCreateModalState } from "../store/finishedScheduleCreateModalState"
 import { confirmFinishedScheduleDeleteModalState } from "../store/confirmFinishedScheduleDeleteModalState"
 import { finishedScheduleMemberListModalState } from "../store/finishedScheduleMemberListModalState"
+import { trainingImplementationState } from "../store/trainingImplementationState"
 
 export const useControllModal = () => {
     const setUserAuthModal = useSetRecoilState(userAuthModalState)
@@ -35,6 +36,7 @@ export const useControllModal = () => {
     const setFinishedScheduleCreateModal = useSetRecoilState(finishedScheduleCreateModalState)
     const setConfirmFinishedScheduleDeleteModal = useSetRecoilState(confirmFinishedScheduleDeleteModalState)
     const setFinishedScheduleMemberListModal = useSetRecoilState(finishedScheduleMemberListModalState)
+    const setTrainingImplementationModal = useSetRecoilState(trainingImplementationState)
 
     const onOpenUserAuthModal = useCallback((isLogin: boolean) => setUserAuthModal({ isLogin, isOpen: true }), [])
     const onCloseUserAuthModal = useCallback(() => setUserAuthModal({ isLogin: true, isOpen: false }), [])
@@ -230,6 +232,26 @@ export const useControllModal = () => {
         })
     ,[])
 
+    const onOpenTrainingImplementationModal = useCallback(
+        (trainingId: string, title: string, finishedPatern: string) => {
+            setTrainingImplementationModal({
+                trainingId,
+                finishedPatern,
+                title,
+                isOpen: true
+            })
+    }, [])
+
+    const onCloseTrainingImplementationModal = useCallback(
+        () => {
+            setTrainingImplementationModal({
+                trainingId: '',
+                finishedPatern: '',
+                title: '',
+                isOpen: false,
+            })
+    }, [])
+
     return {
         onOpenUserAuthModal,
         onCloseUserAuthModal,
@@ -263,6 +285,8 @@ export const useControllModal = () => {
         onOpenConfirmFinishedScheduleDeleteModal,
         onCloseConfirmFinishedScheduleDeleteModal,
         onOpenFinishedScheduleMemberListModal,
-        onCloseFinishedScheduleMemberListModal
+        onCloseFinishedScheduleMemberListModal,
+        onOpenTrainingImplementationModal,
+        onCloseTrainingImplementationModal
     }
 }
