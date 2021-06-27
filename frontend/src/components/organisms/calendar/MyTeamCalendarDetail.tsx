@@ -125,8 +125,13 @@ export const MyTeamCalendarDetail: VFC = memo(() => {
                                             display={{ base: "inline", md: "none" }}
                                             color="orange"
                                             pl={10}
-                                            onClick={() => null}
-                                        >
+                                            onClick={() => 
+                                                onOpenFinishedScheduleMemberListModal(
+                                                    node.id,
+                                                    node.training.title,
+                                                    node.date,
+                                                    "modal"
+                                            )}>
                                             実施者一覧
                                         </Link>
                                     </Flex>
