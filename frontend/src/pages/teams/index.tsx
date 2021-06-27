@@ -14,12 +14,16 @@ import { useGetAllTeamBoard } from "../../hooks/queries/useGetAllTeamBoard";
 import { TeamCard } from "../../components/organisms/layout/TeamCard";
 import { ModalSection } from "../../components/templates/ModalSection";
 import { Footer } from '../../components/organisms/layout/Footer'
+import { tutorialState } from "../../store/tutorialState";
+import { useRecoilValue } from "recoil";
 
 const TeamList: VFC = memo(() => {
     const router = useRouter()
     const { showMessage } = useMessage()
     const { loadingMyProfile, errorMyProfile, dataMyProfile } = useGetMyProfile()
     const { loadingAllTeamBoard, dataAllTeamBoard, errorAllTeamBoard } = useGetAllTeamBoard()
+
+    const tutorial = useRecoilValue(tutorialState)
 
     useEffect(() => {
         if (errorMyProfile) {
@@ -54,7 +58,7 @@ const TeamList: VFC = memo(() => {
                     isMyTeamPage={false}
                     isGuest={dataMyProfile?.myProfile.isGuest!}
                 />
-                  <Box mt="150px" color="white">
+                <Box mt={tutorial === 0 ? "150px" : { base: '300px' , md: '250px'}} color="white">
                     <Flex flexWrap="wrap">
                         {loadingAllTeamBoard && <CustomSpinner />}
                         {errorAllTeamBoard && <FailedText />}

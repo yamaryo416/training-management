@@ -18,12 +18,14 @@ import { finishedScheduleMemberListModalState } from '../store/finishedScheduleM
 import { useRecoilValue } from 'recoil'
 import { FinishedScheduleMemberSection } from '../components/templates/FinishedScheduleMemberSection'
 import { Footer } from '../components/organisms/layout/Footer'
+import { tutorialState } from '../store/tutorialState'
 
 const Main: VFC = memo(() => {
     const router = useRouter()
     const { showMessage } = useMessage()
     const { loadingMyProfile, errorMyProfile, dataMyProfile } = useGetMyProfile()
 
+    const tutorial = useRecoilValue(tutorialState)
     const finishedScheduleMemberListModal = useRecoilValue(finishedScheduleMemberListModalState)
 
     useEffect(() => {
@@ -57,7 +59,7 @@ const Main: VFC = memo(() => {
                     isMyTeamPage={true}
                     isGuest={dataMyProfile?.myProfile.isGuest!}
                 />
-                <Box mt='150px'>
+                <Box mt={tutorial === 0 ? "150px" : { base: '300px' , md: '250px'}}>
                     <Flex flexWrap="wrap">
                         <Box>
                             <MyTeamCalendarSection/>

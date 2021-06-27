@@ -19,6 +19,8 @@ import { OneTeamTrainingSection } from "../../components/templates/OneTeamTraini
 import { TeamBoardSection } from "../../components/templates/TeamBoardSection";
 import { ModalSection } from "../../components/templates/ModalSection";
 import { Footer } from '../../components/organisms/layout/Footer'
+import { useRecoilValue } from "recoil";
+import { tutorialState } from "../../store/tutorialState";
 
 const TeamDetail: VFC = memo(() => {
     const router = useRouter()
@@ -30,6 +32,8 @@ const TeamDetail: VFC = memo(() => {
     const {loading: loadingOneTeamFromId, data: dataOneTeamFromId, error: errorOneTeamFromId } = useQuery<OneTeamFromIdType>(GET_ONE_TEAM_FROM_ID, {
         variables: { teamId: id }
     })
+
+    const tutorial = useRecoilValue(tutorialState)
 
     useEffect(() => {
         if (errorMyProfile) {
@@ -66,7 +70,7 @@ const TeamDetail: VFC = memo(() => {
                     isMyTeamPage={false}
                     isGuest={dataMyProfile?.myProfile.isGuest!}
                 />
-                <Box mt='150px'>
+                <Box mt={tutorial === 0 ? "150px" : { base: '300px' , md: '250px'}}>
                     <TeamDetailMenubar/>
                     <Flex flexWrap="wrap">
                         <Box>

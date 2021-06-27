@@ -19,6 +19,7 @@ import { MenuButton } from "../molecules/MenuButton";
 import { useUserAuth } from "../../hooks/queries/useUserAuth";
 import { useDeleteMyAccount } from "../../hooks/queries/useDeleteMyAccount";
 import { useRecoilValue } from "recoil";
+import { tutorialState } from "../../store/tutorialState";
 
 type Props = {
     isJoinTeam: boolean;
@@ -33,6 +34,7 @@ export const MainMenubar:VFC<Props> = (props) => {
     const router = useRouter()
     const { logout } = useUserAuth()
     const { deleteUser } = useDeleteMyAccount()
+    const tutorial = useRecoilValue(tutorialState)
 
     const [isMenubarOpen, setIsMenubarOpen] = useState(true)
     const [menuFocus, setMenuFocus] = useState<false | "pageList" | "myMenuList">(false)
@@ -66,7 +68,7 @@ export const MainMenubar:VFC<Props> = (props) => {
                         display={{ base: "none", md: "block" }}
                     >
                         <Flex justify="space-between">
-                            <Box mt='50px'>
+                            <Box mt={tutorial === 0 ? '50px' : '130px'}>
                                 <MenuButton title="メニュー" onClick={() => menuFocus === "myMenuList" ? onCloseMenuFocus() : onFocusMyMenuList()  }>
                                     <MenuIcon style={{ fontSize: 40 }} data-testid='main-my-menu-icon' />
                                 </MenuButton>

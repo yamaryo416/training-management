@@ -13,11 +13,15 @@ import { MyTeamMemberListSection } from "../components/templates/MyTeamMemberLis
 import { MyTeamMemberDetailSection } from "../components/templates/MyTeamMemberDetailSection";
 import { ModalSection } from "../components/templates/ModalSection";
 import { Footer } from '../components/organisms/layout/Footer'
+import { tutorialState } from "../store/tutorialState";
+import { useRecoilValue } from "recoil";
 
 const MyTeamMember: VFC = memo(() => {
     const router = useRouter()
     const { showMessage } = useMessage()
     const { loadingMyProfile, dataMyProfile, errorMyProfile } = useGetMyProfile()
+
+    const tutorial = useRecoilValue(tutorialState)
 
     useEffect(() => {
         if (errorMyProfile) {
@@ -44,7 +48,7 @@ const MyTeamMember: VFC = memo(() => {
                 isGuest={false}
             />
             <Flex>
-                <Box mt= "150px">
+                <Box mt={tutorial === 0 ? "150px" : { base: '300px' , md: '250px'}}>
                     <Flex flexWrap="wrap">
                         <MainMenubar isJoinTeam={true} isCoach={true} isMyTeamPage={true} isGuest={false} />
                         {dataMyProfile.myProfile.isCoach ? (
