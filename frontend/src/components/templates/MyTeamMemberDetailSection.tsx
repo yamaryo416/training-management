@@ -21,7 +21,7 @@ import { useControllModal } from "../../hooks/useControllModal";
 export const MyTeamMemberDetailSection: VFC = memo(() => {
     const { dataMyProfile } = useGetMyProfile()
     const { loadingMyTeamTrainings, dataMyTeamTrainings, errorMyTeamTrainings } = useGetMyTeamTrainings()
-    const { onOpenConfirmTeamLeaveModal, onOpenConfirmHandOffCoachModal } = useControllModal()
+    const { onOpenConfirmTeamLeaveModal, onOpenConfirmHandOffCoachModal, onOpenTrainingImplementationModal } = useControllModal()
     const {
         loadingOneMemberFinishedSchedules,
         dataOneMemberFinishedSchedules,
@@ -102,6 +102,20 @@ export const MyTeamMemberDetailSection: VFC = memo(() => {
                                         filter((sche) => sche.node.training.id === train.node.id ).length}回
                                 </Text>
                             </Flex>
+                            <Link
+                                color='orange'
+                                pl='50px'
+                                data-testid={`${train.node.id}-finished-implementation-list`}
+                                onClick={() => {
+                                    onOpenTrainingImplementationModal(
+                                        train.node.id,
+                                        train.node.title,
+                                        train.node.finishedPatern
+                                    )
+                                }}
+                            >
+                                実施状況
+                            </Link>
                         </Box>
                     ))}
                     <TrainingImplementationModal finishedSchedules={dataOneMemberFinishedSchedules.myTeamFinishedSchedules} />
