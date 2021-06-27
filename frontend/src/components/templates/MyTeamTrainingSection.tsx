@@ -24,7 +24,7 @@ export const MyTeamTrainingSection: VFC = memo(() => {
             <SectionTitle>
                 トレーニングリスト
             </SectionTitle>
-             {loadingMyTeamTrainings  ? (
+             {loadingMyTeamTrainings || loadingMyFinishedSchedules  ? (
                  <CustomSpinner />
              ): (
                  <>
