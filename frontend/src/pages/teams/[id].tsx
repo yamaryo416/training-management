@@ -16,6 +16,8 @@ import { TeamDetailMenubar } from "../../components/organisms/team/TeamDetailMen
 import { ConfirmTeamJoinModal } from "../../components/organisms/modal/ConfirmTeamJoinModal";
 import { OneTeamCalendarSection } from "../../components/templates/OneTeamCalendarSection";
 import { OneTeamTrainingSection } from "../../components/templates/OneTeamTrainingSection";
+import { TeamBoardSection } from "../../components/templates/TeamBoardSection";
+import { ModalSection } from "../../components/templates/ModalSection";
 
 const TeamDetail: VFC = memo(() => {
     const router = useRouter()
@@ -72,9 +74,23 @@ const TeamDetail: VFC = memo(() => {
                         <Box>
                             <OneTeamTrainingSection trainings={dataOneTeamFromId?.oneTeamFromId.teamBoard.trainings} />
                         </Box>
+                        <Box>
+                            <TeamBoardSection
+                                teamName={dataOneTeamFromId?.oneTeamFromId.name}
+                                introduction={dataOneTeamFromId?.oneTeamFromId.teamBoard.introduction}
+                                coachName={dataOneTeamFromId?.oneTeamFromId.teamBoard.coach}
+                                joinCount={dataOneTeamFromId?.oneTeamFromId.teamBoard.joinCount}
+                                isMyTeam={false}
+                            />
+                        </Box>
                     </Flex>
                 </Box>
             </Flex>
+            <ModalSection
+                isJoinTeam={dataMyProfile?.myProfile.teamBoard !== null}
+                isCoach={dataMyProfile?.myProfile.isCoach!}
+                page="teamListPage"
+            />
             <ConfirmTeamJoinModal teamName={dataOneTeamFromId?.oneTeamFromId.name} teamId={dataOneTeamFromId?.oneTeamFromId.teamBoard.id}/> 
         </>
     )
