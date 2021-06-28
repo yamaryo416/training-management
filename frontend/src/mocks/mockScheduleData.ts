@@ -49,7 +49,6 @@ export const mockScheduleWithFinisheMember = (id: string, dateDiff: number) => {
     }
 }
 
-
 export const mockSchedules = {
     edges: [
         { node: mockSchedule('1', 0) },
