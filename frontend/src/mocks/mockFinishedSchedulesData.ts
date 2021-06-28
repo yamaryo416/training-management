@@ -1,6 +1,6 @@
 import moment from "moment"
 
-import { GET_MY_FINISHED_SCHEDULES, GET_ONE_MEMBER_FINISHED_SCHEDULES } from "../queries"
+import { GET_MY_FINISHED_SCHEDULES, GET_ONE_MEMBER_FINISHED_SCHEDULES, GET_MY_TEAM_FINISHED_SCHEDULES } from "../queries"
 
 export const mockFinishedSchedule = (id: string, trainingId: string, scheduleId: string, dateDiff: number) => {
     return {
@@ -8,6 +8,30 @@ export const mockFinishedSchedule = (id: string, trainingId: string, scheduleId:
         profile: {
             id: '1',
             nickname: 'coach user'
+        },
+        training: {
+            id: trainingId,
+            title: `トレーニング${trainingId}`,
+            finishedPatern: '1'
+        },
+        schedule: {
+            id: scheduleId,
+            date: moment().add(dateDiff, 'days').format('YYYY-MM-DD')
+        },
+        count: 10,
+        load: 0,
+        distance: 0,
+        minitus: 0,
+        comment: ''
+    }
+}
+
+export const mockOtherFinishedSchedule = (id: string, trainingId: string, scheduleId: string, dateDiff: number) => {
+    return {
+        id,
+        profile: {
+            id: '2',
+            nickname: 'user1'
         },
         training: {
             id: trainingId,
@@ -55,6 +79,26 @@ export const mockOneMemberFinishedSchedulesQuery = {
                     { node: mockFinishedSchedule('1', '1', '1', 0) },
                     { node: mockFinishedSchedule('2', '1', '2', -1) },
                     { node: mockFinishedSchedule('3', '1', '3', -2) },
+                ]
+            }
+        }
+    }
+}
+
+export const mockMyTeamFinishedSchedulesQuery = {
+    request: {
+        query: GET_MY_TEAM_FINISHED_SCHEDULES,
+    },
+    result: {
+        data: {
+            myTeamFinishedSchedules: {
+                edges: [
+                    { node: mockFinishedSchedule('1', '1', '1', 0) },
+                    { node: mockFinishedSchedule('2', '1', '2', -1) },
+                    { node: mockFinishedSchedule('3', '1', '3', -2) },
+                    { node: mockOtherFinishedSchedule('4', '1', '1', 0) },
+                    { node: mockOtherFinishedSchedule('5', '1', '2', -1) },
+                    { node: mockOtherFinishedSchedule('6', '1', '3', -2) },
                 ]
             }
         }
