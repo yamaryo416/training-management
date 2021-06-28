@@ -32,6 +32,28 @@ export const mockMyProfileQuery = (isCoach: boolean, isGuest: boolean) => {
     }
 }
 
+export const mockMyProfileWithoutTeamBoardQuery = (isCoach: boolean, isGuest: boolean) => { 
+    return {
+        request: {
+            query: GET_MY_PROFILE,
+        },
+        result: {
+            data: {
+                myProfile: {
+                    id: '1',
+                    nickname: 'coach user',
+                    user: {
+                        id: '1'
+                    },
+                    teamBoard: null,
+                    isCoach,
+                    isGuest
+                }
+            }
+        }
+    }
+}
+
 export const mockMember = {
     node: {
         id: '1',
