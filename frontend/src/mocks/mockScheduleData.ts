@@ -2,7 +2,7 @@ import moment from "moment"
 
 import { TODAY } from "../../constants"
 import { mockTrainingWithIcon, mockTrainingWithoutIcon } from "./mockTrainingData"
-import { GET_ONE_DAY_SCHEDULES } from "../queries"
+import { GET_ONE_DAY_SCHEDULES, GET_MY_TEAM_SCHEDULES } from "../queries"
 
 export const mockSchedule = (id: string, dateDiff: number) => {
     return {
@@ -143,6 +143,31 @@ export const mockErrorScheduleQuery = {
     error: new Error()
 }
 
+export const mockMyTeamSchedulesQuery = {
+    request: {
+        query: GET_MY_TEAM_SCHEDULES,
+    },
+    result: {
+        data: {
+            myTeamSchedules: {
+                edges: [
+                    { node: mockSchedule('1', 0) },
+                    { node: mockSchedule('2', 7) },
+                ]
+            }
+        }
+    }
+}
+
+export const mockErrorMyTeamScheduleQuery = {
+    request: {
+        query: GET_MY_TEAM_SCHEDULES,
+        variables: {
+            date: TODAY
+        },
+    },
+    error: new Error()
+}
 
 
 
