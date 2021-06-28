@@ -33,7 +33,7 @@ const TeamList: VFC = memo(() => {
             router.push('/')
             showMessage({ title: 'ログインしてください。', status: 'error'})
         }
-    }, [])
+    }, [errorMyProfile])
 
     if (loadingMyProfile) return <CustomSpinner />
     else if (errorMyProfile) return <FailedText />

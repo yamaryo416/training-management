@@ -46,7 +46,7 @@ const TeamDetail: VFC = memo(() => {
         if (errorOneTeamFromId) {
             router.push('/teams')
         }
-    }, [])
+    }, [errorMyProfile, errorOneTeamFromId])
     
 
     if (loadingMyProfile || loadingOneTeamFromId) return <CustomSpinner />
