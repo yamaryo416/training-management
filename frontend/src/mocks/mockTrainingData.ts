@@ -73,3 +73,10 @@ export const mockMyTeamTrainingsQuery = {
         }
     }
 }
+
+export const mockErrorMyTeamTrainingQuery = {
+    request: {
+        query: GET_MY_TEAM_TRAININGS,
+    },
+    error: new Error()
+}

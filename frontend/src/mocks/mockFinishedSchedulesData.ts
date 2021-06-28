@@ -1,7 +1,6 @@
 import moment from "moment"
-import { graphql } from 'msw'
 
-import { GET_MY_FINISHED_SCHEDULES } from "../queries"
+import { GET_MY_FINISHED_SCHEDULES, GET_ONE_MEMBER_FINISHED_SCHEDULES } from "../queries"
 
 export const mockFinishedSchedule = (id: string, trainingId: string, scheduleId: string, dateDiff: number) => {
     return {
@@ -34,6 +33,24 @@ export const mockMyFinishedSchedulesQuery = {
     result: {
         data: {
             myFinishedSchedules: {
+                edges: [
+                    { node: mockFinishedSchedule('1', '1', '1', 0) },
+                    { node: mockFinishedSchedule('2', '1', '2', -1) },
+                    { node: mockFinishedSchedule('3', '1', '3', -2) },
+                ]
+            }
+        }
+    }
+}
+
+export const mockOneMemberFinishedSchedulesQuery = {
+    request: {
+        query: GET_ONE_MEMBER_FINISHED_SCHEDULES,
+        variables: { }
+    },
+    result: {
+        data: {
+            myTeamFinishedSchedules: {
                 edges: [
                     { node: mockFinishedSchedule('1', '1', '1', 0) },
                     { node: mockFinishedSchedule('2', '1', '2', -1) },
