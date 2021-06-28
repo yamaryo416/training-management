@@ -71,11 +71,7 @@ export const MyTeamMemberListSection: VFC = memo(() => {
             <SectionTitle>メンバーリスト</SectionTitle>
             {loadingMoreMyTeamMember && <CustomSpinner />}
             {errorMoreMyTeamMember ? 
-                <>
-                    {errorMoreMyTeamMember.message}
-                    <FailedText />
-                </>
-            :(
+                <FailedText /> : (
                 <>
                     <Flex justify="center" mb={10}>
                         <Input
