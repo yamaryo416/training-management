@@ -1,6 +1,6 @@
 import { graphql } from 'msw'
 
-import { GET_MY_PROFILE, GET_MY_TEAM_MEMBER, UPDATE_MY_PROFILE_NICKNAME, UPDATE_MY_PROFILE_TEAM_BOARD } from "../queries";
+import { DELETE_MY_PROFILE_TEAM_BOARD, DELETE_ONE_PROFILE_TEAM_BOARD, GET_MY_PROFILE, GET_MY_TEAM_MEMBER, UPDATE_MY_PROFILE_NICKNAME, UPDATE_MY_PROFILE_TEAM_BOARD } from "../queries";
 import { NUM_PAGE } from '../../constants';
 
 export const mockMember = {
@@ -267,6 +267,42 @@ export const mockGetMyTeamMemberHandler = graphql.query('MyTeamMember', (req, re
         })
     )
 })
+
+export const mockDeleteMyProfileTeamBoardMutation = {
+    request: {
+        query: DELETE_MY_PROFILE_TEAM_BOARD,
+        variables: {
+            confirm: true
+        }
+    },
+    result: {
+        data: {
+            deleteMyProfileTeamBoard: {
+                profile: {
+                    id: '1'
+                }
+            }
+        }
+    }
+}
+
+export const mockDeleteOneProfileTeamBoardMutation = {
+    request: {
+        query: DELETE_ONE_PROFILE_TEAM_BOARD,
+        variables: {
+            profileId: '2'
+        }
+    },
+    result: {
+        data: {
+            deleteOneProfileTeamBoard: {
+                profile: {
+                    id: '2'
+                }
+            }
+        }
+    }
+}
 
 export const mockUpdateMyProfileNicknameMutation = {
     request: {

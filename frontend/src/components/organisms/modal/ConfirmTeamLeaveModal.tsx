@@ -8,10 +8,12 @@ import { confirmTeamLeaveModalState } from "../../../store/confirmTeamLeaveModal
 import { DeleteButton } from "../../atoms/button/DeleteButton";
 import { ModalLayout } from "../layout/ModalLayout";
 import { Flex } from "@chakra-ui/react";
+import { useDeleteOneProfileTeamBoard } from "../../../hooks/queries/useDeleteOneProfileTeamBoard";
 
 export const ConfirmTeamLeaveModal: VFC = memo(() => {
     const { onCloseConfirmTeamLeaveModal } = useControllModal()
     const { deleteMyProfileTeamBoard } = useDeleteMyProfileTeamBoard()
+    const { deleteOneProfileTeamBoard } = useDeleteOneProfileTeamBoard()
 
     const confirmTeamLeaveModal = useRecoilValue(confirmTeamLeaveModalState)
     const { id, nickname, isMyself, isOpen } = confirmTeamLeaveModal
@@ -42,7 +44,7 @@ export const ConfirmTeamLeaveModal: VFC = memo(() => {
                     name='team-leave'
                     type='button'
                     disabled={false}
-                    onClick={() => isMyself ? deleteMyProfileTeamBoard() : null }
+                    onClick={() => isMyself ? deleteMyProfileTeamBoard() : deleteOneProfileTeamBoard(id)  }
                 >
                     {isMyself ? "脱退する" : "脱退させる"}
                 </DeleteButton>

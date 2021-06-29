@@ -121,6 +121,16 @@ export const GET_MY_TEAM_MEMBER =gql`
     }
 `;
 
+export const DELETE_ONE_PROFILE_TEAM_BOARD = gql`
+    mutation DeleteOneProfileTeamBoard($profileId: ID!) {
+        deleteOneProfileTeamBoard(input: { profileId: $profileId }) {
+            profile {
+                id
+            }
+        }
+    }
+`;
+
 // team
 
 export const GET_ONE_TEAM_FROM_NAME = gql`

@@ -106,6 +106,37 @@ export const mockMyTeamFinishedSchedulesQuery = {
     }
 }
 
+export const mockSecondMemberFinishedSchedulesQuery = {
+    request: {
+        query: GET_ONE_MEMBER_FINISHED_SCHEDULES,
+        variables: { profileId: '2' }
+    },
+    result: {
+        data: {
+            myTeamFinishedSchedules: {
+                edges: [
+                ]
+            }
+        }
+    }
+}
+
+export const mockOtherFinishedScheduleQuery = {
+    request: {
+        query: GET_ONE_MEMBER_FINISHED_SCHEDULES,
+        variables: { id: '2'}
+    },
+    result: {
+        data: {
+            myTeamFinishedSchedules: {
+                edges: [
+                    { node: mockFinishedSchedule('1', '1', '1', 0) },
+                ]
+            }
+        }
+    }
+}
+
 export const mockCreateFinishedScheduleMutation = {
     request: {
         query: CREATE_FINISHED_SCHEDULE,
