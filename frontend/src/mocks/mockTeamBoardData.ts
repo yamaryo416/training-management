@@ -1,3 +1,5 @@
+import { graphql } from "msw"
+
 import { UPDATE_TEAM_BOARD_COACH, UPDATE_TEAM_BOARD_INTRODUCTION } from "../queries"
 
 export const mockTeamBoard = {
@@ -16,6 +18,19 @@ export const mockTeamBoard = {
     },
     trainings: {
         edges: []
+    }
+}
+
+export const mockTeamBoardItem = (id: string) => {
+    return {
+        id,
+        introduction: '',
+        joinCount: Number(id),
+        coach: `coach${id}`,
+        team: {
+            id,
+            name: `team${id}` 
+        }
     }
 }
 
@@ -55,3 +70,17 @@ export const mockUpdateTeamBoardCoachMutation = {
         }
     }
 }
+
+export const mockGetAllTeamBoardHandler = graphql.query('AllTeamBoard', (req, res, ctx) => {
+    return res(
+        ctx.data({
+            allTeamBoard: {
+                edges: [
+                    { node: mockTeamBoardItem('1') },
+                    { node: mockTeamBoardItem('2') },
+                    { node: mockTeamBoardItem('3') },
+                ]
+            },
+        })
+    )
+})
