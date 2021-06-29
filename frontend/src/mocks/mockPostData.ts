@@ -129,6 +129,24 @@ export const mockCreatePostMutation = {
     }
 }
 
+export const mockDeletePostMutation = {
+    request: {
+        query: DELETE_POST,
+        variables: {
+            postId: '1'
+        }
+    },
+    result: {
+        data: {
+            deletePost: {
+                post: {
+                    id: null
+                }
+            }
+        }
+    }
+}
+
 export const mockGetMyTeamPostsHandler= graphql.query('MyTeamPosts', (req, res, ctx) => {
     const { after } = req.variables
     if (after === '10') {
