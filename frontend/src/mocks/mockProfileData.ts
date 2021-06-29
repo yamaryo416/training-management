@@ -1,6 +1,6 @@
 import { graphql } from 'msw'
 
-import { GET_MY_PROFILE, GET_MY_TEAM_MEMBER, UPDATE_MY_PROFILE_NICKNAME } from "../queries";
+import { GET_MY_PROFILE, GET_MY_TEAM_MEMBER, UPDATE_MY_PROFILE_NICKNAME, UPDATE_MY_PROFILE_TEAM_BOARD } from "../queries";
 import { NUM_PAGE } from '../../constants';
 
 export const mockMember = {
@@ -280,6 +280,24 @@ export const mockUpdateMyProfileNicknameMutation = {
             updateProfileNickname: {
                 profile: {
                     id: '2'
+                }
+            }
+        }
+    }
+}
+
+export const mockUpdateMyProfileTeamBoardMutation = {
+    request: {
+        query: UPDATE_MY_PROFILE_TEAM_BOARD,
+        variables: {
+            teamBoardId: '1'
+        }
+    },
+    result: {
+        data: {
+            updateProfileTeamBoard: {
+                profile: {
+                    id: '1'
                 }
             }
         }
