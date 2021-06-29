@@ -1,7 +1,7 @@
 import moment from "moment"
 import { graphql } from 'msw'
 
-import { GET_MY_FINISHED_SCHEDULES, GET_ONE_MEMBER_FINISHED_SCHEDULES, GET_MY_TEAM_FINISHED_SCHEDULES } from "../queries"
+import { GET_MY_FINISHED_SCHEDULES, GET_ONE_MEMBER_FINISHED_SCHEDULES, GET_MY_TEAM_FINISHED_SCHEDULES, CREATE_FINISHED_SCHEDULE } from "../queries"
 
 export const mockFinishedSchedule = (id: string, trainingId: string, scheduleId: string, dateDiff: number) => {
     return {
@@ -104,6 +104,42 @@ export const mockMyTeamFinishedSchedulesQuery = {
             }
         }
     }
+}
+
+export const mockCreateFinishedScheduleMutation = {
+    request: {
+        query: CREATE_FINISHED_SCHEDULE,
+        variables: {
+            scheduleId: '1',
+            count: 10,
+            load: 0,
+            distance: 0,
+            minitus: 0,
+            comment: ''
+        }
+    },
+    result: {
+        data: {
+            finishedScheduleMember: {
+                id: '1'
+            }
+        }
+    }
+}
+
+export const mockErrorCreateFinishedScheduleMutation = {
+    request: {
+        query: CREATE_FINISHED_SCHEDULE,
+        variables: {
+            scheduleId: '1',
+            count: 0,
+            load: 0,
+            distance: 0,
+            minitus: 0,
+            comment: ''
+        }
+    },
+    error: new Error('Count is required')
 }
 
 export const mockGetMyFinishedSchedulesHandler = graphql.query('MyFinishedSchedules', (req, res, ctx) => {
