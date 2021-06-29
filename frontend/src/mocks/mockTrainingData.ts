@@ -1,3 +1,5 @@
+import { graphql } from 'msw'
+
 import { GET_MY_TEAM_TRAININGS } from "../queries"
 
 export const mockTrainingWithIcon = (id: string, finishedPatern: string) => {
@@ -80,3 +82,11 @@ export const mockErrorMyTeamTrainingQuery = {
     },
     error: new Error()
 }
+
+export const mockGetMyTeamTrainingsHandler= graphql.query('MyTeamTrainings', (req, res, ctx) => {
+    return res(
+        ctx.data({
+            myTeamTrainings: mockTrainings
+        })
+    )
+})

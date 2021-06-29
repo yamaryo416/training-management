@@ -1,5 +1,6 @@
-import { GET_MY_PROFILE, GET_MY_TEAM_MEMBER } from "../queries";
+import { graphql } from 'msw'
 
+import { GET_MY_PROFILE, GET_MY_TEAM_MEMBER } from "../queries";
 import { NUM_PAGE } from '../../constants';
 
 export const mockMember = {
@@ -221,3 +222,48 @@ export const mockErrorMyTeamMemberQuery = {
     },
     error: new Error()
 }
+
+export const mockGetMyProfileHandler = graphql.query('MyProfile', (req, res, ctx) => {
+    return res(
+        ctx.data({
+            myProfile: {
+                id: '1',
+                nickname: 'coach user',
+                user: {
+                    id: '1',
+                },
+                teamBoard: {
+                    introduction: '',
+                    joinCount: 2,
+                    coach: 'coach user',
+                    team: {
+                        id: '1',
+                        name: 'team',
+                        password: '0000',
+                        isLimitJoin: false,
+                    }
+                },
+                isCoach: true,
+                isGuest: false,
+            }
+        })
+    )
+})
+
+export const mockGetMyTeamMemberHandler = graphql.query('MyTeamMember', (req, res, ctx) => {
+    return res(
+        ctx.data({
+            myTeamMember: {
+                edges: [
+                    { node: mockMyTeamCoach },
+                    { node: mockMyTeamMember('2') },
+                    { node: mockMyTeamMember('3') },
+                ],
+                pageInfo: {
+                    endCursor: '3',
+                    hasNextPage: false
+                }
+            },
+        })
+    )
+})

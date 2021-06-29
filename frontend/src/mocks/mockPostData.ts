@@ -110,3 +110,45 @@ export const mockErrorMyTeamPostsQuery = {
     },
     error: new Error()
 }
+
+export const mockGetMyTeamPostsHandler= graphql.query('MyTeamPosts', (req, res, ctx) => {
+    const { after } = req.variables
+    if (after === '10') {
+        return res(
+            ctx.data({
+                myTeamPosts: {
+                    edges: [
+                        { node: mockMyPost(11) },
+                        { node: mockMyPost(12) }
+                    ],
+                    pageInfo: {
+                        endCursor: '12',
+                        hasNextPage: false
+                    }
+                }
+            })
+        )
+    }
+    return res(
+        ctx.data({
+            myTeamPosts: {
+                edges: [
+                    { node: mockMyPost(1) },
+                    { node: mockMyPost(3) },
+                    { node: mockMyPost(3) },
+                    { node: mockMyPost(4) },
+                    { node: mockMyPost(5) },
+                    { node: mockOtherPost(6) },
+                    { node: mockOtherPost(7) },
+                    { node: mockOtherPost(8) },
+                    { node: mockOtherPost(9) },
+                    { node: mockOtherPost(10) },
+                ],
+                pageInfo: {
+                    endCursor: '10',
+                    hasNextPage: true
+                }
+            }
+        })
+    )
+})

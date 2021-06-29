@@ -1,4 +1,5 @@
 import moment from "moment"
+import { graphql } from 'msw'
 
 import { TODAY } from "../../constants"
 import { mockTrainingWithIcon, mockTrainingWithoutIcon } from "./mockTrainingData"
@@ -169,5 +170,56 @@ export const mockErrorMyTeamScheduleQuery = {
     error: new Error()
 }
 
+export const mockGetMyTeamSchedulesHandler = graphql.query('MyTeamSchedules', (req, res, ctx) => {
+    return res(
+        ctx.data({
+            myTeamSchedules: {
+                edges: [
+                    { node: mockSchedule('1', 0) },
+                    { node: mockScheduleWithoutIcon('2') },
+                    { node: mockSchedule('3', 7) },
+                    { node: mockSchedule('4', -1) },
+                    { node: mockSchedule('5', 7) },
+                ]
+            }
+        })
+    )
+})
 
+export const mockGetOneDaySchedulesHandler = graphql.query('OneDaySchedules', (req, res, ctx) => {
+    const { date } = req.variables
+
+    if (date === moment(TODAY).add(1, 'days').format('YYYY-MM-DD')) {
+        return res(
+            ctx.data({
+                myTeamSchedules: {
+                    edges: [
+                        { node: mockSchedule('3', 1) }
+                    ]
+                }
+            })
+        )
+    }
+    if (date === moment(TODAY).add(-1, 'days').format('YYYY-MM-DD')) {
+        return res(
+            ctx.data({
+                myTeamSchedules: {
+                    edges: [
+                        { node: mockSchedule('4', -1) }
+                    ]
+                }
+            })
+        )
+    }
+    return res(
+        ctx.data({
+            myTeamSchedules: {
+                edges: [
+                    { node: mockSchedule('1', 0) },
+                    { node: mockScheduleWithoutIcon('2') }
+                ]
+            }
+        })
+    )
+})
 
