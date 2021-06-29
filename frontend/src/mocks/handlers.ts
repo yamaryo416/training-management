@@ -1,4 +1,4 @@
-import { mockGetMyFinishedSchedulesHandler, mockGetMyTeamFinishedSchedulesHandler } from "./mockFinishedSchedulesData";
+import { mockGetMyFinishedSchedulesHandler, mockGetMyTeamFinishedSchedulesHandler, mockGetOneMemberFinishedSchedulesHandler } from "./mockFinishedSchedulesData";
 import { mockGetMyTeamPostsHandler } from "./mockPostData";
 import { mockGetMyProfileHandler, mockGetMyTeamMemberHandler } from "./mockProfileData";
 import { mockGetMyTeamSchedulesHandler, mockGetOneDaySchedulesHandler } from "./mockScheduleData";
@@ -25,4 +25,11 @@ export const teamsPageHandlers = [
 export const teamDetailPageHandler = [
     mockGetMyProfileHandler,
     mockGetOneTeamFromIdHandler
+]
+
+export const myTeamMemberPageHandler = [
+    mockGetMyProfileHandler,
+    mockGetMyTeamMemberHandler,
+    mockGetOneMemberFinishedSchedulesHandler,
+    mockGetMyTeamTrainingsHandler,
 ]

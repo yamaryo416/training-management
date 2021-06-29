@@ -212,3 +212,15 @@ export const mockGetMyTeamFinishedSchedulesHandler = graphql.query('MyTeamFinish
         })
     )
 })
+
+export const mockGetOneMemberFinishedSchedulesHandler = graphql.query('OneMemberFinishedSchedules', (req, res, ctx) => {
+    return res(
+        ctx.data({
+            myTeamFinishedSchedules: {
+                edges: [
+                    { node: mockFinishedSchedule('1', '1', '1', 0) },
+                ]
+            }
+        })
+    )
+})
