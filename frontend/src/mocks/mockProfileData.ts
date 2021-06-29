@@ -1,6 +1,6 @@
 import { graphql } from 'msw'
 
-import { GET_MY_PROFILE, GET_MY_TEAM_MEMBER } from "../queries";
+import { GET_MY_PROFILE, GET_MY_TEAM_MEMBER, UPDATE_MY_PROFILE_NICKNAME } from "../queries";
 import { NUM_PAGE } from '../../constants';
 
 export const mockMember = {
@@ -267,3 +267,21 @@ export const mockGetMyTeamMemberHandler = graphql.query('MyTeamMember', (req, re
         })
     )
 })
+
+export const mockUpdateMyProfileNicknameMutation = {
+    request: {
+        query: UPDATE_MY_PROFILE_NICKNAME,
+        variables: {
+            nickname: 'user update'
+        }
+    },
+    result: {
+        data: {
+            updateProfileNickname: {
+                profile: {
+                    id: '2'
+                }
+            }
+        }
+    }
+}
