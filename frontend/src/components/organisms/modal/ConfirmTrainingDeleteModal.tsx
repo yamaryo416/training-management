@@ -27,7 +27,7 @@ export const ConfirmTrainingDeleteModal: VFC = memo(() => {
             <Heading as="h3" fontSize="20px">以下のトレーニングを削除します。<br/>よろしいですか？</Heading>
             <Flex>
                 <Heading fontSize='18px'>トレーニング名:</Heading>
-                <Text pl={2} fontSize='16px' data-testid='delete-training-titl'>{title}</Text>
+                <Text pl={2} fontSize='16px' data-testid='delete-training-title'>{title}</Text>
             </Flex>
             {description !== "" && (
                 <Flex>
