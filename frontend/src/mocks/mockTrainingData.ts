@@ -1,6 +1,6 @@
 import { graphql } from 'msw'
 
-import { GET_MY_TEAM_TRAININGS } from "../queries"
+import { CREATE_TRAINING, GET_MY_TEAM_TRAININGS } from "../queries"
 
 export const mockTrainingWithIcon = (id: string, finishedPatern: string) => {
     return {
@@ -90,3 +90,24 @@ export const mockGetMyTeamTrainingsHandler= graphql.query('MyTeamTrainings', (re
         })
     )
 })
+
+export const mockCreateTrainingMutation = {
+    request: {
+        query: CREATE_TRAINING,
+        variables: {
+            title: 'トレーニング',
+            description: '',
+            iconNumber: 0,
+            finishedPatern: ''
+        }
+    },
+    result: {
+        data: {
+            createTraining: {
+                training: {
+                    id: '1'
+                }
+            }
+        }
+    }
+}
