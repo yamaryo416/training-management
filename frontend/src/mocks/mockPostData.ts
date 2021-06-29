@@ -111,6 +111,24 @@ export const mockErrorMyTeamPostsQuery = {
     error: new Error()
 }
 
+export const mockCreatePostMutation = {
+    request: {
+        query: CREATE_POST,
+        variables: {
+            text: 'post'
+        }
+    },
+    result: {
+        data: {
+            createPost: {
+                post: {
+                    id: '1'
+                }
+            }
+        }
+    }
+}
+
 export const mockGetMyTeamPostsHandler= graphql.query('MyTeamPosts', (req, res, ctx) => {
     const { after } = req.variables
     if (after === '10') {
