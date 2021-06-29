@@ -28,8 +28,6 @@ export const useCreatePost = () => {
         }
     }, [text])
 
-    console.log("useCreatePost")
-
     return ({
         text,
         onChangeText,

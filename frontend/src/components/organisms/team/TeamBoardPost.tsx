@@ -86,7 +86,6 @@ export const TeamBoardPost: VFC = memo(() => {
                 ) : (
                     <>
                         {errorMoreMyTeamPosts &&  <FailedText />}
-                        {console.log(dataMoreMyTeamPosts)}
                         {dataMoreMyTeamPosts?.myTeamPosts.edges?.length === 0 && <Text textAlign="center">投稿はありません。</Text>}
                         {dataMoreMyTeamPosts?.myTeamPosts.edges?.map(({ node }) => (
                             <Box>

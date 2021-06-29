@@ -21,7 +21,7 @@ export const TrainingDetailModal: VFC = memo(() => {
             onClose={() => {
                 onCloseTrainingDetailModal()
         }}>
-            <Heading fontSize="20px" textAlign="center">{title}</Heading>
+            <Heading fontSize="20px" textAlign="center" data-testid='training-detail-title'>{title}</Heading>
             {description !== "" && (
                 <Flex>
                     <Heading fontSize='18px'>説明:</Heading>
@@ -31,15 +31,13 @@ export const TrainingDetailModal: VFC = memo(() => {
             {finishedPatern !== '' && (
                 <Flex alignItems='center'>
                     <Text　fontSize='18px'>実施する際に</Text>
-                    {finishedPatern.includes('1') && <Text pl={2}>回数</Text>}
-                    {finishedPatern.includes('2') && <Text pl={2}>負荷</Text>}
-                    {finishedPatern.includes('3') && <Text pl={2}>距離</Text>}
-                    {finishedPatern.includes('4') && <Text pl={2}>時間</Text>}
+                    {finishedPatern.includes('1') && <Text pl={2} data-testid='training-detail-count'>回数</Text>}
+                    {finishedPatern.includes('2') && <Text pl={2} data-testid='training-detail-load'>負荷</Text>}
+                    {finishedPatern.includes('3') && <Text pl={2} data-testid='training-detail-distance'>距離</Text>}
+                    {finishedPatern.includes('4') && <Text pl={2} data-testid='training-detail-minitus'>時間</Text>}
                     <Text　fontSize='18px' pl={2}>を記録</Text>
                 </Flex>
             )}
-            {finishedPatern.includes('1') && '回数'}
-            
         </ModalLayout>
     )
 })
