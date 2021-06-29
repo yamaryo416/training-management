@@ -3,6 +3,7 @@ import { mockGetMyTeamPostsHandler } from "./mockPostData";
 import { mockGetMyProfileHandler, mockGetMyTeamMemberHandler } from "./mockProfileData";
 import { mockGetMyTeamSchedulesHandler, mockGetOneDaySchedulesHandler } from "./mockScheduleData";
 import { mockGetAllTeamBoardHandler } from "./mockTeamBoardData";
+import { mockGetOneTeamFromIdHandler } from "./mockTeamData";
 import { mockGetMyTeamTrainingsHandler } from "./mockTrainingData";
 
 export const mainPageHandlers = [
@@ -19,4 +20,9 @@ export const mainPageHandlers = [
 export const teamsPageHandlers = [
     mockGetMyProfileHandler,
     mockGetAllTeamBoardHandler
+]
+
+export const teamDetailPageHandler = [
+    mockGetMyProfileHandler,
+    mockGetOneTeamFromIdHandler
 ]

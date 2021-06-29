@@ -1,4 +1,8 @@
+import { graphql } from 'msw'
+
+import { TODAY } from "../../constants";
 import { CREATE_TEAM, GET_ONE_TEAM_FROM_NAME, UPDATE_TEAM } from "../queries";
+import { mockOtherTeamTraining } from "./mockTrainingData";
 
 export const mockOneTeamFromNameQuery = {
     request: {
@@ -82,3 +86,32 @@ export const mockUpdateTeamMutation = {
         }
     }
 }
+
+export const mockGetOneTeamFromIdHandler = graphql.query('OneTeamFromId', (req, res, ctx) => {
+    return res(
+        ctx.data({
+            oneTeamFromId: {
+                id: '1',
+                name: 'team',
+                teamBoard: {
+                    id: '1',
+                    introduction: 'よろしくお願いします。',
+                    joinCount: 2,
+                    coach: 'coach user',
+                    schedules: {
+                        edges: [
+                            { node: { id: '1', training: mockOtherTeamTraining('1'), date: TODAY } },
+                            { node: { id: '2', training: mockOtherTeamTraining('2'), date: TODAY } }
+                        ]
+                    },
+                    trainings: {
+                        edges: [
+                            { node: mockOtherTeamTraining('1') },
+                            { node: mockOtherTeamTraining('2') }
+                        ]
+                    }
+                }
+            }
+        })
+    )
+})

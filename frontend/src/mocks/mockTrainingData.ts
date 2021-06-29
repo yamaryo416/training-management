@@ -49,6 +49,14 @@ export const mockTrainingWithFinishedSchedules = (id: string, finishedPatern: st
     }
 }
 
+export const mockOtherTeamTraining = (id: string)  => {
+    return {
+        id,
+        title: `トレーニング${id}`,
+        iconNumber: Number(id),
+    }
+}
+
 export const mockTrainings = {
     edges: [
         { node: mockTrainingWithIcon('1', '1')  },
