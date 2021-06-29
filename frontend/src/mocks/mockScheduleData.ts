@@ -3,7 +3,7 @@ import { graphql } from 'msw'
 
 import { TODAY } from "../../constants"
 import { mockTrainingWithIcon, mockTrainingWithoutIcon } from "./mockTrainingData"
-import { GET_ONE_DAY_SCHEDULES, GET_MY_TEAM_SCHEDULES } from "../queries"
+import { GET_ONE_DAY_SCHEDULES, GET_MY_TEAM_SCHEDULES, CREATE_SINGLE_SCHEDULE, CREATE_MANY_SCHEDULES } from "../queries"
 
 export const mockSchedule = (id: string, dateDiff: number) => {
     return {
@@ -185,6 +185,44 @@ export const mockGetMyTeamSchedulesHandler = graphql.query('MyTeamSchedules', (r
         })
     )
 })
+
+export const mockCreateSingleScheduleMutation = {
+    request: {
+        query: CREATE_SINGLE_SCHEDULE,
+        variables: {
+            trainingId: '1',
+            date: TODAY,
+        },
+    },
+    result: {
+        data: {
+            createSchedule: {
+                id: '1'
+            }
+        }
+    }
+}
+
+export const mockCreateManySchedulesMutation = {
+    request: {
+        query: CREATE_MANY_SCHEDULES,
+        variables: {
+            trainingId: '1',
+            startDate: TODAY,
+            endDate: moment(TODAY).add(7, 'days').format('YYYY-MM-DD'),
+            dayOfWeek: '0123456'
+        },
+    },
+    result: {
+        data: {
+            createManySchedules: {
+                schedule: {
+                    id: '1'
+                }
+            }
+        }
+    }
+}
 
 export const mockGetOneDaySchedulesHandler = graphql.query('OneDaySchedules', (req, res, ctx) => {
     const { date } = req.variables
