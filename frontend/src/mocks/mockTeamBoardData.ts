@@ -1,4 +1,4 @@
-import { UPDATE_TEAM_BOARD_INTRODUCTION } from "../queries"
+import { UPDATE_TEAM_BOARD_COACH, UPDATE_TEAM_BOARD_INTRODUCTION } from "../queries"
 
 export const mockTeamBoard = {
     id: '1',
@@ -29,6 +29,25 @@ export const mockUpdateTeamBoardIntroductionMutation = {
     result: {
         data: {
             updateTeamBoardIntroduction: {
+                teamBoard: {
+                    id: '1'
+                }
+            }
+        }
+    }
+}
+
+
+export const mockUpdateTeamBoardCoachMutation = {
+    request: {
+        query: UPDATE_TEAM_BOARD_COACH,
+        variables: {
+            profileId: '2'
+        }
+    },
+    result: {
+        data: {
+            updateTeamBoardCoach: {
                 teamBoard: {
                     id: '1'
                 }
