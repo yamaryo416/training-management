@@ -1,3 +1,5 @@
+import { UPDATE_TEAM_BOARD_INTRODUCTION } from "../queries"
+
 export const mockTeamBoard = {
     id: '1',
     introduction: '',
@@ -14,5 +16,23 @@ export const mockTeamBoard = {
     },
     trainings: {
         edges: []
+    }
+}
+
+export const mockUpdateTeamBoardIntroductionMutation = {
+    request: {
+        query: UPDATE_TEAM_BOARD_INTRODUCTION,
+        variables: {
+            introduction: 'よろしくお願いします。'
+        }
+    },
+    result: {
+        data: {
+            updateTeamBoardIntroduction: {
+                teamBoard: {
+                    id: '1'
+                }
+            }
+        }
     }
 }

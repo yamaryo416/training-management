@@ -62,3 +62,23 @@ export const mockErrorCreateTeamMutation = {
     },
     error: new Error()
 }
+
+export const mockUpdateTeamMutation = {
+    request: {
+        query: UPDATE_TEAM,
+        variables: {
+            name: 'team update',
+            isLimitJoin: false,
+            password: '0000'
+        }
+    },
+    result: {
+        data: {
+            updateTeam: {
+                team: {
+                    id: '1'
+                }
+            }
+        }
+    }
+}
