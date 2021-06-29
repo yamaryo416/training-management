@@ -59,3 +59,22 @@ export const mockErrorCreateGeneralUserMutation = {
     },
     error: new Error('duplicate')
 }
+
+
+export const mockDeleteUserMutation = {
+    request: {
+        query: DELETE_USER,
+        variables: {
+            confirm: true
+        }
+    },
+    result: {
+        data: {
+            deleteUser: {
+                user: {
+                    id: null
+                }
+            }
+        }
+    }
+}
