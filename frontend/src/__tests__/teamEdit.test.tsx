@@ -45,11 +45,11 @@ describe('Team Edit', () => {
             expect(await screen.findByTestId('modal-title')).toHaveTextContent('チーム編集')
             userEvent.clear(screen.getByTestId('name-form'))
             userEvent.type(screen.getByTestId('name-form'), 'team update')
-            userEvent.type(screen.getByTestId('introduction-form'), 'よろしくお願いします。')
+            await userEvent.type(screen.getByTestId('introduction-form'), 'よろしくお願いします。')
             await new Promise(resolve => setTimeout(resolve, 1000));
             userEvent.click(screen.getByTestId('team-edit-button'))
             await new Promise(resolve => setTimeout(resolve, 1000));
-            expect(await screen.findByText('チームを編集しました。')).toBeInTheDocument()
+            expect(screen.queryByText('チームを編集しました。')).toBeInTheDocument()
         })
     })
 })

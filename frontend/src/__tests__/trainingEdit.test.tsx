@@ -20,7 +20,7 @@ const mocks = [
 ]
 
 beforeEach(() => {
-    jest.setTimeout(30000)
+    jest.setTimeout(50000)
 })
 
 afterEach(cleanup)
@@ -41,8 +41,10 @@ describe('Training Edit', () => {
             expect(screen.queryByTestId('title-form')).toHaveValue('トレーニング1')
             userEvent.clear(screen.getByTestId('title-form'))
             await userEvent.type(screen.getByTestId('title-form'), 'トレーニング1 update')
+            await new Promise(resolve => setTimeout(resolve, 1000));
             userEvent.click(screen.queryByTestId('training-create-button'))
-            expect(await screen.findByText('トレーニングを編集しました。')).toBeInTheDocument()
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            expect(screen.queryByText('トレーニングを編集しました。')).toBeInTheDocument()
         })
     })
 })
