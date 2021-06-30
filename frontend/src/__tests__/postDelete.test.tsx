@@ -10,6 +10,10 @@ import { TeamBoardPost } from '../components/organisms/team/TeamBoardPost';
 import { mockDeletePostMutation, mockFirstMyTeamPostsQuery } from '../mocks/mockPostData';
 import { ConfirmPostDeleteModal } from '../components/organisms/modal/ConfirmPostDeleteModal';
 
+beforeEach(() => {
+    jest.setTimeout(30000)
+})
+
 afterEach(cleanup)
 
 const mocks = [

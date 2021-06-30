@@ -42,7 +42,7 @@ describe('Login', () => {
             await new Promise(resolve => setTimeout(resolve, 1000));
             userEvent.click(screen.queryByTestId('login-button'))
             await new Promise(resolve => setTimeout(resolve, 1000));
-            expect(await screen.findByText('Eメール、もしくはパスワードが間違っています。')).toBeInTheDocument()
+            expect(screen.queryAllByText('Eメール、もしくはパスワードが間違っています。')[0]).toBeInTheDocument()
             expect(localStorage.getItem('token')).toBe(null)
         })
     })

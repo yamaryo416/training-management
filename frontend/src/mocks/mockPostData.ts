@@ -10,7 +10,7 @@ const mockMyPost = (id: number) => {
             id: '1',
             nickname: 'coach user'
         },
-        createdAt: moment().add(-id, 'days').toISOString()
+        createdAt: moment('2021-01-01T01:23:45.000000').add(id, 'days').toISOString()
     }
 }
 
@@ -22,7 +22,7 @@ const mockOtherPost = (id: number) => {
             id: '2',
             nickname: 'general user'
         },
-        createdAt: moment().add(-id, 'days').toISOString()
+        createdAt: moment('2021-01-01T01:23:45.000000').add(id, 'days').toISOString()
     }
 }
 

@@ -26,6 +26,7 @@ const mocksAsNotJoinTeam = [
 describe('MyProfileEdithModal', () => {
     describe('As Coach', () => {
         beforeEach(() => {
+            jest.setTimeout(30000)
             render(
                 <MockedProvider mocks={mocksAsCoach}>
                     <RecoilRoot>
@@ -52,21 +53,20 @@ describe('MyProfileEdithModal', () => {
 
         it('Should display error message because click team leave button', async () => {
             expect(await screen.findByTestId('modal-title')).toHaveTextContent('プロフィール編集')
-            userEvent.click(screen.queryByText('チームから脱退する'))
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            expect(screen.queryAllByText('コーチの権限を他のユーザーに委譲してください。')[0]).toBeInTheDocument()
+            userEvent.click(await screen.findByText('チームから脱退する'))
+            expect(await screen.findByText('コーチの権限を他のユーザーに委譲してください。')).toBeInTheDocument()
+            await new Promise(resolve => setTimeout(resolve, 5000));
         })
 
         it('Should display error message because click account delete button', async () => {
             expect(await screen.findByTestId('modal-title')).toHaveTextContent('プロフィール編集')
-            userEvent.click(screen.queryByText('アカウントを削除する'))
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            expect(screen.queryAllByText('コーチの権限を他のユーザーに委譲してください。')[0]).toBeInTheDocument()
+            userEvent.click(await screen.findByText('アカウントを削除する'))
+            expect(await screen.findByText('コーチの権限を他のユーザーに委譲してください。')).toBeInTheDocument()
         })
 
         it('Should display error message becaouse nickname is blank', async () => {
             expect(await screen.findByTestId('modal-title')).toHaveTextContent('プロフィール編集')
-            userEvent.clear(screen.queryByTestId('nickname-form'))
+            userEvent.clear(await screen.findByTestId('nickname-form'))
             userEvent.type(screen.queryByTestId('nickname-form'), '')
             userEvent.click(screen.queryByTestId('modal-title'))
             expect(await screen.findByText('1文字以上入力してください。')).toBeInTheDocument()
@@ -74,8 +74,8 @@ describe('MyProfileEdithModal', () => {
         })
 
         it('Should display error message becaouse nickname is blank', async () => {
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            userEvent.clear(screen.queryByTestId('nickname-form'))
+            expect(await screen.findByTestId('modal-title')).toHaveTextContent('プロフィール編集')
+            userEvent.clear(await screen.findByTestId('nickname-form'))
             userEvent.type(screen.queryByTestId('nickname-form'), 'a'.repeat(21))
             userEvent.click(screen.queryByTestId('modal-title'))
             expect(await screen.findByText('20文字以内で入力してください')).toBeInTheDocument()
@@ -125,8 +125,8 @@ describe('MyProfileEdithModal', () => {
             userEvent.click(screen.getByText('メニュー'))
             userEvent.click(screen.getByText('プロフィール編集'))
             expect(await screen.findByTestId('modal-title')).toHaveTextContent('プロフィール編集')
+            expect(await screen.findByText('アカウントを削除する')).toBeInTheDocument()
             expect(screen.queryByText('チームから脱退する')).not.toBeInTheDocument()
-            expect(screen.queryByText('アカウントを削除する')).toBeInTheDocument()
             expect(screen.queryByText('戻る')).toBeInTheDocument()
         })
     })

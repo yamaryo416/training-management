@@ -22,7 +22,7 @@ const mocks = [
 afterEach(cleanup)
 
 beforeEach(() => {
-    jest.setTimeout(30000)
+    jest.setTimeout(50000)
     render(
         <MockedProvider mocks={mocks} >
             <RecoilRoot>

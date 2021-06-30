@@ -14,14 +14,17 @@ import { PrimaryButton } from "../../atoms/button/PrimaryButton";
 import { ModalLayout } from "../layout/ModalLayout";
 import { CustomForm } from "../../molecules/CustomForm";
 import { ErrorText } from "../../atoms/text/ErrorText";
+import { CustomSpinner } from '../../atoms/spinner/CustomSpinner'
 
 export const MyProfileEditModal: VFC = memo(() => {
     const { updateMyProfileNickname } = useUpdateMyProfileNickname()
     const { onCloseMyProfileEditModal, onOpenConfirmTeamLeaveModal, onOpenConfirmUserDeleteModal } = useControllModal()
-    const { dataMyProfile } = useGetMyProfile()
+    const { loadingMyProfile, dataMyProfile } = useGetMyProfile()
     const { showMessage } = useMessage()
     
     const myProfileEditModal = useRecoilValue(myProfileEditModalState)
+
+    if (loadingMyProfile) return <CustomSpinner />
 
     return (
         <ModalLayout

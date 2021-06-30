@@ -16,6 +16,10 @@ const mocks = [
     mockMyFinishedSchedulesQuery
 ]
 
+beforeEach(() => {
+    jest.setTimeout(30000)
+})
+
 afterEach(cleanup)
 
 describe('TrainingImplementationModal', () => {
