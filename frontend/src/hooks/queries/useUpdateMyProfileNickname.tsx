@@ -14,15 +14,11 @@ export const useUpdateMyProfileNickname = () => {
 
     const updateMyProfileNickname = useCallback(
         async (nickname: string) =>{
-            try {
-                await updateMyProfileNicknameMutation({
-                    variables: { nickname }
-                })
-                showMessage({ title: "プロフィールを編集しました。", status: "success" })
-                onCloseMyProfileEditModal()
-            } catch (err) {
-                console.log(err)
-            }
+            await updateMyProfileNicknameMutation({
+                variables: { nickname }
+            })
+            showMessage({ title: "プロフィールを編集しました。", status: "success" })
+            onCloseMyProfileEditModal()
     }, [])
 
     return { updateMyProfileNickname }
