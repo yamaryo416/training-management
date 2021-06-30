@@ -1,0 +1,16 @@
+version: 2
+jobs:
+  build:
+    machine:
+      image: circleci/classic:edge
+    steps:
+      - checkout
+      - run:
+          name: Dockerコンテナのビルド
+          command: docker-compose build
+      - run:
+          name: バックエンドのテスト
+          command: docker-compose run --rm app sh -c 'python manage.py test'
+      - run:
+          name: フロントエンドのテスト
+          command: docker-compose run --rm app sh -c 'npm run test'
