@@ -17,7 +17,6 @@ services:
       - DB_PASS=supersecretpassword
     depends_on:
       - db
-      - next
 
   db:
     image: postgres:10-alpine
