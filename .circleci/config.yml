@@ -11,6 +11,6 @@ jobs:
       - run:
           name: バックエンドのテスト
           command: docker-compose run --rm app sh -c 'python manage.py test --settings app.test_settings'
-        - run:
+      - run:
           name: フロントエンドのテスト
           command: docker-compose run --rm next sh -c 'npm install && npm run test'
