@@ -1,3 +1,5 @@
+import 'moment/locale/ja'
+
 import { memo, useMemo, VFC } from "react";
 import { Box, Flex, Stack, Text } from "@chakra-ui/layout";
 import moment from "moment";
@@ -13,6 +15,7 @@ import { CustomSpinner } from "../atoms/spinner/CustomSpinner";
 import { FinishedScheduleMemberItem } from "../molecules/FinishedScheduleMemberItem";
 import { Heading } from "@chakra-ui/react";
 
+moment.locale('ja')
 
 export const FinishedScheduleMemberSection: VFC = memo(() => {
     const finishedScheduleMemberListModal = useRecoilValue(finishedScheduleMemberListModalState)
@@ -42,7 +45,7 @@ export const FinishedScheduleMemberSection: VFC = memo(() => {
                         </Flex>
                         <Flex>
                             <Heading fontSize='18px'>日付:</Heading>
-                            <Text pl={3} data-testid='selected-schedule-finished-date'>{moment(date).format("YYYY年M月D日")}</Text>
+                            <Text pl={3} data-testid='selected-schedule-finished-date'>{moment(date).format("YYYY年M月D日(ddd)")}</Text>
                         </Flex>
                     </Stack>
                     <SectionTitle>実施済み</SectionTitle>

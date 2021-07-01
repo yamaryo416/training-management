@@ -1,3 +1,5 @@
+import 'moment/locale/ja'
+
 import { memo, useMemo, VFC } from "react";
 import { useRecoilValue } from "recoil";
 import { Box, Heading, Stack, Text } from "@chakra-ui/layout";
@@ -11,6 +13,9 @@ import { FailedText } from "../../atoms/text/FailedText";
 import { FinishedScheduleMemberItem } from "../../molecules/FinishedScheduleMemberItem";
 import { ModalLayout } from "../layout/ModalLayout";
 import { Flex } from "@chakra-ui/react";
+import moment from 'moment';
+
+moment.locale('ja')
 
 export const FinishedScheduleMemberListModal: VFC = memo(() => {
     const { loadingMyTeamFinishedSchedules, dataMyTeamFinishedSchedules, errorMyTeamFinishedSchedules } = useGetMyTeamFinishedSchedules()
@@ -54,7 +59,7 @@ export const FinishedScheduleMemberListModal: VFC = memo(() => {
                                     日付: 
                                 </Heading>
                                 <Text pl={2}>
-                                    {date}
+                                    {moment(date).format('YYYY年M月D日(ddd)')}
                                 </Text>
                             </Flex>
                             <Heading as="h4" fontSize="20px" textAlign="center">実施済み</Heading>

@@ -1,3 +1,5 @@
+import 'moment/locale/ja'
+
 import { memo, useCallback, VFC } from "react";
 import { Button } from "@chakra-ui/button";
 import { Input } from "@chakra-ui/input";
@@ -19,6 +21,7 @@ import { FetchMoreLink } from "../../atoms/link/FetchMoreLink";
 import { SectionCloseLink } from "../../atoms/link/SectionCloseLink";
 import moment from "moment";
 
+moment.locale('ja')
 
 export const TeamBoardPost: VFC = memo(() => {
     const { dataMyProfile } = useGetMyProfile()
@@ -104,7 +107,7 @@ export const TeamBoardPost: VFC = memo(() => {
                                                 </Box>
                                                 <SpeechBallon isMyPost={true}>{node.text}</SpeechBallon>
                                             </Flex>
-                                            <Text　pr={5} pt={1} opacity="0.7" clear="right" data-testid={node.id + '-post-created-at'}>{moment(node.createdAt).format("M月D日 H時m分")}</Text>
+                                            <Text　pr={5} pt={1} opacity="0.7" clear="right" data-testid={node.id + '-post-created-at'}>{moment(node.createdAt).format("M月D日(ddd) H時m分")}</Text>
                                         </Box>
                                         <PostMemberItem nickname={node.profile.nickname} />
                                     </Flex>
@@ -126,7 +129,7 @@ export const TeamBoardPost: VFC = memo(() => {
                                                     </Box>
                                                 )}
                                             </Flex>
-                                            <Text pl={5}pt={1} opacity="0.7" data-testid={node.id + '-post-created-at'}>{moment(node.createdAt).format("M月D日 H時m分")}</Text>
+                                            <Text pl={5}pt={1} opacity="0.7" data-testid={node.id + '-post-created-at'}>{moment(node.createdAt).format("M月D日(ddd) H時m分")}</Text>
                                         </Box>
                                     </Flex>
                                 )}

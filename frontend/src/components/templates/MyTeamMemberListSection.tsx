@@ -112,8 +112,8 @@ export const MyTeamMemberListSection: VFC = memo(() => {
                         <Flex borderBottom="1px solid #718096" >
                             <Box w={{ base: "40px", md: "50px"}}></Box>
                             <Text>名前</Text>
-                            <Text pl={{ base: "50px", md: "110px" }}>加入日</Text>
-                            <Text pl={{ base: "55px", md: "90px"}}>達成回数</Text>
+                            <Text pl={{ base: "40px", md: "110px" }}>加入日</Text>
+                            <Text pl={{ base: "65px", md: "110px"}}>達成回数</Text>
                         </Flex>
                         {dataMoreMyTeamMember?.myTeamMember.edges?.map((member) => (
                             <MyTeamMemberListItem member={member} />

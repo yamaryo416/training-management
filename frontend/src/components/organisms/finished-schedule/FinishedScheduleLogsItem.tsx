@@ -1,7 +1,11 @@
+import 'moment/locale/ja'
+
 import { memo, VFC } from "react";
 import { Box, Flex, Text } from "@chakra-ui/layout"
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import moment from "moment";
+
+moment.locale('ja')
 
 type Props = {
     id: string;
@@ -22,7 +26,7 @@ export const FinishedScheduleLogsItem: VFC<Props> = memo((props) => {
             <Flex alignItems='center'>
                 <AccountCircle style={{  fontSize: 40 }} />
                 <Text pl={2} data-testid={`${id}-finished-schedule-nickname`}>{nickname}</Text>
-                <Text pl={5} data-testid={`${id}-finished-schedule-date`}>{moment(date).format('M月D日')}</Text>
+                <Text pl={5} data-testid={`${id}-finished-schedule-date`}>{moment(date).format('M月D日(ddd)')}</Text>
             </Flex>
             <Flex pt={2}>
                 <Text pl='45px' data-testid={`${id}-finished-schedule-title`}>{title}</Text>
