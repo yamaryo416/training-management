@@ -49,7 +49,7 @@ describe('Team Edit', () => {
             await new Promise(resolve => setTimeout(resolve, 1000));
             userEvent.click(screen.getByTestId('team-edit-button'))
             await new Promise(resolve => setTimeout(resolve, 1000));
-            expect(screen.queryByText('チームを編集しました。')).toBeInTheDocument()
+            expect(screen.queryAllByText('チームを編集しました。')[0]).toBeInTheDocument()
         })
     })
 })

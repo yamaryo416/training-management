@@ -20,22 +20,22 @@ describe('CalendarMenubar', () => {
     })
 
     it('Should correct content', () => {
-        expect(screen.queryByText(`${moment(TODAY).get('M')  + 1}月(今週)`)).toBeInTheDocument()
+        expect(screen.queryByText(`${moment().startOf('week').get('M')  + 1}月(今週)`)).toBeInTheDocument()
     })
 
     it('Should display next week after click next icon', () => {
         userEvent.click(screen.getByTestId('next-week'))
-        expect(screen.queryByText(`${moment(TODAY).add(1, "w").get('M')  + 1}月(1週後)`)).toBeInTheDocument()
+        expect(screen.queryByText(`${moment().startOf('week').add(1, "w").get('M')  + 1}月(1週後)`)).toBeInTheDocument()
     })
 
     it('Should display last week after click back icon', () => {
         userEvent.click(screen.getByTestId('last-week'))
-        expect(screen.queryByText(`${moment(TODAY).add(-1, "w").get('M')  + 1}月(1週前)`)).toBeInTheDocument()
+        expect(screen.queryByText(`${moment().startOf('week').add(-1, "w").get('M')  + 1}月(1週前)`)).toBeInTheDocument()
     })
 
     it('Should display this week', () => {
         userEvent.click(screen.getByTestId('last-week'))
         userEvent.click(screen.getByTestId('this-week'))
-        expect(screen.queryByText(`${moment(TODAY).get('M')  + 1}月(今週)`)).toBeInTheDocument()
+        expect(screen.queryByText(`${moment().startOf('week').get('M')  + 1}月(今週)`)).toBeInTheDocument()
     })
 })

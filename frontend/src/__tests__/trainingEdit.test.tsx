@@ -44,7 +44,7 @@ describe('Training Edit', () => {
             await new Promise(resolve => setTimeout(resolve, 1000));
             userEvent.click(screen.queryByTestId('training-create-button'))
             await new Promise(resolve => setTimeout(resolve, 1000));
-            expect(screen.queryByText('トレーニングを編集しました。')).toBeInTheDocument()
+            expect(screen.queryAllByText('トレーニングを編集しました。')[0]).toBeInTheDocument()
         })
     })
 })

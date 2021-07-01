@@ -1,4 +1,5 @@
 import '@testing-library/jest-dom/extend-expect'
+import 'moment/locale/ja'
 
 import { render, screen, cleanup } from '@testing-library/react'
 import { RecoilRoot } from 'recoil'
@@ -7,6 +8,8 @@ import userEvent from '@testing-library/user-event'
 import { mockSchedules } from '../../../../mocks/mockScheduleData'
 import { OneTeamCalendarDetail } from '../OneTeamCalendarDetail'
 import moment from 'moment'
+
+moment.locale('ja')
 
 afterEach(cleanup)
 
@@ -31,7 +34,7 @@ describe('OneTeamCalendarDetail', () => {
             </RecoilRoot>
         )
         userEvent.click(screen.getByTestId('previous-date'))
-        expect(screen.queryByText(`${moment().add(-1, "days").format('M/D')}のスケジュール`)).toBeInTheDocument()
+        expect(screen.queryByText(`${moment().add(-1, "days").format('M/D(ddd)')}のスケジュール`)).toBeInTheDocument()
         expect(screen.queryByText('トレーニング5')).toBeInTheDocument()
         expect(screen.queryByRole('img')).toHaveAttribute('src', '/icon/white-dumbell.png')
     })
@@ -43,7 +46,7 @@ describe('OneTeamCalendarDetail', () => {
             </RecoilRoot>
         )
         userEvent.click(screen.getByTestId('next-date'))
-        expect(screen.queryByText(`${moment().add(1, "days").format('M/D')}のスケジュール`)).toBeInTheDocument()
+        expect(screen.queryByText(`${moment().add(1, "days").format('M/D(ddd)')}のスケジュール`)).toBeInTheDocument()
         expect(screen.queryByText('トレーニング6')).toBeInTheDocument()
         expect(screen.queryByRole('img')).toHaveAttribute('src', '/icon/white-plunk.png')
     })
