@@ -21,4 +21,4 @@ RUN chown -R user:user /vol/
 RUN chmod -R 755 /vol/web
 USER user
 
-CMD sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+CMD sh -c "python manage.py migrate --settings app.prod_settings && python manage.py runserver 0.0.0.0:8000 --settings app.prod_settings"
