@@ -31,11 +31,13 @@ export const TrainingImplementationModal: VFC<Props> = memo((props) => {
             finishedSchedules.edges.filter(fSche => fSche.node.training.id === trainingId).map(fsche => {
                 number[0] += fsche.node.count
             })
-        }  else if (finishedPatern.includes('3')) {
+        } 
+        if (finishedPatern.includes('3')) {
             finishedSchedules.edges.filter(fSche => fSche.node.training.id === trainingId).map(fsche => {
                 number[1] += fsche.node.distance
             })
-        } else if (finishedPatern.includes('4')) {
+        } 
+        if (finishedPatern.includes('4')) {
             finishedSchedules.edges.filter(fSche => fSche.node.training.id === trainingId).map(fsche => {
                 number[2] += fsche.node.minitus
             })

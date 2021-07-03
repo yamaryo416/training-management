@@ -20,7 +20,7 @@ export const TrainingFinishedItem: VFC<Props> = memo((props) => {
     const { date, finishedPatern, count, load, distance, minitus } = props
     
     return (
-        <Flex fontSize='18px' py={3} borderBottom='solid 1px black' >
+        <Flex py={3} borderBottom='solid 1px black' >
             <Text pl='20px' data-testid='training-finished-item-date'>
                 {moment(date).format('YYYY年M月D日(ddd)')}
             </Text>

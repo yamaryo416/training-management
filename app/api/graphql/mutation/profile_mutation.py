@@ -40,7 +40,7 @@ class UpdateProfileTeamBoardMutation(relay.ClientIDMutation):
         profile = info.context.user.profile
         team_board = TeamBoard.objects.get(id=from_global_id(input.get('team_board_id'))[1])
         profile.team_board = team_board
-        profile.join_at = datetime.datetime.now()
+        profile.join_at = datetime.datetime.now() + datetime.timedelta(hours=9)
         if not profile.is_guest:
             team_board.join_count += 1
             team_board.save()
