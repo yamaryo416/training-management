@@ -1,5 +1,3 @@
-import 'moment/locale/ja'
-
 import { memo, useCallback, VFC } from "react";
 import { Button } from "@chakra-ui/button";
 import { Input } from "@chakra-ui/input";
@@ -20,8 +18,6 @@ import { FailedText } from "../../atoms/text/FailedText";
 import { FetchMoreLink } from "../../atoms/link/FetchMoreLink";
 import { SectionCloseLink } from "../../atoms/link/SectionCloseLink";
 import moment from "moment";
-
-moment.locale('ja')
 
 export const TeamBoardPost: VFC = memo(() => {
     const { dataMyProfile } = useGetMyProfile()

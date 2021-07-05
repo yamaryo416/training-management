@@ -1,7 +1,10 @@
+import 'moment/locale/ja'
+
 import { memo, VFC, useEffect } from "react";
 import { useRouter } from 'next/router';
 import { useQuery } from "@apollo/client";
 import { Box, Flex } from "@chakra-ui/layout";
+import moment from "moment";
 
 import { OneTeamFromIdType } from "../../../types/queriesType";
 import { GET_ONE_TEAM_FROM_ID } from "../../queries";
@@ -23,6 +26,7 @@ import { useRecoilValue } from "recoil";
 import { tutorialState } from "../../store/tutorialState";
 
 const TeamDetail: VFC = memo(() => {
+    moment.locale('ja')
     const router = useRouter()
     const { id } = router.query
 

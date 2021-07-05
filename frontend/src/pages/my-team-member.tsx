@@ -1,6 +1,8 @@
+import 'moment/locale/ja'
 import { memo, VFC, useEffect } from "react";
 import { useRouter } from "next/router";
 import { Box, Flex, Heading } from "@chakra-ui/layout";
+import moment from "moment";
 
 import { useGetMyProfile } from "../hooks/queries/useGetMyProfile";
 import { useMessage } from "../hooks/useMessage";
@@ -17,6 +19,8 @@ import { tutorialState } from "../store/tutorialState";
 import { useRecoilValue } from "recoil";
 
 const MyTeamMember: VFC = memo(() => {
+    moment.locale('ja')
+
     const router = useRouter()
     const { showMessage } = useMessage()
     const { loadingMyProfile, dataMyProfile, errorMyProfile } = useGetMyProfile()

@@ -1,11 +1,7 @@
-import 'moment/locale/ja'
-
 import { Flex, Text } from "@chakra-ui/react";
 import moment from "moment";
 import { memo } from "react";
 import { VFC } from "react";
-
-moment.locale('ja')
 
 type Props = {
     date: string;

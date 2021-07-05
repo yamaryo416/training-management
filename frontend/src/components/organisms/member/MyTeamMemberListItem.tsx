@@ -1,15 +1,11 @@
-import 'moment/locale/ja'
-
 import { memo, VFC } from "react"
 import { Box, Flex, Text } from "@chakra-ui/layout"
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import InfoIcon from '@material-ui/icons/Info';
+import moment from "moment";
 
 import { ProfileNodeType } from "../../../../types/queriesType";
-import moment from "moment";
 import { useControllModal } from "../../../hooks/useControllModal";
-
-moment.locale('ja')
 
 type Props = {
     member: ProfileNodeType;

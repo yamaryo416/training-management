@@ -1,6 +1,9 @@
+import 'moment/locale/ja'
+
 import { memo, VFC, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { Flex, Box } from '@chakra-ui/layout'
+import moment from "moment";
 
 import { useGetMyProfile } from '../hooks/queries/useGetMyProfile'
 import { useMessage } from '../hooks/useMessage'
@@ -21,6 +24,8 @@ import { Footer } from '../components/organisms/layout/Footer'
 import { tutorialState } from '../store/tutorialState'
 
 const Main: VFC = memo(() => {
+    moment.locale('ja')
+
     const router = useRouter()
     const { showMessage } = useMessage()
     const { loadingMyProfile, errorMyProfile, dataMyProfile } = useGetMyProfile()

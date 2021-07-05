@@ -1,5 +1,3 @@
-import 'moment/locale/ja'
-
 import { memo, useCallback, useEffect, useState, VFC } from "react";
 import { Box, Flex, Link, Text, Wrap, WrapItem } from "@chakra-ui/layout";
 import moment, { Moment } from "moment";
@@ -10,8 +8,6 @@ import { scheduleOneDayState } from "../../../store/scheduleOneDayState";
 import { Maybe, ScheduleNodeType } from "../../../../types/queriesType";
 import { TrainingIcon } from "../../molecules/TrainingIcon";
 import { calendarDateState } from "../../../store/calendarDateState";
-
-moment.locale('ja')
 
 type Props = {
     schedules: {
@@ -91,7 +87,7 @@ export const Calendar: VFC<Props> = memo((props) => {
                             color={date.format("YYYY-MM-DD") === TODAY ? "orange" :  date.format('ddd') === '日' ? 'red.400' : date.format('ddd') === '土' ? 'blue.400' : 'white'}
                             w={{ base: "110px", md: "120px"}}
                         >
-                             {moment(calendarDate.firstDate).get("M") + 1 === date.get("M") ? date.format("M月D日(ddd)") : date.format("D日(ddd)")}
+                            {moment(calendarDate.firstDate).get("M") + 1 === date.get("M") ? date.format("M月D日(ddd)") : date.format("D日(ddd)")}
                         </Text>
                         <Wrap
                             ml={{ base: '10px', md: '40px' }}

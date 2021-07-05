@@ -1,11 +1,7 @@
-import 'moment/locale/ja'
-
 import { memo, VFC } from "react";
 import { Box, Flex, Text } from "@chakra-ui/layout"
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import moment from "moment";
-
-moment.locale('ja')
 
 type Props = {
     id: string;
