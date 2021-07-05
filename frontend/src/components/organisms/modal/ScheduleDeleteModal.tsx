@@ -103,6 +103,7 @@ export const ScheduleDeleteModal: VFC = memo(() => {
                                     <>
                                         <FormLabel>トレーニング</FormLabel>
                                         <Select
+                                            name='training'
                                             borderColor="gray.400"
                                             borderRadius="1000px"
                                             value={values.training}
