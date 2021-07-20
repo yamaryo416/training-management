@@ -3,6 +3,7 @@ from graphene import relay
 
 from api.models import CustomUser, Profile, Team, TeamBoard, Training, Schedule, FinishedSchedule, Post
 
+
 class UserNode(DjangoObjectType):
     class Meta:
         model = CustomUser
@@ -11,6 +12,7 @@ class UserNode(DjangoObjectType):
         }
         interfaces = (relay.Node,)
 
+
 class ProfileNode(DjangoObjectType):
     class Meta:
         model = Profile
@@ -18,6 +20,7 @@ class ProfileNode(DjangoObjectType):
             'nickname': ['exact', 'icontains'],
         }
         interfaces = (relay.Node,)
+
 
 class TeamNode(DjangoObjectType):
     class Meta:
@@ -29,6 +32,7 @@ class TeamNode(DjangoObjectType):
         }
         interfaces = (relay.Node,)
 
+
 class TeamBoardNode(DjangoObjectType):
     class Meta:
         model = TeamBoard
@@ -37,6 +41,7 @@ class TeamBoardNode(DjangoObjectType):
         }
         interfaces = (relay.Node,)
 
+
 class TrainingNode(DjangoObjectType):
     class Meta:
         model = Training
@@ -44,6 +49,7 @@ class TrainingNode(DjangoObjectType):
             'title': ['exact', 'icontains'],
         }
         interfaces = (relay.Node,)
+
 
 class ScheduleNode(DjangoObjectType):
     class Meta:
@@ -54,14 +60,17 @@ class ScheduleNode(DjangoObjectType):
         }
         interfaces = (relay.Node,)
 
+
 class FinishedScheduleNode(DjangoObjectType):
     class Meta:
         model = FinishedSchedule
         filter_fields = {
+            'training__id': ['exact'],
             'schedule__id': ['exact'],
             'profile__id': ['exact'],
         }
         interfaces = (relay.Node, )
+
 
 class PostNode(DjangoObjectType):
     class Meta:

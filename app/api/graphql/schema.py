@@ -1,5 +1,6 @@
 import graphene
 import graphql_jwt
+import datetime
 
 from graphene_django.filter import DjangoFilterConnectionField
 from graphql_jwt.decorators import login_required, user_passes_test
@@ -20,6 +21,7 @@ from api.graphql.mutation.schedule_mutation import \
 from api.graphql.mutation.finished_schedule_mutation import \
     CreateFinishedScheduleMutation, DeleteFinishedScheduleMutation
 from api.graphql.mutation.post_mutation import CreatePostMutation, DeletePostMutation
+
 
 class Mutation(graphene.AbstractType):
     token_auth = graphql_jwt.ObtainJSONWebToken.Field()
@@ -46,6 +48,7 @@ class Mutation(graphene.AbstractType):
     create_post = CreatePostMutation.Field()
     delete_post = DeletePostMutation.Field()
 
+
 class Query(graphene.ObjectType):
     my_profile = graphene.Field(ProfileNode)
     one_team_from_name = graphene.Field(TeamNode,
@@ -56,9 +59,11 @@ class Query(graphene.ObjectType):
     my_team_member = DjangoFilterConnectionField(ProfileNode)
     all_team_board = DjangoFilterConnectionField(TeamBoardNode)
     my_team_trainings = DjangoFilterConnectionField(TrainingNode)
-    my_team_schedules = DjangoFilterConnectionField(ScheduleNode)
+    my_team_week_schedules = DjangoFilterConnectionField(
+        ScheduleNode, start_date=graphene.NonNull(graphene.Date))
     my_finished_schedules = DjangoFilterConnectionField(FinishedScheduleNode)
-    my_team_finished_schedules = DjangoFilterConnectionField(FinishedScheduleNode)
+    my_team_finished_schedules = DjangoFilterConnectionField(
+        FinishedScheduleNode)
     my_team_posts = DjangoFilterConnectionField(PostNode)
 
     @login_required
@@ -76,7 +81,7 @@ class Query(graphene.ObjectType):
     def resolve_one_team_from_id(self, info, **kwargs):
         team_id = from_global_id(kwargs.get('team_id'))[1]
         return Team.objects.get(id=team_id)
-    
+
     @login_required
     @user_passes_test(lambda use: use.profile.is_coach)
     def resolve_my_team_member(self, info, **kwargs):
@@ -92,8 +97,10 @@ class Query(graphene.ObjectType):
         return Training.objects.filter(team_board=info.context.user.profile.team_board).order_by('-created_at')
 
     @login_required
-    def resolve_my_team_schedules(self, info, **kwargs):
-        return Schedule.objects.filter(team_board=info.context.user.profile.team_board).order_by('-created_at')
+    def resolve_my_team_week_schedules(self, info, **kwargs):
+        start_date = kwargs.get('start_date')
+        end_date = start_date + datetime.timedelta(days=6)
+        return Schedule.objects.filter(team_board=info.context.user.profile.team_board, date__range=[start_date, end_date]).order_by('-created_at')
 
     @login_required
     def resolve_my_finished_schedules(self, info, **kwargs):
@@ -102,7 +109,7 @@ class Query(graphene.ObjectType):
     @login_required
     def resolve_my_team_finished_schedules(self, info, **kwargs):
         return FinishedSchedule.objects.filter(schedule__team_board=info.context.user.profile.team_board).order_by('-created_at')
-    
+
     @login_required
     def resolve_my_team_posts(self, info, **kwargs):
         return Post.objects.filter(team_board=info.context.user.profile.team_board).order_by('-created_at')
