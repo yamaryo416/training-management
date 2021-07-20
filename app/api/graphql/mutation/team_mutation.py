@@ -1,12 +1,13 @@
 import graphene
-import datetime
 
 from graphene import relay
 from graphql_jwt.decorators import login_required, user_passes_test
+from django.utils import timezone
 
 from api.models import Team, TeamBoard
 from api.utils.validator import validate_name, validate_team_password
 from api.graphql.node import TeamNode
+
 
 class CreateTeamMutation(relay.ClientIDMutation):
     class Input:
@@ -39,11 +40,12 @@ class CreateTeamMutation(relay.ClientIDMutation):
         team_board.save()
         profile = info.context.user.profile
         profile.team_board = team_board
-        profile.join_at = datetime.datetime.now()
+        profile.join_at = timezone.now()
         profile.is_coach = True
         profile.save()
 
         return CreateTeamMutation(team=team)
+
 
 class UpdateTeamMutation(relay.ClientIDMutation):
     class Input:

@@ -1,4 +1,5 @@
 import 'moment/locale/ja'
+
 import { memo, VFC, useEffect } from "react";
 import { useRouter } from "next/router";
 import { Box, Flex, Heading } from "@chakra-ui/layout";
