@@ -59,6 +59,7 @@ class Query(graphene.ObjectType):
     my_team_member = DjangoFilterConnectionField(ProfileNode)
     all_team_board = DjangoFilterConnectionField(TeamBoardNode)
     my_team_trainings = DjangoFilterConnectionField(TrainingNode)
+    my_team_all_schedules = DjangoFilterConnectionField(ScheduleNode)
     my_team_week_schedules = DjangoFilterConnectionField(
         ScheduleNode, start_date=graphene.NonNull(graphene.Date))
     my_finished_schedules = DjangoFilterConnectionField(FinishedScheduleNode)
@@ -95,6 +96,10 @@ class Query(graphene.ObjectType):
     @login_required
     def resolve_my_team_trainings(self, info, **kwargs):
         return Training.objects.filter(team_board=info.context.user.profile.team_board).order_by('-created_at')
+
+    @login_required
+    def resolve_my_team_all_schedules(self, info, **kwargs):
+        return Schedule.objects.filter(team_board=info.context.user.profile.team_board)
 
     @login_required
     def resolve_my_team_week_schedules(self, info, **kwargs):
