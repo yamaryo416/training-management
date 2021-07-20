@@ -71,7 +71,7 @@ export const GET_MY_PROFILE = gql`
     }
 `;
 
-export const UPDATE_MY_PROFILE_TEAM_BOARD  = gql`
+export const UPDATE_MY_PROFILE_TEAM_BOARD = gql`
     mutation UpdateMyProfileTeamBoard($teamBoardId: ID!) {
         updateProfileTeamBoard(input: { teamBoardId: $teamBoardId }) {
             profile {
@@ -91,7 +91,7 @@ export const UPDATE_MY_PROFILE_NICKNAME = gql`
     }
 `;
 
-export const DELETE_MY_PROFILE_TEAM_BOARD  = gql`
+export const DELETE_MY_PROFILE_TEAM_BOARD = gql`
     mutation DeleteMyProfileTeamBoard($confirm: Boolean!) {
         deleteMyProfileTeamBoard(input: { confirm: $confirm }) {
             profile {
@@ -101,7 +101,7 @@ export const DELETE_MY_PROFILE_TEAM_BOARD  = gql`
     }
 `;
 
-export const GET_MY_TEAM_MEMBER =gql`
+export const GET_MY_TEAM_MEMBER = gql`
     query MyTeamMember($nickname: String, $first: Int, $after: String) {
         myTeamMember(nickname_Icontains: $nickname, first: $first, after: $after) {
             edges {
@@ -322,9 +322,9 @@ export const DELETE_TRAINING = gql`
 
 // schedule
 
-export const GET_MY_TEAM_SCHEDULES = gql`
-    query MyTeamSchedules{
-        myTeamSchedules {
+export const GET_MY_TEAM_WEEK_SCHEDULES = gql`
+    query MyTeamWeekSchedules($startDate: Date!) {
+        myTeamWeekSchedules(startDate: $startDate) {
             edges {
                 node {
                     id
@@ -344,7 +344,7 @@ export const GET_MY_TEAM_SCHEDULES = gql`
 
 export const GET_ONE_DAY_SCHEDULES = gql`
     query OneDaySchedules($date : Date!) {
-        myTeamSchedules(date: $date) {
+        myTeamAllSchedules(date: $date) {
             edges {
                 node {
                     id

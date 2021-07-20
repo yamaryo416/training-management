@@ -1,13 +1,13 @@
 export type Maybe<T> = T | null;
 
 type Scalars = {
-    ID: string;
-    String: string;
-    Boolean: boolean;
-    Int: number;
-    Float: number;
-    Date: any;
-    DateTime: any;
+  ID: string;
+  String: string;
+  Boolean: boolean;
+  Int: number;
+  Float: number;
+  Date: any;
+  DateTime: any;
 };
 
 type PageInfoType = {
@@ -81,7 +81,7 @@ export type TeamBoardType = {
     isLimitJoin: Scalars['Boolean'];
   }
   schedules: {
-    edges:  Maybe<Array<ScheduleNodeType>>;
+    edges: Maybe<Array<ScheduleNodeType>>;
   }
   trainings: {
     edges: Maybe<Array<TrainingNodeType>>;
@@ -141,8 +141,14 @@ export type ScheduleNodeType = {
   node: ScheduleType;
 }
 
-export type MyTeamSchedulesType = {
-  myTeamSchedules: {
+export type MyTeamWeekSchedulesType = {
+  myTeamWeekSchedules: {
+    edges: Maybe<Array<ScheduleNodeType>>;
+  }
+}
+
+export type MyTeamOneDaySchedulesType = {
+  myTeamAllSchedules: {
     edges: Maybe<Array<ScheduleNodeType>>;
   }
 }

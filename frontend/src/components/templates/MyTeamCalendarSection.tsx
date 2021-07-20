@@ -4,24 +4,24 @@ import { Calendar } from "../organisms/calendar/Calendar"
 import { CalendarMenubar } from "../organisms/calendar/CalendarMenubar"
 import { MyTeamCalendarDetail } from "../organisms/calendar/MyTeamCalendarDetail"
 import { SectionCard } from "../organisms/layout/SectionCard"
-import { useGetMyTeamSchedules } from "../../hooks/queries/useGetMyTeamSchedules"
+import { useGetMyTeamWeekSchedules } from "../../hooks/queries/useGetMyTeamWeekSchedules"
 import { CustomSpinner } from "../atoms/spinner/CustomSpinner"
 import { FailedText } from "../atoms/text/FailedText"
 
-export const MyTeamCalendarSection: VFC= memo(() => {
-    const { loadingMyTeamSchedules, dataMyTeamSchedules, errorMyTeamSchedules } = useGetMyTeamSchedules()
-    
+export const MyTeamCalendarSection: VFC = memo(() => {
+    const { loadingMyTeamWeekSchedules, dataMyTeamWeekSchedules, errorMyTeamWeekSchedules } = useGetMyTeamWeekSchedules()
+
     return (
         <SectionCard width="400px">
             <MyTeamCalendarDetail />
             <CalendarMenubar />
-            {loadingMyTeamSchedules ? (
+            {loadingMyTeamWeekSchedules ? (
                 <CustomSpinner />
             ) : (
                 <>
-                    {errorMyTeamSchedules ? 
+                    {errorMyTeamWeekSchedules ?
                         <FailedText /> :
-                        <Calendar schedules={dataMyTeamSchedules?.myTeamSchedules} />
+                        <Calendar schedules={dataMyTeamWeekSchedules?.myTeamWeekSchedules} />
                     }
                 </>
             )}

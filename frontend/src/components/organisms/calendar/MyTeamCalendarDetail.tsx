@@ -26,48 +26,48 @@ export const MyTeamCalendarDetail: VFC = memo(() => {
         onOpenConfirmFinishedScheduleDeleteModal,
         onOpenFinishedScheduleMemberListModal
     } = useControllModal()
- 
+
     const oneDay = useRecoilValue(scheduleOneDayState)
 
     return (
-       <Box textAlign="center">
-           {loadingOnedaySchedules ? (
-               <CustomSpinner />
-           ): (
+        <Box textAlign="center">
+            {loadingOnedaySchedules ? (
+                <CustomSpinner />
+            ) : (
                 <>
                     <CalendarDetailMenubar />
                     <Box py={7}>
                         {errorOneDaySchedules && <FailedText />}
-                        {dataOneDaySchedules?.myTeamSchedules.edges?.map(({ node }) => (
+                        {dataOneDaySchedules?.myTeamAllSchedules.edges?.map(({ node }) => (
                             <Box key={node.id} textAlign="left" mb={5}>
                                 <Flex alignItems="center" >
                                     <CalendarDetailContents node={node} />
                                     {moment(oneDay).isBefore(moment(TODAY)) && (
                                         <Box pl={3}>
-                                             {node.finishedSchedules.edges?.some(({ node }) => node.profile.id === dataMyProfile?.myProfile.id ) ? (
+                                            {node.finishedSchedules.edges?.some(({ node }) => node.profile.id === dataMyProfile?.myProfile.id) ? (
                                                 <Text color='yellow' data-testid={node.id + '-previous-finished-text'}>実施！</Text>
-                                            ):(
+                                            ) : (
                                                 <Text color='gray.400' data-testid={node.id + '-previous-not-finished-text'}>未実施</Text>
                                             )}
                                         </Box>
                                     )}
                                     {!dataMyProfile?.myProfile.isGuest && oneDay === TODAY && (
                                         <Box pl={3}>
-                                            {node.finishedSchedules.edges?.some(({ node }) => node.profile.id === dataMyProfile?.myProfile.id ) ? (
-                                                 <Link
+                                            {node.finishedSchedules.edges?.some(({ node }) => node.profile.id === dataMyProfile?.myProfile.id) ? (
+                                                <Link
                                                     color='yellow'
                                                     data-testid={node.id + '-finished-text'}
                                                     onClick={() => {
                                                         onOpenConfirmFinishedScheduleDeleteModal(
                                                             node.id,
                                                             node.training.title,
-                                                            node.date, 
+                                                            node.date,
                                                         )
                                                     }}
                                                 >
                                                     実施！
                                                 </Link>
-                                            ):(
+                                            ) : (
                                                 <Button
                                                     data-testid={node.id + '-schedule-finished-create-button'}
                                                     bg='blue.500'
@@ -98,8 +98,9 @@ export const MyTeamCalendarDetail: VFC = memo(() => {
                                                         "",
                                                         "",
                                                         false
-                                            )}}/>
-                                        </Box> 
+                                                    )
+                                                }} />
+                                        </Box>
                                     )}
                                 </Flex>
                                 {dataMyProfile?.myProfile.isCoach && (
@@ -108,7 +109,7 @@ export const MyTeamCalendarDetail: VFC = memo(() => {
                                             {node.finishedCount}/{dataMyProfile?.myProfile.teamBoard.joinCount}人実施
                                         </Text>
                                         <Link
-                                            display={{ base: "none", md: "inline"}}
+                                            display={{ base: "none", md: "inline" }}
                                             color="orange"
                                             pl={10}
                                             data-testid={node.id + '-finished-member-link'}
@@ -118,33 +119,33 @@ export const MyTeamCalendarDetail: VFC = memo(() => {
                                                     node.training.title,
                                                     node.date,
                                                     "section"
-                                            )}>
+                                                )}>
                                             実施者一覧
                                         </Link>
-                                        <Link 
+                                        <Link
                                             display={{ base: "inline", md: "none" }}
                                             color="orange"
                                             pl={10}
-                                            onClick={() => 
+                                            onClick={() =>
                                                 onOpenFinishedScheduleMemberListModal(
                                                     node.id,
                                                     node.training.title,
                                                     node.date,
                                                     "modal"
-                                            )}>
+                                                )}>
                                             実施者一覧
                                         </Link>
                                     </Flex>
                                 )}
                             </Box>
                         ))}
-                        {dataOneDaySchedules?.myTeamSchedules.edges?.length === 0 && (
+                        {dataOneDaySchedules?.myTeamAllSchedules.edges?.length === 0 && (
                             <Text>予定はありません。</Text>
                         )}
                     </Box>
                 </>
             )}
-       </Box>
+        </Box>
     )
 })
 
