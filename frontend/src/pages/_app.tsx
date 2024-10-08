@@ -30,13 +30,13 @@ const client = new ApolloClient({
 
 function MyApp({ Component, pageProps }: AppProps) {
     return (
-        <ApolloProvider client={client}>
-             <RecoilRoot>
-                <ChakraProvider theme={theme}>
-                    <Component {...pageProps} />
-                </ChakraProvider>
-             </RecoilRoot>
-        </ApolloProvider>
+      <ApolloProvider client={client}>
+            <RecoilRoot>
+              <ChakraProvider theme={theme}>
+                  <Component {...pageProps} />
+              </ChakraProvider>
+            </RecoilRoot>
+      </ApolloProvider>
     )
 }
 

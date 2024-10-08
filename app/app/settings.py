@@ -11,15 +11,22 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 import os
+import environ
+
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+env = environ.Env()
+env.read_env(os.path.join(BASE_DIR, '.env'))
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
-ALLOWED_HOSTS = [os.environ['ALLOWED_HOST']]
+ALLOWED_HOSTS = [env('ALLOWED_HOST')]
+
+SECRET_KEY = env('SECRET_KEY')
 
 # Application definition
 
@@ -47,7 +54,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ORIGIN_WHITELIST = [
-    os.environ['FRONT_URI']
+    env('FRONT_URI')
 ]
 
 GRAPHWL_JWT = {
@@ -94,9 +101,9 @@ WSGI_APPLICATION = 'app.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ['DB_NAME'],
-        'USER': os.environ['DB_USER'],
-        'HOST': os.environ['DB_HOST'],
+        'NAME': env('DB_NAME'),
+        'USER': env('DB_USER'),
+        'HOST': env('DB_HOST'),
         'PORT': 5432,
     }
 }

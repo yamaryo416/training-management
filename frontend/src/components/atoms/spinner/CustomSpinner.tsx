@@ -1,11 +1,10 @@
-import { memo, VFC } from "react";
-import { Center } from "@chakra-ui/layout";
-import { Spinner } from "@chakra-ui/spinner";
+import { memo, VFC } from 'react'
+import { Center, Spinner } from '@chakra-ui/react'
 
 export const CustomSpinner: VFC = memo(() => {
-    return (
-        <Center>
-            <Spinner />
-        </Center>
-    )
+  return (
+    <Center>
+      <Spinner />
+    </Center>
+  )
 })

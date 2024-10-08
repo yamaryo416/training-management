@@ -1,17 +1,12 @@
-import { memo, VFC } from "react"
-import { Text } from "@chakra-ui/layout"
+import { memo, VFC } from 'react'
+import { Text } from '@chakra-ui/react'
 
 type Props = {
-    children: string;
+  children: string
 }
 
 export const ErrorText: VFC<Props> = memo((props) => {
-    const { children } = props
+  const { children } = props
 
-    return (
-       <Text color="red.600">
-                {children}
-        </Text>
-    )
+  return <Text color="red.600">{children}</Text>
 })
-
