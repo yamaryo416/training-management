@@ -15,12 +15,34 @@ export const PrimaryButton: VFC<Props> = memo((props) => {
     <Button
       disabled={disabled}
       type={type}
-      bg="blue.500"
-      borderRadius="1000px"
-      px={5}
+      bg="brand.500"
+      bgGradient="linear(to-r, brand.500, orange.400)"
+      borderRadius="lg"
+      px={6}
+      py={2}
       color="white"
+      fontWeight="600"
+      boxShadow="md"
       data-testid={name + '-button'}
       onClick={onClick}
+      _hover={{
+        bgGradient: "linear(to-r, brand.600, orange.500)",
+        transform: "translateY(-2px)",
+        boxShadow: "lg",
+      }}
+      _active={{
+        transform: "translateY(0)",
+        boxShadow: "md",
+      }}
+      _disabled={{
+        opacity: 0.6,
+        cursor: "not-allowed",
+        _hover: {
+          transform: "none",
+          boxShadow: "md",
+        }
+      }}
+      transition="all 0.2s"
     >
       {children}
     </Button>
